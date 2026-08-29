@@ -58,7 +58,11 @@ SOURCES = [
 KUCOIN_API = "https://api.kucoin.com/api/v3/announcements"
 KUCOIN_TYPES = ["activities", "new-listings"]
 KUCOIN_FILTER = re.compile(
-    os.getenv("KUCOIN_KEYWORDS", r"gempool|launchpool|burning drop|pool-x|staking mining"),
+    os.getenv(
+        "KUCOIN_KEYWORDS",
+        r"gempool|gem pool|kumining|ku mining|launchpool|launch pool|"
+        r"burning drop|pool-x|staking mining|mining campaign|farming",
+    ),
     re.I,
 )
 
@@ -80,7 +84,13 @@ def log(msg):
 PROXIES = [
     ("allorigins", lambda u: "https://api.allorigins.win/raw?url=" + urllib.parse.quote(u, safe="")),
     ("codetabs", lambda u: "https://api.codetabs.com/v1/proxy?quest=" + urllib.parse.quote(u, safe="")),
+    ("cors.lol", lambda u: "https://api.cors.lol/?url=" + urllib.parse.quote(u, safe="")),
+    ("corsfix", lambda u: "https://proxy.corsfix.com/?" + u),
 ]
+
+# Tran thoi gian cho toan bo phan MEXC, de job khong treo qua timeout cua workflow.
+FETCH_BUDGET = int(os.getenv("FETCH_BUDGET", "300"))
+_budget_until = None
 
 # Cach tai nao da chay duoc trong lan chay nay -> dung luon cho cac URL sau
 _working = None
@@ -117,9 +127,12 @@ def fetch(url, tries=2, valid=None):
 
     last = None
     for name, build, timeout in methods:
-        # cach da chay duoc thi cho thu lai, cach chua biet chi thu 1 lan cho nhanh
-        attempts = tries if name == _working else 1
+        # direct that bai la do bi chan (chac chan), khong thu lai;
+        # proxy hay chap chon nen cho thu 2 lan
+        attempts = 1 if name == "direct" else tries
         for i in range(attempts):
+            if _budget_until and time.monotonic() > _budget_until:
+                raise RuntimeError("het thoi gian danh cho viec tai trang")
             try:
                 body = _raw_get(build(url), timeout)
                 if not (valid or _looks_valid)(body):
@@ -156,10 +169,14 @@ def find_title(page, link_start, slug):
 
 def collect():
     """Tra ve dict {article_id: {...}} tu tat ca nguon."""
+    global _budget_until
     found = {}
-    _collect_mexc(found)
+    # KuCoin goi API chinh thuc, nhanh va on dinh -> lam truoc cho chac
     if WATCH_KUCOIN:
         _collect_kucoin(found)
+    _budget_until = time.monotonic() + FETCH_BUDGET
+    _collect_mexc(found)
+    _budget_until = None
     return found
 
 
@@ -194,7 +211,7 @@ def _collect_kucoin(found):
                 "id": aid,
                 "title": title,
                 "url": it.get("annUrl") or "https://www.kucoin.com/gempool",
-                "sources": ["KuCoin GemPool"],
+                "sources": ["KuCoin Launchpool"],
             }
         log(f"  -> {n} bai khop")
 

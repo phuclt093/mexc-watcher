@@ -87,8 +87,9 @@ Chỉ cần Python 3.9+, không cần cài thư viện nào (dùng `urllib` sẵ
 ```
 
 **Nguồn KuCoin** dùng API chính thức `api.kucoin.com/api/v3/announcements` — công khai, không
-cần key, không bị Cloudflare chặn. Lọc theo từ khoá trong `KUCOIN_FILTER`
-(mặc định `gempool|launchpool|burning drop|pool-x|staking mining`). Tắt bằng `KUCOIN=0`,
+cần key, không bị Cloudflare chặn nên luôn chạy đường `direct`. Lọc theo từ khoá
+`gempool | kumining | launchpool | burning drop | pool-x | staking mining | mining campaign | farming`
+(KuCoin đổi tên sản phẩm khá thường xuyên nên danh sách này cố ý rộng). Tắt bằng `KUCOIN=0`,
 đổi từ khoá bằng biến `KUCOIN_KEYWORDS`.
 
 **Thêm/bớt nguồn MEXC** — sửa `SOURCES` trong `mexc_watch.py`:
@@ -115,7 +116,8 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 | `DRY_RUN` | — | `1` = chỉ in ra màn hình, không gửi |
 | `PROXY_MODE` | `auto` | `direct` = chỉ tải thẳng, `proxy` = chỉ đi qua proxy |
 | `KUCOIN` | `1` | `0` = tắt theo dõi KuCoin GemPool |
-| `KUCOIN_KEYWORDS` | `gempool\|launchpool\|…` | regex lọc tiêu đề KuCoin |
+| `KUCOIN_KEYWORDS` | `gempool\|kumining\|…` | regex lọc tiêu đề KuCoin |
+| `FETCH_BUDGET` | `300` | số giây tối đa dành cho phần MEXC |
 
 ---
 
@@ -128,9 +130,13 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
   trả về 403 Forbidden. Vì vậy script tự động đi vòng qua proxy đọc trang (`api.allorigins.win`,
   dự phòng `api.codetabs.com`) khi tải trực tiếp thất bại. Log sẽ in `(dang dung: allorigins)`
   cho biết đang đi đường nào. Trên máy cá nhân (IP nhà mạng) thì `direct` chạy được bình thường.
-- **Proxy là bên thứ ba miễn phí, có thể chậm hoặc chết.** Nếu cả hai proxy cùng hỏng,
-  script giữ nguyên state và báo lỗi — không mất bài nào, lần chạy sau sẽ bắt lại. Có thể ép
-  đường đi bằng biến `PROXY_MODE` (`auto` / `direct` / `proxy`).
+- **Proxy là bên thứ ba miễn phí, hay chập chờn.** Script thử lần lượt 4 proxy
+  (`allorigins`, `codetabs`, `cors.lol`, `corsfix`), mỗi cái 2 lần. Lỗi 522/520 nghĩa là proxy
+  đó đang quá tải — chuyện thường. Bỏ lỡ một lần chạy **không làm mất thông báo**: bài viết
+  còn nằm trên trang MEXC nhiều ngày, lần chạy sau bắt lại. Với 144 lần chạy mỗi ngày thì chỉ
+  cần một phần nhỏ thành công là đủ.
+- **Trần thời gian `FETCH_BUDGET`** (mặc định 300 giây) giới hạn phần MEXC, để job không treo
+  quá `timeout-minutes` của workflow. KuCoin luôn được quét trước vì nhanh và ổn định.
 - Script **không bao giờ tự động tham gia** launchpool hay đặt lệnh. Nó chỉ đọc trang
   công khai và báo tin. Không cần API key MEXC, không đụng gì tới tài khoản của bạn.
 - Nếu một lần gửi Telegram thất bại, bài đó **không** bị đánh dấu đã đọc — lần chạy sau
