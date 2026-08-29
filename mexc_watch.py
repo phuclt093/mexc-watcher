@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MEXC Launchpool / Airdrop+ / Kickstarter + KuCoin GemPool watcher -> Telegram
+Bao pool moi mo: MEXC Launchpool + Kickstarter, KuCoin KuMining/GemPool -> Telegram
 
 Cach hoat dong:
   1. Tai cac trang thong bao (server-rendered HTML) cua MEXC.
@@ -48,20 +48,20 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 # (nhan hien thi, duong dan, bo loc tu khoa hoac None = lay tat ca)
 SOURCES = [
     ("MEXC Launchpool",  "/announcements/tag/launchpool-28", None),
-    ("MEXC Airdrop+",    "/announcements/tag/airdrop-32",    None),
-    ("MEXC Kickstarter", "/announcements/new-listings",
-     re.compile(r"kickstarter|launchpool|airdrop", re.I)),
+    # MEXC khong co tag rieng cho Kickstarter, no nam lan trong trang New Listings
+    # -> loc chat bang tu khoa, chi lay dung bai Kickstarter, bo qua tin niem yet thuong.
+    ("MEXC Kickstarter", "/announcements/new-listings", re.compile(r"kickstarter", re.I)),
 ]
 
 # KuCoin co API thong bao cong khai, khong can key, khong bi Cloudflare chan.
 # GemPool la san pham "launchpool" cua KuCoin: stake KCS/USDT de farm token moi.
 KUCOIN_API = "https://api.kucoin.com/api/v3/announcements"
-KUCOIN_TYPES = ["activities", "new-listings"]
+KUCOIN_TYPES = ["activities"]
 KUCOIN_FILTER = re.compile(
     os.getenv(
         "KUCOIN_KEYWORDS",
         r"gempool|gem pool|kumining|ku mining|launchpool|launch pool|"
-        r"burning drop|pool-x|staking mining|mining campaign|farming",
+        r"burning drop|pool-x|staking mining|mining campaign",
     ),
     re.I,
 )
@@ -328,7 +328,7 @@ def main():
         state["initialized"] = True
         save_state(state)
         telegram_send(
-            "✅ <b>Launchpool watcher da khoi dong</b>\n"
+            "✅ <b>Pool watcher da khoi dong</b>\n"
             f"Da ghi nhan {len(found)} bai hien co. "
             "Tu gio chi bao khi co bai <b>moi</b>."
         )

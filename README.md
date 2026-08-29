@@ -1,7 +1,11 @@
-# Launchpool Watcher → Telegram
+# Pool Watcher → Telegram
 
-Bot tự động theo dõi **Launchpool / Airdrop+ / Kickstarter** của MEXC và **GemPool** của
-KuCoin, có bài mới là bắn tin về Telegram. Chạy miễn phí trên GitHub Actions, không cần bật máy.
+Báo khi có **pool mới mở** để đem token đi farm: **Launchpool** và **Kickstarter** của MEXC
+(dùng MX), **KuMining / GemPool** của KuCoin (dùng KCS). Chạy miễn phí trên GitHub Actions,
+không cần bật máy.
+
+Cố ý **không** theo dõi tin niêm yết coin mới, Airdrop+ hay khuyến mãi giao dịch — chỉ những
+sự kiện mà bạn bỏ token đang giữ vào để nhận thưởng.
 
 ---
 
@@ -87,8 +91,8 @@ Chỉ cần Python 3.9+, không cần cài thư viện nào (dùng `urllib` sẵ
 ```
 
 **Nguồn KuCoin** dùng API chính thức `api.kucoin.com/api/v3/announcements` — công khai, không
-cần key, không bị Cloudflare chặn nên luôn chạy đường `direct`. Lọc theo từ khoá
-`gempool | kumining | launchpool | burning drop | pool-x | staking mining | mining campaign | farming`
+cần key, không bị Cloudflare chặn nên luôn chạy đường `direct`. Chỉ quét mục `activities`, lọc theo từ khoá
+`gempool | kumining | launchpool | burning drop | pool-x | staking mining | mining campaign`
 (KuCoin đổi tên sản phẩm khá thường xuyên nên danh sách này cố ý rộng). Tắt bằng `KUCOIN=0`,
 đổi từ khoá bằng biến `KUCOIN_KEYWORDS`.
 
