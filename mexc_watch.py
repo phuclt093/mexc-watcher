@@ -134,6 +134,7 @@ PROXIES = [
 # Tran thoi gian cho toan bo phan MEXC, de job khong treo qua timeout cua workflow.
 FETCH_BUDGET = int(os.getenv("FETCH_BUDGET", "300"))
 _budget_until = None
+_sources_ok = 0   # so nguon tai duoc trong lan chay nay
 
 # Cach tai nao da chay duoc trong lan chay nay -> dung luon cho cac URL sau
 _working = None
@@ -156,7 +157,7 @@ def _looks_valid(body):
 
 def fetch(url, tries=2, valid=None):
     """Tai HTML: thu tai thang truoc, that bai thi di vong qua proxy doc trang."""
-    global _working
+    global _working, _sources_ok
 
     methods = []
     if PROXY_MODE != "proxy":
@@ -183,6 +184,7 @@ def fetch(url, tries=2, valid=None):
                 if _working != name:
                     log(f"  (dang dung: {name})")
                     _working = name
+                _sources_ok += 1
                 return body
             except Exception as e:  # noqa: BLE001
                 last = f"{name}: {e}"
@@ -502,9 +504,12 @@ def main():
     state = load_state()
     found = collect()
 
-    if not found:
-        log("Khong lay duoc bai nao (MEXC co the doi giao dien hoac chan IP). Giu nguyen state.")
+    if _sources_ok == 0:
+        # Khong nguon nao tai duoc -> loi that su, giu nguyen state de lan sau bat lai
+        log("! Khong nguon nao tai duoc (bi chan IP hoac tat ca proxy chet). Giu nguyen state.")
         return 1
+
+    log(f"Da tai duoc {_sources_ok} nguon, tim thay {len(found)} bai trong pham vi theo doi.")
 
     new = [a for aid, a in found.items() if aid not in state["seen"]]
     new.sort(key=lambda a: a["id"], reverse=True)
@@ -519,14 +524,14 @@ def main():
         save_state(state)
         telegram_send(
             "✅ <b>Pool watcher da khoi dong</b>\n"
-            f"Da ghi nhan {len(found)} bai hien co. "
-            "Tu gio chi bao khi co bai <b>moi</b>."
+            f"Da ghi nhan {len(found)} pool dang mo. "
+            "Tu gio chi bao khi co pool <b>moi</b>."
         )
         log(f"Khoi tao xong voi {len(found)} bai.")
         return 0
 
     if not new:
-        log("Khong co bai moi.")
+        log("Khong co pool moi.")
         save_state(state)
         return 0
 
