@@ -1,7 +1,7 @@
-# MEXC Launchpool Watcher → Telegram
+# Launchpool Watcher → Telegram
 
-Bot tự động theo dõi thông báo **Launchpool**, **Airdrop+** và **Kickstarter** của MEXC,
-có bài mới là bắn tin về Telegram. Chạy miễn phí trên GitHub Actions, không cần bật máy.
+Bot tự động theo dõi **Launchpool / Airdrop+ / Kickstarter** của MEXC và **GemPool** của
+KuCoin, có bài mới là bắn tin về Telegram. Chạy miễn phí trên GitHub Actions, không cần bật máy.
 
 ---
 
@@ -24,8 +24,10 @@ có bài mới là bắn tin về Telegram. Chạy miễn phí trên GitHub Acti
 
 ## 2. Đưa code lên GitHub
 
-Repo **private** cũng chạy được (Actions miễn phí 2000 phút/tháng cho tài khoản free —
-job này chỉ tốn ~20 giây/lần).
+**Nên để repo PUBLIC.** GitHub Actions miễn phí không giới hạn phút cho repo public, còn repo
+private chỉ được 2000 phút/tháng — chạy 10 phút/lần tốn khoảng 10.000 phút/tháng, cháy quota
+sau chưa tới một tuần. Secrets vẫn được che kín ở repo public, code này cũng không chứa gì
+riêng tư. Nếu bắt buộc để private thì phải giãn cron lên 45–60 phút/lần.
 
 ```bash
 cd mexc-watcher
@@ -84,7 +86,12 @@ Chỉ cần Python 3.9+, không cần cài thư viện nào (dùng `urllib` sẵ
 - cron: "*/30 * * * *"   # 30 phút/lần
 ```
 
-**Thêm/bớt nguồn theo dõi** — sửa `SOURCES` trong `mexc_watch.py`:
+**Nguồn KuCoin** dùng API chính thức `api.kucoin.com/api/v3/announcements` — công khai, không
+cần key, không bị Cloudflare chặn. Lọc theo từ khoá trong `KUCOIN_FILTER`
+(mặc định `gempool|launchpool|burning drop|pool-x|staking mining`). Tắt bằng `KUCOIN=0`,
+đổi từ khoá bằng biến `KUCOIN_KEYWORDS`.
+
+**Thêm/bớt nguồn MEXC** — sửa `SOURCES` trong `mexc_watch.py`:
 
 ```python
 SOURCES = [
@@ -107,6 +114,8 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 | `STATE_FILE` | `seen.json` | nơi lưu danh sách bài đã thấy |
 | `DRY_RUN` | — | `1` = chỉ in ra màn hình, không gửi |
 | `PROXY_MODE` | `auto` | `direct` = chỉ tải thẳng, `proxy` = chỉ đi qua proxy |
+| `KUCOIN` | `1` | `0` = tắt theo dõi KuCoin GemPool |
+| `KUCOIN_KEYWORDS` | `gempool\|launchpool\|…` | regex lọc tiêu đề KuCoin |
 
 ---
 

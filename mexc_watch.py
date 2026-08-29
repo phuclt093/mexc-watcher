@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MEXC Launchpool / Airdrop+ / Kickstarter watcher -> Telegram
+MEXC Launchpool / Airdrop+ / Kickstarter + KuCoin GemPool watcher -> Telegram
 
 Cach hoat dong:
   1. Tai cac trang thong bao (server-rendered HTML) cua MEXC.
@@ -15,6 +15,7 @@ Tuy chon:
   STATE_FILE       (mac dinh "seen.json")
   MAX_NOTIFY       (mac dinh 10 - chong spam neu MEXC doi HTML)
   PROXY_MODE       ("auto" mac dinh | "direct" chi tai thang | "proxy" chi qua proxy)
+  KUCOIN           ("0" de tat theo doi KuCoin)
   DRY_RUN          ("1" = khong gui Telegram, chi in ra man hinh)
 """
 
@@ -36,6 +37,7 @@ STATE_FILE = pathlib.Path(os.getenv("STATE_FILE", "seen.json"))
 MAX_NOTIFY = int(os.getenv("MAX_NOTIFY", "10"))
 DRY_RUN = os.getenv("DRY_RUN") == "1"
 PROXY_MODE = os.getenv("PROXY_MODE", "auto").lower()
+WATCH_KUCOIN = os.getenv("KUCOIN", "1") != "0"
 
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
@@ -45,11 +47,20 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 
 # (nhan hien thi, duong dan, bo loc tu khoa hoac None = lay tat ca)
 SOURCES = [
-    ("Launchpool",  "/announcements/tag/launchpool-28", None),
-    ("Airdrop+",    "/announcements/tag/airdrop-32",    None),
-    ("Kickstarter", "/announcements/new-listings",
+    ("MEXC Launchpool",  "/announcements/tag/launchpool-28", None),
+    ("MEXC Airdrop+",    "/announcements/tag/airdrop-32",    None),
+    ("MEXC Kickstarter", "/announcements/new-listings",
      re.compile(r"kickstarter|launchpool|airdrop", re.I)),
 ]
+
+# KuCoin co API thong bao cong khai, khong can key, khong bi Cloudflare chan.
+# GemPool la san pham "launchpool" cua KuCoin: stake KCS/USDT de farm token moi.
+KUCOIN_API = "https://api.kucoin.com/api/v3/announcements"
+KUCOIN_TYPES = ["activities", "new-listings"]
+KUCOIN_FILTER = re.compile(
+    os.getenv("KUCOIN_KEYWORDS", r"gempool|launchpool|burning drop|pool-x|staking mining"),
+    re.I,
+)
 
 # href="/announcements/article/ten-bai-viet-17827791534551"  (co the co prefix ngon ngu)
 ARTICLE_RE = re.compile(
@@ -90,7 +101,7 @@ def _looks_valid(body):
     return bool(body) and "/announcements/article/" in body
 
 
-def fetch(url, tries=2):
+def fetch(url, tries=2, valid=None):
     """Tai HTML: thu tai thang truoc, that bai thi di vong qua proxy doc trang."""
     global _working
 
@@ -111,7 +122,7 @@ def fetch(url, tries=2):
         for i in range(attempts):
             try:
                 body = _raw_get(build(url), timeout)
-                if not _looks_valid(body):
+                if not (valid or _looks_valid)(body):
                     raise ValueError("noi dung khong co link bai viet")
                 if _working != name:
                     log(f"  (dang dung: {name})")
@@ -146,6 +157,49 @@ def find_title(page, link_start, slug):
 def collect():
     """Tra ve dict {article_id: {...}} tu tat ca nguon."""
     found = {}
+    _collect_mexc(found)
+    if WATCH_KUCOIN:
+        _collect_kucoin(found)
+    return found
+
+
+def _collect_kucoin(found):
+    """KuCoin: goi API chinh thuc roi loc theo tu khoa GemPool/Launchpool."""
+    for ann_type in KUCOIN_TYPES:
+        url = (f"{KUCOIN_API}?currentPage=1&pageSize=30"
+               f"&annType={ann_type}&lang=en_US")
+        log(f"Dang kiem tra KuCoin ({ann_type})")
+        try:
+            body = fetch(url, valid=lambda b: '"annId"' in b)
+        except RuntimeError as e:
+            log(f"  ! bo qua KuCoin {ann_type}: {e}")
+            continue
+
+        try:
+            items = (json.loads(body).get("data") or {}).get("items") or []
+        except Exception as e:  # noqa: BLE001
+            log(f"  ! KuCoin tra ve JSON hong: {e}")
+            continue
+
+        n = 0
+        for it in items:
+            title = (it.get("annTitle") or "").strip()
+            if not title or not KUCOIN_FILTER.search(title):
+                continue
+            n += 1
+            aid = "kc:" + str(it.get("annId"))
+            if aid in found:
+                continue
+            found[aid] = {
+                "id": aid,
+                "title": title,
+                "url": it.get("annUrl") or "https://www.kucoin.com/gempool",
+                "sources": ["KuCoin GemPool"],
+            }
+        log(f"  -> {n} bai khop")
+
+
+def _collect_mexc(found):
     for label, path, keyword in SOURCES:
         url = f"{BASE}/{LANG}{path}" if LANG and LANG != "en-US" else f"{BASE}{path}"
         log(f"Dang kiem tra {label}: {url}")
@@ -174,7 +228,6 @@ def collect():
                 "sources": [label],
             }
         log(f"  -> {n} bai khop")
-    return found
 
 
 def load_state():
@@ -253,7 +306,7 @@ def main():
         state["initialized"] = True
         save_state(state)
         telegram_send(
-            "✅ <b>MEXC watcher da khoi dong</b>\n"
+            "✅ <b>Launchpool watcher da khoi dong</b>\n"
             f"Da ghi nhan {len(found)} bai hien co. "
             "Tu gio chi bao khi co bai <b>moi</b>."
         )
@@ -273,7 +326,7 @@ def main():
     for a in new:
         tag = " / ".join(a["sources"])
         msg = (
-            f"🚀 <b>MEXC {html.escape(tag)}</b>\n\n"
+            f"🚀 <b>{html.escape(tag)}</b>\n\n"
             f"<b>{html.escape(a['title'])}</b>\n\n"
             f'<a href="{a["url"]}">Xem thong bao</a>'
         )
