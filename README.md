@@ -106,6 +106,7 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 | `MAX_NOTIFY` | `10` | trần số tin mỗi lần chạy, chống spam nếu MEXC đổi HTML |
 | `STATE_FILE` | `seen.json` | nơi lưu danh sách bài đã thấy |
 | `DRY_RUN` | — | `1` = chỉ in ra màn hình, không gửi |
+| `PROXY_MODE` | `auto` | `direct` = chỉ tải thẳng, `proxy` = chỉ đi qua proxy |
 
 ---
 
@@ -114,9 +115,13 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 - **MEXC không có API chính thức cho Launchpool.** API công khai (spot/futures v3) chỉ
   phục vụ giao dịch. Script này đọc trang thông báo — cách bền nhất hiện có, nhưng nếu
   MEXC đổi cấu trúc trang thì phải chỉnh lại regex `ARTICLE_RE`.
-- **Có khả năng MEXC/Cloudflare chặn IP của GitHub Actions.** Nếu log báo lỗi 403 hoặc
-  "không lấy được bài nào", chuyển sang chạy trên VPS hoặc trên máy cá nhân bằng Task
-  Scheduler — code y hệt, chỉ khác chỗ chạy. Cứ chạy thử vài hôm sẽ biết.
+- **Cloudflare của MEXC chặn IP datacenter (đã xác nhận).** Chạy thẳng từ GitHub Actions
+  trả về 403 Forbidden. Vì vậy script tự động đi vòng qua proxy đọc trang (`api.allorigins.win`,
+  dự phòng `api.codetabs.com`) khi tải trực tiếp thất bại. Log sẽ in `(dang dung: allorigins)`
+  cho biết đang đi đường nào. Trên máy cá nhân (IP nhà mạng) thì `direct` chạy được bình thường.
+- **Proxy là bên thứ ba miễn phí, có thể chậm hoặc chết.** Nếu cả hai proxy cùng hỏng,
+  script giữ nguyên state và báo lỗi — không mất bài nào, lần chạy sau sẽ bắt lại. Có thể ép
+  đường đi bằng biến `PROXY_MODE` (`auto` / `direct` / `proxy`).
 - Script **không bao giờ tự động tham gia** launchpool hay đặt lệnh. Nó chỉ đọc trang
   công khai và báo tin. Không cần API key MEXC, không đụng gì tới tài khoản của bạn.
 - Nếu một lần gửi Telegram thất bại, bài đó **không** bị đánh dấu đã đọc — lần chạy sau
@@ -130,6 +135,7 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 |---|---|
 | Không nhận được tin nào | Kiểm tra log ở tab Actions; xác nhận đã nhắn `/start` cho bot |
 | Log: `thieu TELEGRAM_BOT_TOKEN` | Secrets đặt sai tên hoặc đặt nhầm ở Environment thay vì Repository |
-| Log: `Khong lay duoc bai nao` | MEXC chặn IP hoặc đổi giao diện — xem mục Lưu ý ở trên |
+| Log: `Khong lay duoc bai nao` | Cả tải thẳng lẫn 2 proxy đều hỏng — xem mục Lưu ý ở trên |
+| Log: `403 Forbidden` ở dòng `direct` | Bình thường trên GitHub Actions, script tự chuyển qua proxy |
 | Cron không chạy | GitHub tự tắt schedule nếu repo không hoạt động 60 ngày — vào bấm **Run workflow** để bật lại |
 | Muốn reset, nhận lại từ đầu | Xoá nội dung `seen.json` về `{"seen":{},"initialized":false}` rồi commit |

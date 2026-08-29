@@ -14,6 +14,7 @@ Tuy chon:
   MEXC_LANG        (mac dinh "en-US", vd "vi-VN")
   STATE_FILE       (mac dinh "seen.json")
   MAX_NOTIFY       (mac dinh 10 - chong spam neu MEXC doi HTML)
+  PROXY_MODE       ("auto" mac dinh | "direct" chi tai thang | "proxy" chi qua proxy)
   DRY_RUN          ("1" = khong gui Telegram, chi in ra man hinh)
 """
 
@@ -34,6 +35,7 @@ LANG = os.getenv("MEXC_LANG", "en-US")
 STATE_FILE = pathlib.Path(os.getenv("STATE_FILE", "seen.json"))
 MAX_NOTIFY = int(os.getenv("MAX_NOTIFY", "10"))
 DRY_RUN = os.getenv("DRY_RUN") == "1"
+PROXY_MODE = os.getenv("PROXY_MODE", "auto").lower()
 
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
@@ -62,24 +64,64 @@ def log(msg):
     print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}", flush=True)
 
 
-def fetch(url, tries=3):
-    """Tai HTML, co retry + backoff."""
+# Cloudflare cua MEXC chan IP datacenter (GitHub Actions, VPS) bang loi 403.
+# Cac proxy doc trang duoi day fetch ho tu IP cua ho roi tra ve HTML goc.
+PROXIES = [
+    ("allorigins", lambda u: "https://api.allorigins.win/raw?url=" + urllib.parse.quote(u, safe="")),
+    ("codetabs", lambda u: "https://api.codetabs.com/v1/proxy?quest=" + urllib.parse.quote(u, safe="")),
+]
+
+# Cach tai nao da chay duoc trong lan chay nay -> dung luon cho cac URL sau
+_working = None
+
+
+def _raw_get(url, timeout):
+    req = urllib.request.Request(url, headers={
+        "User-Agent": UA,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9,vi;q=0.8",
+        "Cache-Control": "no-cache",
+    })
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read().decode("utf-8", "replace")
+
+
+def _looks_valid(body):
+    return bool(body) and "/announcements/article/" in body
+
+
+def fetch(url, tries=2):
+    """Tai HTML: thu tai thang truoc, that bai thi di vong qua proxy doc trang."""
+    global _working
+
+    methods = []
+    if PROXY_MODE != "proxy":
+        methods.append(("direct", lambda u: u, 25))
+    if PROXY_MODE != "direct":
+        methods.extend((name, fn, 40) for name, fn in PROXIES)
+
+    # uu tien cach da chung minh la chay duoc
+    if _working:
+        methods.sort(key=lambda m: 0 if m[0] == _working else 1)
+
     last = None
-    for i in range(tries):
-        req = urllib.request.Request(url, headers={
-            "User-Agent": UA,
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language": "en-US,en;q=0.9,vi;q=0.8",
-            "Cache-Control": "no-cache",
-        })
-        try:
-            with urllib.request.urlopen(req, timeout=30) as r:
-                return r.read().decode("utf-8", "replace")
-        except Exception as e:  # noqa: BLE001
-            last = e
-            log(f"  ! loi tai {url}: {e} (lan {i + 1}/{tries})")
-            time.sleep(2 ** i + random.random())
-    raise RuntimeError(f"khong tai duoc {url}: {last}")
+    for name, build, timeout in methods:
+        # cach da chay duoc thi cho thu lai, cach chua biet chi thu 1 lan cho nhanh
+        attempts = tries if name == _working else 1
+        for i in range(attempts):
+            try:
+                body = _raw_get(build(url), timeout)
+                if not _looks_valid(body):
+                    raise ValueError("noi dung khong co link bai viet")
+                if _working != name:
+                    log(f"  (dang dung: {name})")
+                    _working = name
+                return body
+            except Exception as e:  # noqa: BLE001
+                last = f"{name}: {e}"
+                log(f"  ! {name} loi ({e}) - lan {i + 1}/{attempts}")
+                time.sleep(1.5 * (i + 1))
+    raise RuntimeError(f"khong tai duoc {url} ({last})")
 
 
 def prettify(slug):
