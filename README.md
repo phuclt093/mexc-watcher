@@ -131,6 +131,8 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 |---|---|---|
 | `MEXC_LANG` | `en-US` | đổi thành `vi-VN` để lấy trang tiếng Việt |
 | `MAX_NOTIFY` | `10` | trần số tin mỗi lần chạy, chống spam nếu MEXC đổi HTML |
+| `MAX_AGE_HOURS` | `72` | bỏ qua bài cũ hơn ngưỡng này; `0` = tắt lọc theo ngày |
+| `TITLE_DEDUPE_DAYS` | `30` | chặn bài trùng tiêu đề trong khoảng này; `0` = tắt |
 | `STATE_FILE` | `seen.json` | nơi lưu danh sách bài đã thấy |
 | `DRY_RUN` | — | `1` = chỉ in ra màn hình, không gửi |
 | `PROXY_MODE` | `auto` | `direct` = chỉ tải thẳng, `proxy` = chỉ đi qua proxy |
@@ -159,6 +161,15 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
   đó đang quá tải — chuyện thường. Bỏ lỡ một lần chạy **không làm mất thông báo**: bài viết
   còn nằm trên trang MEXC nhiều ngày, lần chạy sau bắt lại. Với 144 lần chạy mỗi ngày thì chỉ
   cần một phần nhỏ thành công là đủ.
+- **Chặn trùng theo tiêu đề, không chỉ theo ID.** Sàn sửa bài rồi cấp ID mới, hoặc cùng một
+  bài đăng ở hai danh mục với đường dẫn khác nhau — dedupe theo ID sẽ trượt. Nên `seen.json`
+  lưu thêm bảng `titles`: tiêu đề đã chuẩn hoá kèm thời điểm đã báo, chặn trong `TITLE_DEDUPE_DAYS`
+  ngày. Chuẩn hoá **giữ lại chữ số và dấu `#`**, vì "PrimePool #39" và "#40" là hai sự kiện khác
+  nhau. Có giới hạn thời gian để sự kiện định kỳ trùng tên (chạy lại sau vài tháng) vẫn báo được.
+- **Chỉ báo bài mới trong vòng 72 giờ.** Ngoài việc so với `seen.json`, script còn đọc ngày
+  đăng và bỏ qua bài cũ hơn `MAX_AGE_HOURS`. Đây là lưới an toàn: nếu `seen.json` bị xoá hay
+  reset, bot sẽ không dội một loạt pool đã đóng từ đời nào. Bài nào **không đọc được ngày**
+  thì vẫn giữ — thà báo thừa còn hơn bỏ sót.
 - **Trần thời gian `FETCH_BUDGET`** (mặc định 300 giây) giới hạn phần MEXC, để job không treo
   quá `timeout-minutes` của workflow. KuCoin luôn được quét trước vì nhanh và ổn định.
 - Script **không bao giờ tự động tham gia** launchpool hay đặt lệnh. Nó chỉ đọc trang

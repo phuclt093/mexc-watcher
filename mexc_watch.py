@@ -15,10 +15,13 @@ Tuy chon:
   STATE_FILE       (mac dinh "seen.json")
   MAX_NOTIFY       (mac dinh 10 - chong spam neu MEXC doi HTML)
   PROXY_MODE       ("auto" mac dinh | "direct" chi tai thang | "proxy" chi qua proxy)
-  KUCOIN / HTX / COINEX   ("0" de tat theo doi tung san
+  KUCOIN / HTX / COINEX   ("0" de tat theo doi tung san)
+  MAX_AGE_HOURS    (mac dinh 72 - bo qua bai cu hon nguong nay, 0 = tat)
+  TITLE_DEDUPE_DAYS (mac dinh 30 - chan bai trung tieu de trong khoang nay, 0 = tat)
   DRY_RUN          ("1" = khong gui Telegram, chi in ra man hinh)
 """
 
+import calendar
 import html
 import json
 import os
@@ -40,6 +43,8 @@ PROXY_MODE = os.getenv("PROXY_MODE", "auto").lower()
 WATCH_KUCOIN = os.getenv("KUCOIN", "1") != "0"
 WATCH_HTX = os.getenv("HTX", "1") != "0"
 WATCH_COINEX = os.getenv("COINEX", "1") != "0"
+MAX_AGE_HOURS = int(os.getenv("MAX_AGE_HOURS", "72"))
+TITLE_DEDUPE_DAYS = int(os.getenv("TITLE_DEDUPE_DAYS", "30"))
 
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
@@ -99,6 +104,18 @@ ARTICLE_RE = re.compile(
 )
 TAG_RE = re.compile(r"<[^>]+>")
 WS_RE = re.compile(r"\s+")
+
+
+MONTHS = {m: i + 1 for i, m in enumerate(
+    ["jan", "feb", "mar", "apr", "may", "jun",
+     "jul", "aug", "sep", "oct", "nov", "dec"])}
+
+# Cac dinh dang ngay gap tren trang danh sach cua tung san
+DATE_RES = [
+    ("ymd", re.compile(r"\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b")),          # 2026-08-25
+    ("mdy", re.compile(r"\b([A-Z][a-z]{2})[a-z]*\.?\s+(\d{1,2}),?\s+(20\d{2})\b")),  # Aug 25, 2026
+    ("md", re.compile(r"\b(\d{2})/(\d{2})\b")),                                # 08/12 (HTX)
+]
 
 
 def log(msg):
@@ -174,6 +191,52 @@ def fetch(url, tries=2, valid=None):
     raise RuntimeError(f"khong tai duoc {url} ({last})")
 
 
+def _epoch(y, mo, d):
+    try:
+        return calendar.timegm((int(y), int(mo), int(d), 12, 0, 0, 0, 0, 0))
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def date_near(page, pos, window=400):
+    """Tim ngay dang sau vi tri link. Tra ve epoch giay, hoac None neu khong thay."""
+    chunk = page[pos: pos + window]
+    now = time.time()
+    for kind, rx in DATE_RES:
+        m = rx.search(chunk)
+        if not m:
+            continue
+        if kind == "ymd":
+            ts = _epoch(m.group(1), m.group(2), m.group(3))
+        elif kind == "mdy":
+            mo = MONTHS.get(m.group(1).lower())
+            ts = _epoch(m.group(3), mo, m.group(2)) if mo else None
+        else:  # "md" khong co nam -> doan nam hien tai, lech qua xa thi lui 1 nam
+            year = time.gmtime(now).tm_year
+            ts = _epoch(year, m.group(1), m.group(2))
+            if ts and ts - now > 30 * 86400:
+                ts = _epoch(year - 1, m.group(1), m.group(2))
+        if ts:
+            return ts
+    return None
+
+
+def too_old(ts):
+    """True neu BIET ngay va ngay do cu hon nguong. Khong biet ngay -> khong loai."""
+    if not ts or MAX_AGE_HOURS <= 0:
+        return False
+    return (time.time() - ts) > MAX_AGE_HOURS * 3600
+
+
+NORM_RE = re.compile(r"[^a-z0-9#]+")
+
+
+def norm_title(title):
+    """Chuan hoa tieu de de so trung: thuong hoa, bo dau cau, gop khoang trang.
+    Giu lai chu so va dau # vi 'PrimePool #39' va '#40' la hai su kien khac nhau."""
+    return NORM_RE.sub(" ", (title or "").lower()).strip()
+
+
 def prettify(slug):
     """Fallback: bien slug thanh tieu de doc duoc."""
     words = slug.replace("-", " ").strip()
@@ -224,10 +287,14 @@ def _collect_htx(found):
             continue
         page = page.replace("\\/", "/")
 
-        n = 0
+        n = old = 0
         for m in HTX_LINK_RE.finditer(page):
             title = find_title(page, m.start(), "")
             if not title or not HTX_FILTER.search(title):
+                continue
+            ts = date_near(page, m.start())
+            if too_old(ts):
+                old += 1
                 continue
             n += 1
             aid = "htx:" + m.group("id")
@@ -238,8 +305,9 @@ def _collect_htx(found):
                 "title": title,
                 "url": HTX_BASE + m.group("path"),
                 "sources": [label],
+                "ts": ts,
             }
-        log(f"  -> {n} bai khop")
+        log(f"  -> {n} bai khop" + (f" ({old} bai qua cu)" if old else ""))
     _budget_until = None
 
 
@@ -258,10 +326,18 @@ def _collect_coinex(found):
         log(f"  ! CoinEx tra ve JSON hong: {e}")
         return
 
-    n = 0
+    n = old = 0
     for a in arts:
         title = (a.get("title") or "").strip()
         if not title or not COINEX_FILTER.search(title):
+            continue
+        ts = None
+        raw = a.get("created_at") or ""
+        m = re.match(r"(20\d{2})-(\d{2})-(\d{2})", raw)
+        if m:
+            ts = _epoch(*m.groups())
+        if too_old(ts):
+            old += 1
             continue
         n += 1
         aid = "cx:" + str(a.get("id"))
@@ -272,8 +348,9 @@ def _collect_coinex(found):
             "title": title,
             "url": a.get("html_url") or "https://www.coinex.com/en/announcements",
             "sources": ["CoinEx"],
+            "ts": ts,
         }
-    log(f"  -> {n} bai khop")
+    log(f"  -> {n} bai khop" + (f" ({old} bai qua cu)" if old else ""))
 
 
 def _collect_kucoin(found):
@@ -294,10 +371,14 @@ def _collect_kucoin(found):
             log(f"  ! KuCoin tra ve JSON hong: {e}")
             continue
 
-        n = 0
+        n = old = 0
         for it in items:
             title = (it.get("annTitle") or "").strip()
             if not title or not KUCOIN_FILTER.search(title):
+                continue
+            ts = (it.get("cTime") or 0) / 1000 or None
+            if too_old(ts):
+                old += 1
                 continue
             n += 1
             aid = "kc:" + str(it.get("annId"))
@@ -308,8 +389,9 @@ def _collect_kucoin(found):
                 "title": title,
                 "url": it.get("annUrl") or "https://www.kucoin.com/gempool",
                 "sources": ["KuCoin Launchpool"],
+                "ts": ts,
             }
-        log(f"  -> {n} bai khop")
+        log(f"  -> {n} bai khop" + (f" ({old} bai qua cu)" if old else ""))
 
 
 def _collect_mexc(found):
@@ -323,13 +405,17 @@ def _collect_mexc(found):
             continue
         page = page.replace("\\/", "/")   # go escape trong payload JSON
 
-        n = 0
+        n = old = 0
         for m in ARTICLE_RE.finditer(page):
             aid = m.group("id")
             slug = m.group("slug")
             in_href = "href=" in page[max(0, m.start() - 60):m.start()]
             title = find_title(page, m.start(), slug) if in_href else prettify(slug)
             if keyword and not (keyword.search(title) or keyword.search(slug)):
+                continue
+            ts = date_near(page, m.start())
+            if too_old(ts):
+                old += 1
                 continue
             n += 1
             if aid in found:
@@ -341,21 +427,23 @@ def _collect_mexc(found):
                 "title": title,
                 "url": BASE + m.group("path"),
                 "sources": [label],
+                "ts": ts,
             }
-        log(f"  -> {n} bai khop")
+        log(f"  -> {n} bai khop" + (f" ({old} bai qua cu)" if old else ""))
 
 
 def load_state():
     if not STATE_FILE.exists():
-        return {"seen": {}, "initialized": False}
+        return {"seen": {}, "titles": {}, "initialized": False}
     try:
         data = json.loads(STATE_FILE.read_text("utf-8"))
         data.setdefault("seen", {})
+        data.setdefault("titles", {})
         data.setdefault("initialized", False)
         return data
     except Exception as e:  # noqa: BLE001
         log(f"! state hong ({e}), tao lai tu dau")
-        return {"seen": {}, "initialized": False}
+        return {"seen": {}, "titles": {}, "initialized": False}
 
 
 def save_state(state):
@@ -364,6 +452,13 @@ def save_state(state):
     if len(seen) > 800:
         keep = sorted(seen.items(), key=lambda kv: kv[0], reverse=True)[:800]
         state["seen"] = dict(keep)
+
+    # kho tieu de chi can giu trong khoang dedupe, qua han thi don di
+    if TITLE_DEDUPE_DAYS > 0:
+        cutoff = time.time() - TITLE_DEDUPE_DAYS * 86400
+        state["titles"] = {k: v for k, v in state.get("titles", {}).items() if v >= cutoff}
+    else:
+        state["titles"] = {}
     state["updated_at"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=2), "utf-8")
 
@@ -416,8 +511,10 @@ def main():
 
     if not state["initialized"]:
         # Lan chay dau: chi ghi nhan, khong ban 30 tin cu vao mat
+        now = time.time()
         for aid, a in found.items():
             state["seen"][aid] = a["title"]
+            state["titles"][norm_title(a["title"])] = now
         state["initialized"] = True
         save_state(state)
         telegram_send(
@@ -438,21 +535,35 @@ def main():
         new = new[:MAX_NOTIFY]
 
     ok_all = True
+    dup = 0
     for a in new:
+        key = norm_title(a["title"])
+        if TITLE_DEDUPE_DAYS > 0 and key and key in state["titles"]:
+            # bai nay da bao roi duoi mot ID khac (san sua bai / dang lai o muc khac)
+            state["seen"][a["id"]] = a["title"]
+            dup += 1
+            log(f"Bo qua (trung tieu de da bao): {a['title'][:70]}")
+            continue
         tag = " / ".join(a["sources"])
+        when = ""
+        if a.get("ts"):
+            when = "\n📅 " + time.strftime("%d/%m/%Y", time.gmtime(a["ts"]))
         msg = (
-            f"🚀 <b>{html.escape(tag)}</b>\n\n"
+            f"🚀 <b>{html.escape(tag)}</b>{when}\n\n"
             f"<b>{html.escape(a['title'])}</b>\n\n"
             f'<a href="{a["url"]}">Xem thong bao</a>'
         )
         if telegram_send(msg):
             state["seen"][a["id"]] = a["title"]
+            state["titles"][key] = time.time()
             log(f"Da gui: {a['title']}")
         else:
             ok_all = False
             log(f"! Gui that bai, se thu lai lan sau: {a['title']}")
         time.sleep(1)
 
+    if dup:
+        log(f"({dup} bai bi chan vi trung tieu de voi bai da bao)")
     save_state(state)
     return 0 if ok_all else 1
 
