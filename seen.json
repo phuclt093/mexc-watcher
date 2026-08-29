@@ -1,4 +1,16 @@
 {
-  "seen": {},
-  "initialized": false
+  "seen": {
+    "17827791535675": "KSKD Launchpool: Share 10,000,000 KSKD!",
+    "17827791534866": "EMBLEM Launchpool: Share 5,000,000 EMBLEM!",
+    "17827791534641": "USD1 Launchpool: Share 1,500,000 WLFI!",
+    "17827791534615": "USD1 Genesis: 15,000,000 WLFI Prize Pool Up for Grabs!",
+    "17827791533210": "Important: Early Conclusion of PLUS Launchpool",
+    "17827791532819": "PlusMore (PLUS) Launchpool & Airdrop+: Share 18,000 PLUS!",
+    "17827791527816": "Einstein (EIN) : Join EIN Launchpool Round 2 to Share 30,000,000 EIN !",
+    "17827791524813": "[Initial Listing] Participate in Bombie (BOMB) Launchpool, Airdrop+ & Earn to Share 18,200,000 BOMB and 50,000 USDT!",
+    "17827791524156": "[Initial Listing] Iceberg (ICEBERG) Launchpool: Share 1,666,666,666 ICEBERG!",
+    "17827791523182": "[Initial Listing] New Listing of Shardeum (SHM): Join Launchpool & Airdrop + to share 72,000 SHM & 150,000 USDT bonus!"
+  },
+  "initialized": true,
+  "updated_at": "2026-08-29T00:45:15Z"
 }
