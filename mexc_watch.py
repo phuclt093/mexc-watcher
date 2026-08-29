@@ -66,10 +66,13 @@ KUCOIN_FILTER = re.compile(
     re.I,
 )
 
-# href="/announcements/article/ten-bai-viet-17827791534551"  (co the co prefix ngon ngu)
+# Bat duong dan bai viet o BAT KY dau trong trang, khong bat buoc phai nam trong href="".
+# Ly do: qua proxy, MEXC doi khi tra ve payload JSON cua Next.js thay vi HTML co the <a>,
+# luc do duong dan nam trong "url":"/announcements/article/..." -> regex bam href se trat.
+# vd: /announcements/article/ten-bai-viet-17827791534551 (co the co prefix ngon ngu)
 ARTICLE_RE = re.compile(
-    r'href="(?P<path>/(?:[a-z]{2}-[A-Z]{2}/)?announcements/article/'
-    r'(?P<slug>[A-Za-z0-9\-]+?)-(?P<id>\d{10,}))"'
+    r'(?P<path>/(?:[a-z]{2}-[A-Z]{2}/)?announcements/article/'
+    r'(?P<slug>[A-Za-z0-9\-]+?)-(?P<id>\d{10,}))(?=["\'\\?\s<)&])'
 )
 TAG_RE = re.compile(r"<[^>]+>")
 WS_RE = re.compile(r"\s+")
@@ -225,12 +228,14 @@ def _collect_mexc(found):
         except RuntimeError as e:
             log(f"  ! bo qua {label}: {e}")
             continue
+        page = page.replace("\\/", "/")   # go escape trong payload JSON
 
         n = 0
         for m in ARTICLE_RE.finditer(page):
             aid = m.group("id")
             slug = m.group("slug")
-            title = find_title(page, m.start(), slug)
+            in_href = "href=" in page[max(0, m.start() - 60):m.start()]
+            title = find_title(page, m.start(), slug) if in_href else prettify(slug)
             if keyword and not (keyword.search(title) or keyword.search(slug)):
                 continue
             n += 1
