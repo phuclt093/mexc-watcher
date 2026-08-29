@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Bao pool moi mo: MEXC Launchpool + Kickstarter, KuCoin KuMining/GemPool -> Telegram
+Bao pool moi mo cho token dang nam giu (MX, KCS, HTX, CET) -> Telegram
 
 Cach hoat dong:
   1. Tai cac trang thong bao (server-rendered HTML) cua MEXC.
@@ -15,7 +15,7 @@ Tuy chon:
   STATE_FILE       (mac dinh "seen.json")
   MAX_NOTIFY       (mac dinh 10 - chong spam neu MEXC doi HTML)
   PROXY_MODE       ("auto" mac dinh | "direct" chi tai thang | "proxy" chi qua proxy)
-  KUCOIN           ("0" de tat theo doi KuCoin)
+  KUCOIN / HTX / COINEX   ("0" de tat theo doi tung san
   DRY_RUN          ("1" = khong gui Telegram, chi in ra man hinh)
 """
 
@@ -38,6 +38,8 @@ MAX_NOTIFY = int(os.getenv("MAX_NOTIFY", "10"))
 DRY_RUN = os.getenv("DRY_RUN") == "1"
 PROXY_MODE = os.getenv("PROXY_MODE", "auto").lower()
 WATCH_KUCOIN = os.getenv("KUCOIN", "1") != "0"
+WATCH_HTX = os.getenv("HTX", "1") != "0"
+WATCH_COINEX = os.getenv("COINEX", "1") != "0"
 
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
@@ -65,6 +67,27 @@ KUCOIN_FILTER = re.compile(
     ),
     re.I,
 )
+
+# HTX: trang danh muc thong bao render san HTML, lay duoc bang GET binh thuong.
+# Primepool = khoa HTX/HT de farm token moi. Primelist = mua som token moi.
+HTX_BASE = "https://www.htx.com"
+HTX_LISTS = [
+    ("HTX Primepool", "https://www.htx.com/en-us/support/list/360000031362/"),   # Latest Activities
+    ("HTX Primepool", "https://www.htx.com/en-us/support/list/54911014605677/"),  # HTX Earn
+]
+HTX_LINK_RE = re.compile(r'href="(?P<path>/support/(?P<id>\d{8,})/?)"')
+HTX_FILTER = re.compile(
+    os.getenv("HTX_KEYWORDS", r"primepool|prime pool|primelist|prime list"), re.I)
+HTX_BUDGET = int(os.getenv("HTX_BUDGET", "120"))
+
+# CoinEx dung Zendesk cho trang thong bao -> co API JSON cong khai, khong can key.
+# CoinEx KHONG co san pham launchpool; muc Events chu yeu la thuong nap va thi giao dich,
+# nen bo loc mac dinh bam vao chu CET de bat su kien lien quan token ban dang giu.
+COINEX_API = ("https://coinex-announcement.zendesk.com/api/v2/help_center/en-us/"
+              "categories/14108305136532/articles.json"
+              "?per_page=30&sort_by=created_at&sort_order=desc")
+COINEX_FILTER = re.compile(
+    os.getenv("COINEX_KEYWORDS", r"\bCET\b|launchpool|staking mining|mining pool"), re.I)
 
 # Bat duong dan bai viet o BAT KY dau trong trang, khong bat buoc phai nam trong href="".
 # Ly do: qua proxy, MEXC doi khi tra ve payload JSON cua Next.js thay vi HTML co the <a>,
@@ -174,13 +197,83 @@ def collect():
     """Tra ve dict {article_id: {...}} tu tat ca nguon."""
     global _budget_until
     found = {}
-    # KuCoin goi API chinh thuc, nhanh va on dinh -> lam truoc cho chac
+    # Nguon dung API chinh thuc (nhanh, on dinh) lam truoc
     if WATCH_KUCOIN:
         _collect_kucoin(found)
+    if WATCH_COINEX:
+        _collect_coinex(found)
+    # Nguon phai cao HTML lam sau, moi cai co tran thoi gian rieng
+    if WATCH_HTX:
+        _collect_htx(found)
     _budget_until = time.monotonic() + FETCH_BUDGET
     _collect_mexc(found)
     _budget_until = None
     return found
+
+
+def _collect_htx(found):
+    """HTX: cao trang danh muc thong bao, loc tieu de co Primepool/Primelist."""
+    global _budget_until
+    _budget_until = time.monotonic() + HTX_BUDGET
+    for label, url in HTX_LISTS:
+        log(f"Dang kiem tra {label}: {url}")
+        try:
+            page = fetch(url, valid=lambda b: "/support/" in b)
+        except RuntimeError as e:
+            log(f"  ! bo qua {label}: {e}")
+            continue
+        page = page.replace("\\/", "/")
+
+        n = 0
+        for m in HTX_LINK_RE.finditer(page):
+            title = find_title(page, m.start(), "")
+            if not title or not HTX_FILTER.search(title):
+                continue
+            n += 1
+            aid = "htx:" + m.group("id")
+            if aid in found:
+                continue
+            found[aid] = {
+                "id": aid,
+                "title": title,
+                "url": HTX_BASE + m.group("path"),
+                "sources": [label],
+            }
+        log(f"  -> {n} bai khop")
+    _budget_until = None
+
+
+def _collect_coinex(found):
+    """CoinEx: API Zendesk cua trang thong bao, muc Events."""
+    log("Dang kiem tra CoinEx (Events)")
+    try:
+        body = fetch(COINEX_API, valid=lambda b: '"articles"' in b)
+    except RuntimeError as e:
+        log(f"  ! bo qua CoinEx: {e}")
+        return
+
+    try:
+        arts = json.loads(body).get("articles") or []
+    except Exception as e:  # noqa: BLE001
+        log(f"  ! CoinEx tra ve JSON hong: {e}")
+        return
+
+    n = 0
+    for a in arts:
+        title = (a.get("title") or "").strip()
+        if not title or not COINEX_FILTER.search(title):
+            continue
+        n += 1
+        aid = "cx:" + str(a.get("id"))
+        if aid in found:
+            continue
+        found[aid] = {
+            "id": aid,
+            "title": title,
+            "url": a.get("html_url") or "https://www.coinex.com/en/announcements",
+            "sources": ["CoinEx"],
+        }
+    log(f"  -> {n} bai khop")
 
 
 def _collect_kucoin(found):

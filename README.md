@@ -1,11 +1,26 @@
 # Pool Watcher → Telegram
 
-Báo khi có **pool mới mở** để đem token đi farm: **Launchpool** và **Kickstarter** của MEXC
-(dùng MX), **KuMining / GemPool** của KuCoin (dùng KCS). Chạy miễn phí trên GitHub Actions,
+Báo khi có **pool mới mở** để đem token đang giữ đi farm. Chạy miễn phí trên GitHub Actions,
 không cần bật máy.
+
+| Sàn | Sự kiện theo dõi | Token bạn bỏ vào | Nguồn dữ liệu |
+|---|---|---|---|
+| MEXC | Launchpool, Kickstarter | MX | cào HTML (qua proxy) |
+| KuCoin | KuMining, GemPool | KCS | API chính thức |
+| HTX | Primepool, Primelist | HTX / HT | cào HTML (trực tiếp) |
+| CoinEx | sự kiện liên quan CET | CET | API Zendesk |
 
 Cố ý **không** theo dõi tin niêm yết coin mới, Airdrop+ hay khuyến mãi giao dịch — chỉ những
 sự kiện mà bạn bỏ token đang giữ vào để nhận thưởng.
+
+> **Về CoinEx:** sàn này **không có sản phẩm launchpool**. Mục Events của họ chủ yếu là thưởng
+> nạp tiền, khuyến mãi mua fiat và thi giao dịch. Lợi tức của CET đến từ CoinEx Staking —
+> một sản phẩm chạy thường trực, không phải sự kiện có hạn. Nên bộ lọc CoinEx bám vào chữ
+> `CET` để bắt các sự kiện liên quan token bạn giữ, chứ không kỳ vọng có pool.
+
+> **Về HTX Primepool:** sản phẩm này có thật (khoá $HTX để farm token mới) nhưng đợt gần đây
+> không thấy chạy — các mục Latest Activities và HTX Earn vài tháng qua chỉ toàn khuyến mãi
+> giao dịch. Bot cứ theo dõi sẵn, khi nào Primepool quay lại là báo.
 
 ---
 
@@ -119,7 +134,12 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 | `STATE_FILE` | `seen.json` | nơi lưu danh sách bài đã thấy |
 | `DRY_RUN` | — | `1` = chỉ in ra màn hình, không gửi |
 | `PROXY_MODE` | `auto` | `direct` = chỉ tải thẳng, `proxy` = chỉ đi qua proxy |
-| `KUCOIN` | `1` | `0` = tắt theo dõi KuCoin GemPool |
+| `KUCOIN` | `1` | `0` = tắt theo dõi KuCoin |
+| `HTX` | `1` | `0` = tắt theo dõi HTX |
+| `COINEX` | `1` | `0` = tắt theo dõi CoinEx |
+| `HTX_KEYWORDS` | `primepool\|primelist\|…` | regex lọc tiêu đề HTX |
+| `COINEX_KEYWORDS` | `\bCET\b\|launchpool\|…` | regex lọc tiêu đề CoinEx |
+| `HTX_BUDGET` | `120` | số giây tối đa dành cho phần HTX |
 | `KUCOIN_KEYWORDS` | `gempool\|kumining\|…` | regex lọc tiêu đề KuCoin |
 | `FETCH_BUDGET` | `300` | số giây tối đa dành cho phần MEXC |
 
