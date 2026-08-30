@@ -5,10 +5,14 @@ không cần bật máy.
 
 | Sàn | Sự kiện theo dõi | Token bạn bỏ vào | Nguồn dữ liệu |
 |---|---|---|---|
-| MEXC | Launchpool, Kickstarter | MX | cào HTML (qua proxy) |
+| MEXC | Launchpool, Kickstarter, buyback & burn | MX | cào HTML (qua proxy) |
 | KuCoin | KuMining, GemPool | KCS | API chính thức |
 | HTX | Primepool, Primelist | HTX / HT | cào HTML (trực tiếp) |
 | CoinEx | sự kiện liên quan CET | CET | API Zendesk |
+
+Bot còn **mở bài ra đọc** để lấy giờ mở/đóng pool rồi **nhắc trước khi pool mở** và
+**nhắc trước khi pool đóng** để kịp rút token về, và **tự báo khi chính nó hỏng** thay vì
+im lặng khiến bạn tưởng đang không có pool nào.
 
 Kèm theo là **bộ theo dõi burn** (`burn_watch.py`): báo mỗi khi sàn đốt token, kèm tổng đã
 đốt, đốt hôm nay và số còn lại của MX / KCS / HTX / CET — xem mục
@@ -165,6 +169,72 @@ theo ngày (giữ 40 ngày gần nhất) để tính được "hôm nay / 7 ngà
 
 ---
 
+## 6. Đọc chi tiết bài và nhắc lịch pool
+
+Trang danh sách chỉ có tiêu đề. Mọi thứ quan trọng — pool mở lúc nào, đóng lúc nào, thưởng
+bao nhiêu — nằm trong thân bài. Với mỗi bài **mới**, bot mở bài ra một lần và bóc ra
+(`article.py`):
+
+```
+🚀 MEXC Launchpool
+📅 30/08/2026
+
+KSKD Launchpool: Share 10,000,000 KSKD!
+
+🕐 Mo 12:44 02/09 · Dong 12:44 02/10 (gio VN)
+🎁 Thuong: 10,000,000 KSKD
+```
+
+Có giờ rồi thì bot nhắc được — đây mới là phần đáng giá, vì thông báo thường ra **trước**
+1–3 ngày, tới lúc pool mở thật thì đã quên:
+
+```
+⏰ Pool sap mo - con 24 phut          ⚠️ Pool sap dong - con 5 gio 19 phut
+
+KSKD Launchpool: Share 10,000,000     EMBLEM Launchpool: Share 5,000,000
+                                       Nho rut token ve.
+🕐 Mo luc 13:09 30/08 (gio VN)        🕐 Dong luc 18:04 30/08 (gio VN)
+```
+
+Lịch lưu trong `seen.json` mục `agenda`, pool đóng quá 3 ngày thì tự dọn.
+
+Bộ bóc thời gian hiểu các định dạng: `May 25, 2026, 13:00 (UTC)` (MEXC),
+`2026-05-25 21:00 (UTC+8)` (KuCoin/HTX), `25 May 2026 13:00`, `25/05/2026 13:00`. Nhiều sàn
+chỉ ghi múi giờ **một lần** cho cả khoảng — bot lấy múi giờ đó áp cho mốc còn thiếu. Ngày kiểu
+`05/06/2026` không đoán được đâu là ngày đâu là tháng thì bot **bỏ qua** chứ không đoán bừa.
+
+> Bóc sai còn tệ hơn không bóc, nên bot chỉ nhận khoảng thời gian khi tìm được **ít nhất 2
+> mốc** và khoảng cách giữa chúng nằm trong 1 giờ – 200 ngày. Không chắc thì bỏ trống, tin
+> báo pool vẫn gửi bình thường, chỉ là không có dòng 🕐.
+
+---
+
+## 7. Cảnh báo khi chính bot hỏng
+
+Đây là lỗ hổng nguy hiểm nhất của loại bot này: **hỏng im lặng trông y hệt "không có pool nào"**.
+Bot tự canh hai kiểu hỏng.
+
+**Không tải được nguồn nào** — Cloudflare chặn IP hoặc proxy chết hết. Sau 6 lần chạy liên
+tiếp thất bại (~1 tiếng) bot bắn một tin cảnh báo, và bắn tin báo hồi phục khi chạy lại được.
+
+**Tải được nhưng bóc ra 0 bài** — sàn đổi cấu trúc HTML, regex không còn khớp. Kiểu này
+nguy hiểm hơn: GitHub Actions vẫn xanh, log vẫn đẹp, nhưng bot mù tịt. Bot đếm số bài bóc
+được **trước khi lọc từ khoá**; tải thành công mà con số đó bằng 0 ba lần liên tiếp thì báo:
+
+```
+⚠️ Nguon MEXC Launchpool co the da hong
+
+Tai trang thanh cong 3 lan lien tiep nhung khong boc duoc bai nao.
+Nhieu kha nang san doi cau truc HTML, can sua lai regex.
+```
+
+Mỗi cảnh báo chỉ gửi **một lần** cho tới khi tình trạng đổi, không spam. Tắt bằng `HEALTH_ALERT=0`.
+
+> Cố ý đếm bài **trước** khi lọc từ khoá. Nếu đếm sau, HTX vài tháng không có Primepool sẽ bị
+> báo nhầm là hỏng.
+
+---
+
 ## Chạy thử ở máy (tuỳ chọn)
 
 ```bash
@@ -233,6 +303,27 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 | `HTX_BUDGET` | `120` | số giây tối đa dành cho phần HTX |
 | `KUCOIN_KEYWORDS` | `gempool\|kumining\|…` | regex lọc tiêu đề KuCoin |
 | `FETCH_BUDGET` | `300` | số giây tối đa dành cho phần MEXC |
+
+**Đọc chi tiết bài và nhắc lịch:**
+
+| Biến | Mặc định | Ý nghĩa |
+|---|---|---|
+| `ARTICLE_DETAIL` | `1` | `0` = không mở bài lấy giờ mở/đóng, chỉ báo tiêu đề như cũ |
+| `ARTICLE_BUDGET` | `60` | số giây tối đa dành cho việc mở bài mỗi lần chạy |
+| `REMIND_START_MIN` | `30` | nhắc trước bao nhiêu phút khi pool sắp mở |
+| `REMIND_END_HOURS` | `6` | nhắc trước bao nhiêu giờ khi pool sắp đóng |
+| `MAX_REMINDERS` | `5` | trần số tin nhắc mỗi lần chạy |
+| `DISPLAY_TZ_HOURS` | `7` | múi giờ hiển thị trong tin nhắn (7 = giờ VN) |
+
+**Tin burn và cảnh báo sức khoẻ:**
+
+| Biến | Mặc định | Ý nghĩa |
+|---|---|---|
+| `BURN_NEWS` | `1` | `0` = không bắt thông báo buyback/burn của sàn |
+| `BURN_NEWS_KEYWORDS` | `buyback\|repurchase\|burn\|…` | regex nhận diện tin burn |
+| `HEALTH_ALERT` | `1` | `0` = tắt cảnh báo khi bot hỏng |
+| `HEALTH_DOWN_AFTER` | `6` | báo sau bao nhiêu lần liên tiếp không tải được nguồn nào |
+| `HEALTH_PARSE_AFTER` | `3` | báo sau bao nhiêu lần tải được mà bóc 0 bài |
 
 ---
 
