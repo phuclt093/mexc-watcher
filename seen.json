@@ -29,9 +29,43 @@
     "cx:41668602003860": "Join USDC Futures Tradeboard, Share 100,000 CET",
     "cx:40864214797972": "Join Futures PNL Tradeboard to Share 100,000 CET!",
     "cx:40826324521364": "CoinEx Mining: Lock CET to Share 5 ETH",
-    "cx:40825280204308": "CoinEx Has Distributed Rewards for the “PUMP, BONK, ZORA Special Event: Deposit & Trade Futures to Share 50,000 CET and More” Event"
+    "cx:40825280204308": "CoinEx Has Distributed Rewards for the “PUMP, BONK, ZORA Special Event: Deposit & Trade Futures to Share 50,000 CET and More” Event",
+    "4411278979481": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter",
+    "17827791532625": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-08-30T05:05:57Z",
-  "titles": {}
+  "updated_at": "2026-08-30T05:57:24Z",
+  "titles": {
+    "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848
+  },
+  "agenda": {},
+  "health": {
+    "sources": {
+      "KuCoin activities": {
+        "zero": 0,
+        "notified": false
+      },
+      "CoinEx": {
+        "zero": 0,
+        "notified": false
+      },
+      "HTX Primepool": {
+        "zero": 1
+      },
+      "MEXC Launchpool": {
+        "zero": 0,
+        "notified": false
+      },
+      "MEXC MX Exclusives": {
+        "zero": 0,
+        "notified": false
+      },
+      "MEXC Kickstarter": {
+        "zero": 0,
+        "notified": false
+      }
+    },
+    "fail_streak": 0,
+    "down_notified": false
+  }
 }
