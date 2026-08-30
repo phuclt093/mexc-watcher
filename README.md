@@ -10,6 +10,10 @@ không cần bật máy.
 | HTX | Primepool, Primelist | HTX / HT | cào HTML (trực tiếp) |
 | CoinEx | sự kiện liên quan CET | CET | API Zendesk |
 
+Kèm theo là **bộ theo dõi burn** (`burn_watch.py`): báo mỗi khi sàn đốt token, kèm tổng đã
+đốt, đốt hôm nay và số còn lại của MX / KCS / HTX / CET — xem mục
+[Theo dõi burn token sàn](#5-theo-dõi-burn-token-sàn).
+
 Cố ý **không** theo dõi tin niêm yết coin mới, Airdrop+ hay khuyến mãi giao dịch — chỉ những
 sự kiện mà bạn bỏ token đang giữ vào để nhận thưởng.
 
@@ -68,6 +72,12 @@ Trong repo trên GitHub: **Settings → Secrets and variables → Actions → Ne
 |---|---|
 | `TELEGRAM_BOT_TOKEN` | token từ BotFather |
 | `TELEGRAM_CHAT_ID` | chat_id của bạn |
+| `ETHERSCAN_API_KEY` | *(tuỳ chọn)* key miễn phí từ [etherscan.io/apis](https://etherscan.io/apis) — để đọc cung MX/KCS thẳng từ blockchain |
+| `COINGECKO_API_KEY` | *(tuỳ chọn)* Demo key miễn phí từ [coingecko.com/en/api](https://www.coingecko.com/en/api) — đỡ bị chặn 429 |
+
+Hai key cuối chỉ phục vụ phần theo dõi burn. Thiếu chúng bot vẫn chạy: `ETHERSCAN_API_KEY`
+thiếu thì lấy số của CoinGecko, `COINGECKO_API_KEY` thiếu thì gọi CoinGecko không key
+(vẫn được, chỉ dễ dính giới hạn tần suất hơn).
 
 ---
 
@@ -82,6 +92,79 @@ Sau đó cron tự chạy **10 phút/lần**.
 
 ---
 
+## 5. Theo dõi burn token sàn
+
+`burn_watch.py` chạy chung workflow, mỗi giờ một lần đọc **tổng cung** hiện tại của 4 token
+và so với lần trước. Cung giảm = sàn vừa đốt token → bắn tin ngay.
+
+**Hai loại tin:**
+
+*Khi sàn vừa đốt:*
+
+```
+🔥 MEXC vua burn MX
+
+Dot nay: 12.500M MX (~$27.63M)
+Tong da dot: 603.475M / 1.000B (60.35%)
+Con lai: 396.525M MX
+██████░░░░
+```
+
+*Tổng kết định kỳ (mặc định sáng thứ Hai, 8h giờ VN):*
+
+```
+📊 Tong ket burn token san
+30/08/2026
+
+🔥 MX · MEXC
+   Con lai: 396.525M / 1.000B
+   Da dot: 603.475M (60.35%) ██████░░░░
+   Hom nay: 79,305 · 7 ngay: 1.850M · 30 ngay: 7.930M
+   nguon: on-chain
+...
+```
+
+**Nguồn số liệu** — on-chain trước, CoinGecko dự phòng:
+
+| Token | Cung ban đầu | Nguồn chính | Vì sao |
+|---|---|---|---|
+| MX | 1.000.000.000 | on-chain, Etherscan V2 | toàn bộ cung nằm trên 1 contract ERC-20 |
+| KCS | 200.000.000 | on-chain, Etherscan V2 | như trên |
+| HTX | 999,99 nghìn tỷ | CoinGecko | token trải trên TRON + Ethereum + BSC |
+| CET | 10.000.000.000 | CoinGecko | cung thật nằm trên CoinEx Chain, ERC-20 chỉ là phần cầu nối |
+
+Contract dùng để đọc on-chain:
+
+- MX — `0x11eeF04c884E24d9B7B4760e7476D06ddF797f36` (Ethereum)
+- KCS — `0xf34960d9d60be18cC1D5Afc1A6F012A723a28811` (Ethereum)
+
+Sửa danh sách token, cung ban đầu hoặc contract trong biến `TOKENS` ở đầu `burn_watch.py`.
+
+> **Con số "đã đốt" là ước tính**, tính bằng `cung ban đầu − tổng cung hiện tại`. Nó khớp với
+> số sàn công bố khi sàn burn bằng cách **giảm thật** tổng cung (MX, KCS đúng như vậy). Với
+> token burn bằng cách gửi vào ví chết, con số phụ thuộc cách CoinGecko thống kê nên có thể
+> lệch chút so với thông cáo của sàn. Đừng dùng làm số liệu kế toán.
+
+**Biến môi trường của phần burn:**
+
+| Biến | Mặc định | Ý nghĩa |
+|---|---|---|
+| `BURN_WATCH` | `1` | `0` = tắt hẳn phần theo dõi burn |
+| `BURN_TOKENS` | — | chỉ theo dõi vài token, vd `MX,KCS` |
+| `BURN_INTERVAL_MIN` | `60` | tối thiểu bao nhiêu phút mới kiểm tra lại (workflow chạy 10 phút/lần nên script tự bỏ qua các lượt thừa) |
+| `BURN_MIN_PCT` | `0.005` | bỏ qua thay đổi nhỏ hơn % này — chặn nhiễu làm tròn |
+| `BURN_DIGEST_DAY` | `mon` | ngày gửi tổng kết: `mon`…`sun`, `daily`, hoặc `off` |
+| `BURN_DIGEST_HOUR_UTC` | `1` | giờ UTC gửi tổng kết (1 = 8h sáng giờ VN) |
+| `BURN_STATE_FILE` | `burn.json` | nơi lưu snapshot cung theo ngày |
+| `ETHERSCAN_API_KEY` | — | thiếu thì bỏ qua đường on-chain |
+| `COINGECKO_API_KEY` | — | Demo key, gắn vào query `x_cg_demo_api_key` |
+
+Lần chạy đầu chỉ **ghi nhận** cung hiện tại và gửi 1 tin tóm tắt, không báo burn giả.
+`burn.json` được commit ngược về repo giống `seen.json` — đây cũng là nơi lưu lịch sử cung
+theo ngày (giữ 40 ngày gần nhất) để tính được "hôm nay / 7 ngày / 30 ngày".
+
+---
+
 ## Chạy thử ở máy (tuỳ chọn)
 
 ```bash
@@ -90,6 +173,12 @@ DRY_RUN=1 python mexc_watch.py
 
 # gửi thật
 TELEGRAM_BOT_TOKEN=xxx TELEGRAM_CHAT_ID=yyy python mexc_watch.py
+
+# phần burn (BURN_INTERVAL_MIN=0 để chạy ngay, không đợi ngưỡng 60 phút)
+DRY_RUN=1 BURN_INTERVAL_MIN=0 python burn_watch.py
+
+# xem thử tin tổng kết
+DRY_RUN=1 BURN_INTERVAL_MIN=0 BURN_DIGEST_DAY=daily BURN_DIGEST_HOUR_UTC=0 python burn_watch.py
 ```
 
 Chỉ cần Python 3.9+, không cần cài thư viện nào (dùng `urllib` sẵn có).

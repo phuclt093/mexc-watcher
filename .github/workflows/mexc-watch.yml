@@ -30,12 +30,21 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python mexc_watch.py
 
+      - name: Check exchange token burns
+        if: always()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+          COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
+        run: python burn_watch.py
+
       - name: Save state
         if: always()
         run: |
           git config user.name  "mexc-watcher[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add seen.json || exit 0
+          git add seen.json burn.json 2>/dev/null || git add seen.json || exit 0
           git diff --staged --quiet && echo "khong co thay doi" && exit 0
           git commit -m "chore: update seen state [skip ci]"
           for i in 1 2 3; do
