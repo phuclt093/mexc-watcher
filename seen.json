@@ -34,7 +34,7 @@
     "17827791532625": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-08-30T23:17:50Z",
+  "updated_at": "2026-08-31T01:24:15Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848
   },
@@ -50,7 +50,7 @@
         "notified": false
       },
       "HTX Primepool": {
-        "zero": 6,
+        "zero": 7,
         "notified": true
       },
       "MEXC Launchpool": {
