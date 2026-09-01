@@ -47,6 +47,10 @@ MIN_PCT = float(os.getenv("BURN_MIN_PCT", "0.005"))
 DIGEST_DAY = os.getenv("BURN_DIGEST_DAY", "mon").strip().lower()
 DIGEST_HOUR = int(os.getenv("BURN_DIGEST_HOUR_UTC", "1"))
 ONLY = [s.strip().upper() for s in os.getenv("BURN_TOKENS", "").split(",") if s.strip()]
+# Token khong phai cua minh: chi bao khi dot LON, khoi nhieu vi burn thoi gian thuc
+OTHER_MIN_PCT = float(os.getenv("BURN_OTHER_MIN_PCT", "0.5"))
+# Thu muc xuat du lieu cho trang bieu do (de trong = tat)
+DOCS_DIR = pathlib.Path(os.getenv("DOCS_DATA_DIR", "docs/data"))
 
 ETHERSCAN_KEY = os.getenv("ETHERSCAN_API_KEY", "").strip()
 CG_KEY = os.getenv("COINGECKO_API_KEY", "").strip()
@@ -62,17 +66,31 @@ WEEKDAYS = {"mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6
 #            HTX (trai tren TRON + ETH + BSC) -> khong doc on-chain duoc bang 1 lenh,
 #            de None va lay so tong hop cua CoinGecko.
 TOKENS = [
-    dict(key="MX", exch="MEXC", initial=1_000_000_000,
+    # own=True: token ban dang giu -> bao moi lan dot du nho
+    dict(key="MX", exch="MEXC", own=True, initial=1_000_000_000,
          cg=["mx-token"],
          chain=1, contract="0x11eeF04c884E24d9B7B4760e7476D06ddF797f36", decimals=18),
-    dict(key="KCS", exch="KuCoin", initial=200_000_000,
+    dict(key="KCS", exch="KuCoin", own=True, initial=200_000_000,
          cg=["kucoin-shares", "kucoin-token"],
          chain=1, contract="0xf34960d9d60be18cC1D5Afc1A6F012A723a28811", decimals=6),
-    dict(key="HTX", exch="HTX", initial=999_990_000_000_000,
+    dict(key="HTX", exch="HTX", own=True, initial=999_990_000_000_000,
          cg=["htx-dao", "htx"],
          chain=None, contract=None, decimals=None),
-    dict(key="CET", exch="CoinEx", initial=10_000_000_000,
+    dict(key="CET", exch="CoinEx", own=True, initial=10_000_000_000,
          cg=["coinex-token"],
+         chain=None, contract=None, decimals=None),
+    # own=False: theo doi de so sanh, chi bao khi dot lon (>= BURN_OTHER_MIN_PCT)
+    dict(key="BNB", exch="Binance", own=False, initial=200_000_000,
+         cg=["binancecoin"],
+         chain=None, contract=None, decimals=None),
+    dict(key="OKB", exch="OKX", own=False, initial=300_000_000,
+         cg=["okb"],
+         chain=None, contract=None, decimals=None),
+    dict(key="BGB", exch="Bitget", own=False, initial=2_000_000_000,
+         cg=["bitget-token"],
+         chain=None, contract=None, decimals=None),
+    dict(key="GT", exch="Gate", own=False, initial=300_000_000,
+         cg=["gatetoken", "gatechain-token"],
          chain=None, contract=None, decimals=None),
 ]
 
@@ -281,37 +299,90 @@ def alert_burn(t, burned, supply, price):
     return telegram_send(msg)
 
 
+def _own_block(t, state):
+    supply, initial = t["supply"], t["initial"]
+    total_burned = initial - supply
+    pct = total_burned / initial * 100
+    rec = state["tokens"].get(t["key"], {})
+    d1 = burn_since(rec, supply, 0)
+    d7 = burn_since(rec, supply, 7)
+    d30 = burn_since(rec, supply, 30)
+    return (
+        f"🔥 <b>{html.escape(t['key'])}</b> · {html.escape(t['exch'])}\n"
+        f"   Con lai: <b>{fmt(supply)}</b> / {fmt(initial)}\n"
+        f"   Da dot: {fmt(total_burned)} ({pct:.2f}%) {bar(pct)}\n"
+        f"   Hom nay: {fmt(d1) if d1 is not None else '—'}"
+        f" · 7 ngay: {fmt(d7) if d7 is not None else '—'}"
+        f" · 30 ngay: {fmt(d30) if d30 is not None else '—'}\n"
+        f"   <i>nguon: {t['source']}</i>\n")
+
+
 def digest(state, snapshot):
-    lines = ["📊 <b>Tong ket burn token san</b>",
-             time.strftime("%d/%m/%Y", time.gmtime()), ""]
-    any_row = False
-    for t in snapshot:
-        supply = t["supply"]
-        if not supply:
-            lines.append(f"❓ <b>{t['key']}</b> · {t['exch']} — khong lay duoc so lieu\n")
-            continue
-        any_row = True
-        initial = t["initial"]
-        total_burned = initial - supply
-        pct = total_burned / initial * 100
-        rec = state["tokens"].get(t["key"], {})
-        d1 = burn_since(rec, supply, 0)
-        d7 = burn_since(rec, supply, 7)
-        d30 = burn_since(rec, supply, 30)
-        lines.append(
-            f"🔥 <b>{html.escape(t['key'])}</b> · {html.escape(t['exch'])}\n"
-            f"   Con lai: <b>{fmt(supply)}</b> / {fmt(initial)}\n"
-            f"   Da dot: {fmt(total_burned)} ({pct:.2f}%) {bar(pct)}\n"
-            f"   Hom nay: {fmt(d1) if d1 is not None else '—'}"
-            f" · 7 ngay: {fmt(d7) if d7 is not None else '—'}"
-            f" · 30 ngay: {fmt(d30) if d30 is not None else '—'}\n"
-            f"   <i>nguon: {t['source']}</i>\n"
-        )
-    if not any_row:
+    have = [t for t in snapshot if t["supply"]]
+    if not have:
         log("! Khong co token nao co so lieu, bo qua tin tong ket.")
         return False
+
+    lines = ["📊 <b>Tong ket burn token san</b>",
+             time.strftime("%d/%m/%Y", time.gmtime()), ""]
+
+    mine = [t for t in have if t.get("own")]
+    if mine:
+        lines.append("<b>━ Token ban dang giu ━</b>\n")
+        for t in mine:
+            lines.append(_own_block(t, state))
+
+    others = sorted((t for t in have if not t.get("own")),
+                    key=lambda t: -(t["initial"] - t["supply"]) / t["initial"])
+    if others:
+        lines.append("<b>━ Cac san khac ━</b>")
+        rows = []
+        for t in others:
+            pct = (t["initial"] - t["supply"]) / t["initial"] * 100
+            rows.append(f"{t['key']:<4}{pct:>6.1f}%  {bar(pct, 8)}  con {fmt(t['supply'])}")
+        lines.append("<pre>" + "\n".join(rows) + "</pre>")
+
+    missing = [t["key"] for t in snapshot if not t["supply"]]
+    if missing:
+        lines.append(f"<i>Khong lay duoc so lieu: {', '.join(missing)}</i>")
     lines.append("<i>Da dot = cung ban dau - tong cung hien tai.</i>")
     return telegram_send("\n".join(lines))
+
+
+def export_docs(state, snapshot):
+    """Ghi du lieu cho trang bieu do GitHub Pages. Hong thi ke, khong duoc lam
+    gay luong bao burn."""
+    if not str(DOCS_DIR).strip():
+        return
+    try:
+        DOCS_DIR.mkdir(parents=True, exist_ok=True)
+        tokens, rows = [], []
+        for r in snapshot:
+            if not r["supply"]:
+                continue
+            rec = state["tokens"].get(r["key"], {})
+            burned = r["initial"] - r["supply"]
+            tokens.append({
+                "key": r["key"], "exch": r["exch"], "own": bool(r.get("own")),
+                "initial": r["initial"], "supply": r["supply"], "burned": burned,
+                "pct": burned / r["initial"] * 100,
+                "source": r["source"], "price": r.get("price"),
+                "d1": burn_since(rec, r["supply"], 0),
+                "d7": burn_since(rec, r["supply"], 7),
+                "d30": burn_since(rec, r["supply"], 30),
+                "days": rec.get("days") or {},
+            })
+            for day, sup in sorted((rec.get("days") or {}).items()):
+                rows.append(f"{day},{r['key']},{sup:.0f}")
+        tokens.sort(key=lambda x: -x["pct"])
+        (DOCS_DIR / "burn.json").write_text(json.dumps(
+            {"updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+             "tokens": tokens}, ensure_ascii=False, indent=1), "utf-8")
+        (DOCS_DIR / "burn_history.csv").write_text(
+            "date,token,total_supply\n" + "\n".join(sorted(rows)) + "\n", "utf-8")
+        log(f"Da xuat du lieu bieu do ({len(tokens)} token)")
+    except Exception as e:  # noqa: BLE001
+        log(f"! khong xuat duoc du lieu bieu do: {e}")
 
 
 def digest_due(state):
@@ -377,7 +448,10 @@ def main():
             continue
 
         drop = (prev - supply) if prev else 0
-        if prev and drop > 0 and (drop / prev * 100) >= MIN_PCT:
+        # Token minh giu: bao moi lan dot. Token chi theo doi: chi bao dot lon,
+        # vi vai san (BNB) dot theo thoi gian thuc, bao het thi loan.
+        thr = MIN_PCT if t.get("own") else OTHER_MIN_PCT
+        if prev and drop > 0 and (drop / prev * 100) >= thr:
             log(f"  -> phat hien burn {fmt(drop)} {t['key']}")
             if not first_run and not alert_burn(t, drop, supply, price):
                 # gui that bai -> giu nguyen so cu de lan sau bao lai
@@ -399,16 +473,17 @@ def main():
             return 1
         telegram_send(
             "✅ <b>Burn watcher da khoi dong</b>\n"
-            + "\n".join(
-                f"• <b>{r['key']}</b>: con {fmt(r['supply'])} / {fmt(r['initial'])}"
-                f" (da dot {(r['initial'] - r['supply']) / r['initial'] * 100:.2f}%)"
-                for r in rows
-            )
+            + "<pre>" + "\n".join(
+                f"{r['key']:<4}{(r['initial'] - r['supply']) / r['initial'] * 100:>6.1f}%"
+                f"  con {fmt(r['supply'])}"
+                for r in sorted(rows, key=lambda x: -(x['initial'] - x['supply']) / x['initial'])
+            ) + "</pre>"
             + "\n\nTu gio se bao moi khi san dot them token."
         )
         state["last_check"] = now
         state["last_digest"] = today
         save_state(state)
+        export_docs(state, snapshot)
         return 0
 
     if force_digest and digest(state, snapshot):
@@ -416,6 +491,7 @@ def main():
 
     state["last_check"] = now
     save_state(state)
+    export_docs(state, snapshot)
     return 0 if ok_all else 1
 
 

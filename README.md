@@ -14,9 +14,10 @@ Bot còn **mở bài ra đọc** để lấy giờ mở/đóng pool rồi **nh�
 **nhắc trước khi pool đóng** để kịp rút token về, và **tự báo khi chính nó hỏng** thay vì
 im lặng khiến bạn tưởng đang không có pool nào.
 
-Kèm theo là **bộ theo dõi burn** (`burn_watch.py`): báo mỗi khi sàn đốt token, kèm tổng đã
-đốt, đốt hôm nay và số còn lại của MX / KCS / HTX / CET — xem mục
-[Theo dõi burn token sàn](#5-theo-dõi-burn-token-sàn).
+Kèm theo là **bộ theo dõi burn** (`burn_watch.py`) cho 8 token sàn: báo mỗi khi sàn đốt token,
+kèm tổng đã đốt, đốt hôm nay và số còn lại — xem mục
+[Theo dõi burn token sàn](#5-theo-dõi-burn-token-sàn) — và một **trang biểu đồ** so sánh sàn nào
+đốt thật, sàn nào chỉ nói ([mục 8](#8-trang-biểu-đồ-github-pages)).
 
 Cố ý **không** theo dõi tin niêm yết coin mới, Airdrop+ hay khuyến mãi giao dịch — chỉ những
 sự kiện mà bạn bỏ token đang giữ vào để nhận thưởng.
@@ -136,14 +137,30 @@ Con lai: 396.525M MX
 ...
 ```
 
-**Nguồn số liệu** — on-chain trước, CoinGecko dự phòng:
+**8 token đang theo dõi.** Bốn token bạn giữ, cộng bốn sàn lớn để có cái so sánh — nhìn cạnh
+nhau mới thấy sàn nào đốt thật:
 
-| Token | Cung ban đầu | Nguồn chính | Vì sao |
-|---|---|---|---|
-| MX | 1.000.000.000 | on-chain, Etherscan V2 | toàn bộ cung nằm trên 1 contract ERC-20 |
-| KCS | 200.000.000 | on-chain, Etherscan V2 | như trên |
-| HTX | 999,99 nghìn tỷ | CoinGecko | token trải trên TRON + Ethereum + BSC |
-| CET | 10.000.000.000 | CoinGecko | cung thật nằm trên CoinEx Chain, ERC-20 chỉ là phần cầu nối |
+| Token | Sàn | Giữ? | Cung ban đầu | Nguồn số liệu |
+|---|---|:---:|---|---|
+| MX | MEXC | ✅ | 1.000.000.000 | on-chain (Etherscan V2) |
+| KCS | KuCoin | ✅ | 200.000.000 | on-chain (Etherscan V2) |
+| HTX | HTX | ✅ | 999,99 nghìn tỷ | CoinGecko |
+| CET | CoinEx | ✅ | 10.000.000.000 | CoinGecko |
+| BNB | Binance | — | 200.000.000 | CoinGecko |
+| OKB | OKX | — | 300.000.000 | CoinGecko |
+| BGB | Bitget | — | 2.000.000.000 | CoinGecko |
+| GT | Gate | — | 300.000.000 | CoinGecko |
+
+**Token bạn giữ** thì báo mọi lần đốt. **Token chỉ theo dõi** chỉ báo khi đốt lớn
+(≥ `BURN_OTHER_MIN_PCT`, mặc định 0,5%) — vì BNB đốt theo thời gian thực, báo hết thì loạn.
+Cả 8 đều xuất hiện trong bản tổng kết định kỳ.
+
+Chỉ MX và KCS đọc được on-chain: toàn bộ cung của chúng nằm trên **một** contract ERC-20 và
+burn làm giảm thật `totalSupply`. Sáu token còn lại trải trên nhiều chain (HTX: TRON + Ethereum
++ BSC), hoặc cung thật nằm ở chain riêng còn bản ERC-20 chỉ là phần cầu nối (CET trên Ethereum
+chỉ có 201 triệu trên tổng 2,46 tỷ), hoặc burn bằng cách gửi vào ví chết nên `totalSupply`
+on-chain không giảm (GT). Đọc on-chain mấy cái đó sẽ ra số sai, nên dùng số tổng hợp của
+CoinGecko.
 
 Contract dùng để đọc on-chain:
 
@@ -151,6 +168,7 @@ Contract dùng để đọc on-chain:
 - KCS — `0xf34960d9d60be18cC1D5Afc1A6F012A723a28811` (Ethereum)
 
 Sửa danh sách token, cung ban đầu hoặc contract trong biến `TOKENS` ở đầu `burn_watch.py`.
+Cờ `own=True` là token bạn giữ (báo mọi lần đốt), `own=False` là chỉ theo dõi để so sánh.
 
 > **Con số "đã đốt" là ước tính**, tính bằng `cung ban đầu − tổng cung hiện tại`. Nó khớp với
 > số sàn công bố khi sàn burn bằng cách **giảm thật** tổng cung (MX, KCS đúng như vậy). Với
@@ -165,6 +183,7 @@ Sửa danh sách token, cung ban đầu hoặc contract trong biến `TOKENS` �
 | `BURN_TOKENS` | — | chỉ theo dõi vài token, vd `MX,KCS` |
 | `BURN_INTERVAL_MIN` | `60` | tối thiểu bao nhiêu phút mới kiểm tra lại (workflow chạy 10 phút/lần nên script tự bỏ qua các lượt thừa) |
 | `BURN_MIN_PCT` | `0.005` | bỏ qua thay đổi nhỏ hơn % này — chặn nhiễu làm tròn |
+| `BURN_OTHER_MIN_PCT` | `0.5` | ngưỡng riêng cho token chỉ theo dõi (`own=False`) |
 | `BURN_DIGEST_DAY` | `mon` | ngày gửi tổng kết: `mon`…`sun`, `daily`, hoặc `off` |
 | `BURN_DIGEST_HOUR_UTC` | `1` | giờ UTC gửi tổng kết (1 = 8h sáng giờ VN) |
 | `BURN_STATE_FILE` | `burn.json` | nơi lưu snapshot cung theo ngày |
@@ -205,6 +224,10 @@ KSKD Launchpool: Share 10,000,000     EMBLEM Launchpool: Share 5,000,000
 ```
 
 Lịch lưu trong `seen.json` mục `agenda`, pool đóng quá 3 ngày thì tự dọn.
+
+**Lịch sử pool.** Mọi pool đã báo được ghi vào `pool_history` (giữ 300 mục gần nhất) kèm giờ mở,
+giờ đóng và tổng thưởng. Sau vài tháng nó trả lời được câu "sàn nào thực sự có việc cho token
+mình giữ" bằng số đếm chứ không phải cảm giác. Tin buyback/burn **không** tính là pool.
 
 Bộ bóc thời gian hiểu các định dạng: `May 25, 2026, 13:00 (UTC)` (MEXC),
 `2026-05-25 21:00 (UTC+8)` (KuCoin/HTX), `25 May 2026 13:00`, `25/05/2026 13:00`. Nhiều sàn
@@ -254,6 +277,32 @@ Mỗi cảnh báo chỉ gửi **một lần** cho tới khi tình trạng đổi
 > Bài học: **điều kiện kiểm tra "tải thành công" phải đúng bằng cái mà bộ bóc tách cần tìm**,
 > không được lỏng hơn. Giờ nó dùng chính `HTX_LINK_RE` — không thấy đường dẫn bài viết thật
 > thì coi như tải hỏng.
+
+---
+
+## 8. Trang biểu đồ (GitHub Pages)
+
+Mỗi lần chạy, hai script ghi dữ liệu ra `docs/data/` (`burn.json`, `burn_history.csv`,
+`pools.json`) và commit cùng state. Thư mục `docs/` có sẵn một trang tĩnh đọc mấy file đó.
+
+**Bật lên:** repo trên GitHub → **Settings → Pages** → *Source*: **Deploy from a branch** →
+branch `main`, thư mục **`/docs`** → Save. Vài phút sau trang có ở
+`https://<username>.github.io/<repo>/`.
+
+Trang gồm:
+
+- **Biểu đồ cột** xếp hạng % cung đã đốt của 8 token, tô màu tách token bạn giữ với token chỉ
+  theo dõi
+- **Bảng số liệu** đầy đủ: cung ban đầu, còn lại, đã đốt, tốc độ 7/30 ngày, nguồn lấy số
+- **Sparkline** cung theo thời gian — chỉ vẽ token có thay đổi, còn lại gộp vào một dòng
+  "không đổi" cho đỡ rối
+- **Pool**: đang mở / sắp mở, số pool đã báo theo từng nguồn, và danh sách gần đây
+
+Trang không cần build, không thư viện ngoài, chạy được cả nền sáng lẫn nền tối theo cài đặt máy.
+Chưa có dữ liệu thì nó hiện lời nhắc chạy workflow một lần, không vỡ.
+
+> Bảng màu đã kiểm tra bằng máy cho người mù màu (Delta E 24,7 nền sáng và 26,8 nền tối, ngưỡng
+> cần ≥ 8), và mọi cột đều có nhãn số bên cạnh nên không bao giờ phải phân biệt bằng màu.
 
 ---
 
@@ -336,6 +385,8 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 | `REMIND_END_HOURS` | `6` | nhắc trước bao nhiêu giờ khi pool sắp đóng |
 | `MAX_REMINDERS` | `5` | trần số tin nhắc mỗi lần chạy |
 | `DISPLAY_TZ_HOURS` | `7` | múi giờ hiển thị trong tin nhắn (7 = giờ VN) |
+| `POOL_HISTORY_MAX` | `300` | giữ tối đa bao nhiêu pool trong lịch sử |
+| `DOCS_DATA_DIR` | `docs/data` | nơi ghi dữ liệu cho trang biểu đồ; để trống = tắt |
 
 **Tin burn và cảnh báo sức khoẻ:**
 

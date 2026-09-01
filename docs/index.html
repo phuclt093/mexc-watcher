@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Burn token sàn</title>
+<style>
+:root {
+  color-scheme: light;
+  --plane:        #f9f9f7;
+  --surface:      #fcfcfb;
+  --ink:          #0b0b0b;
+  --ink-2:        #52514e;
+  --muted:        #898781;
+  --grid:         #e1e0d9;
+  --axis:         #c3c2b7;
+  --border:       rgba(11,11,11,0.10);
+  --series-mine:  #2a78d6;
+  --series-other: #eb6834;
+  --track:        #ececE6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --plane:        #0d0d0d;
+    --surface:      #1a1a19;
+    --ink:          #ffffff;
+    --ink-2:        #c3c2b7;
+    --muted:        #898781;
+    --grid:         #2c2c2a;
+    --axis:         #383835;
+    --border:       rgba(255,255,255,0.10);
+    --series-mine:  #3987e5;
+    --series-other: #d95926;
+    --track:        #262624;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --plane: #0d0d0d; --surface: #1a1a19; --ink: #fff; --ink-2: #c3c2b7;
+  --muted: #898781; --grid: #2c2c2a; --axis: #383835;
+  --border: rgba(255,255,255,0.10);
+  --series-mine: #3987e5; --series-other: #d95926; --track: #262624;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--plane); color: var(--ink);
+  font: 15px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.wrap { max-width: 900px; margin: 0 auto; padding: 32px 20px 64px; }
+header { margin-bottom: 28px; }
+h1 { font-size: 26px; margin: 0 0 6px; letter-spacing: -0.01em; }
+h2 { font-size: 17px; margin: 0 0 4px; letter-spacing: -0.005em; }
+.sub { color: var(--ink-2); margin: 0; font-size: 14px; }
+.meta { color: var(--muted); font-size: 13px; margin-top: 6px; }
+section {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; margin-bottom: 18px;
+}
+.hint { color: var(--muted); font-size: 13px; margin: 2px 0 16px; }
+.legend { display: flex; gap: 18px; margin: 0 0 16px; font-size: 13px; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.swatch { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.scroll { overflow-x: auto; }
+.brow { display: flex; align-items: center; gap: 10px; height: 32px; font-size: 13.5px; }
+.bkey { width: 46px; font-weight: 600; color: var(--ink); }
+.btrack { flex: 1; min-width: 60px; height: 15px; border-radius: 3px; background: var(--track); }
+.bfill { display: block; height: 100%; border-radius: 1px 4px 4px 1px; min-width: 3px; }
+.bpct { width: 58px; text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); }
+.bleft { width: 104px; text-align: right; font-variant-numeric: tabular-nums;
+         color: var(--muted); font-size: 12.5px; }
+@media (max-width: 520px) { .bleft { display: none; } }
+.flatnote { color: var(--muted); font-size: 13px; margin: 12px 0 0; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; min-width: 620px; }
+th, td { text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--grid); }
+th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase;
+     letter-spacing: 0.04em; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+td { font-variant-numeric: tabular-nums; color: var(--ink-2); }
+td.name { color: var(--ink); font-weight: 600; }
+td.name small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+tr:last-child td { border-bottom: none; }
+.dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; margin-right: 7px;
+       vertical-align: 1px; }
+.sparks { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+.spark { border: 1px solid var(--border); border-radius: 9px; padding: 11px 13px; }
+.spark b { font-size: 13px; }
+.spark .v { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+ul.pools { list-style: none; margin: 0; padding: 0; }
+ul.pools li { padding: 9px 0; border-bottom: 1px solid var(--grid); font-size: 14px; }
+ul.pools li:last-child { border-bottom: none; }
+ul.pools a { color: var(--ink); text-decoration: none; }
+ul.pools a:hover { text-decoration: underline; }
+ul.pools .when { color: var(--muted); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.tag { color: var(--ink-2); font-size: 12px; }
+#tip {
+  position: fixed; pointer-events: none; opacity: 0; transition: opacity .1s;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 11px; font-size: 12.5px; line-height: 1.5;
+  box-shadow: 0 6px 20px rgba(0,0,0,.16); z-index: 9; max-width: 260px;
+  font-variant-numeric: tabular-nums;
+}
+footer { color: var(--muted); font-size: 12.5px; margin-top: 26px; }
+footer a { color: var(--ink-2); }
+.empty { color: var(--muted); font-size: 13.5px; padding: 6px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Burn token sàn</h1>
+    <p class="sub">Bao nhiêu phần trăm nguồn cung ban đầu đã bị các sàn đốt bỏ.</p>
+    <p class="meta" id="updated"></p>
+  </header>
+
+  <section>
+    <h2>Đã đốt bao nhiêu phần cung ban đầu</h2>
+    <p class="hint">Tính bằng <em>cung ban đầu − tổng cung hiện tại</em>. Xem bảng bên dưới để có số tuyệt đối.</p>
+    <div class="legend">
+      <span><i class="swatch" style="background:var(--series-mine)"></i> Token bạn đang giữ</span>
+      <span><i class="swatch" style="background:var(--series-other)"></i> Sàn khác, theo dõi để so sánh</span>
+    </div>
+    <div id="bars"></div>
+  </section>
+
+  <section>
+    <h2>Số liệu chi tiết</h2>
+    <p class="hint">Tốc độ đốt gần đây được tính từ ảnh chụp cung mỗi ngày, nên cần vài ngày mới có số.</p>
+    <div class="scroll"><table id="tbl"></table></div>
+  </section>
+
+  <section id="spark-sec" hidden>
+    <h2>Cung còn lại theo thời gian</h2>
+    <p class="hint">Chỉ vẽ token có thay đổi. Phần lớn sàn đốt theo quý nên đa số sẽ nằm ở dòng &ldquo;không đổi&rdquo;.</p>
+    <div class="sparks" id="sparks"></div>
+  </section>
+
+  <section id="pool-sec">
+    <h2>Pool</h2>
+    <div id="pools"></div>
+  </section>
+
+  <footer>
+    <p><strong>Con số &ldquo;đã đốt&rdquo; là ước tính.</strong> Nó khớp với công bố của sàn khi sàn
+    đốt bằng cách giảm thật tổng cung (MX, KCS đúng như vậy). Với token đốt bằng cách gửi vào ví
+    chết, con số phụ thuộc cách CoinGecko thống kê nên có thể lệch so với thông cáo. Đừng dùng làm
+    số liệu kế toán.</p>
+    <p>Cập nhật tự động bởi <a href="https://github.com/phuclt093/mexc-watcher">mexc-watcher</a>.
+    Dữ liệu thô: <a href="data/burn.json">burn.json</a> ·
+    <a href="data/burn_history.csv">burn_history.csv</a></p>
+  </footer>
+</div>
+<div id="tip" role="status"></div>
+
+<script>
+const TZ = 7 * 3600;
+const tip = document.getElementById("tip");
+
+function fmt(x) {
+  if (x === null || x === undefined) return "—";
+  const a = Math.abs(x);
+  const trim = v => (+v.toFixed(2)).toString();
+  if (a >= 1e12) return trim(x / 1e12) + "T";
+  if (a >= 1e9)  return trim(x / 1e9) + "B";
+  if (a >= 1e6)  return trim(x / 1e6) + "M";
+  if (a >= 1000) return Math.round(x).toLocaleString("en-US");
+  return (+x.toFixed(2)).toString();
+}
+function day(ts) {
+  if (!ts) return "—";
+  const d = new Date((ts + TZ) * 1000);
+  const p = n => String(n).padStart(2, "0");
+  return p(d.getUTCDate()) + "/" + p(d.getUTCMonth() + 1) + " " + p(d.getUTCHours()) + ":" + p(d.getUTCMinutes());
+}
+function showTip(e, html) {
+  tip.innerHTML = html; tip.style.opacity = "1";
+  const r = tip.getBoundingClientRect();
+  let x = e.clientX + 14, y = e.clientY + 14;
+  if (x + r.width > innerWidth - 8) x = e.clientX - r.width - 14;
+  if (y + r.height > innerHeight - 8) y = e.clientY - r.height - 14;
+  tip.style.left = x + "px"; tip.style.top = y + "px";
+}
+const hideTip = () => { tip.style.opacity = "0"; };
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* ---------- biểu đồ cột ngang: % cung đã đốt ---------- */
+function drawBars(tokens) {
+  const host = document.getElementById("bars");
+  if (!tokens.length) { host.innerHTML = '<p class="empty">Chưa có dữ liệu.</p>'; return; }
+  host.innerHTML = tokens.map((t, i) => {
+    const color = t.own ? "var(--series-mine)" : "var(--series-other)";
+    const w = Math.max(0.5, Math.min(100, t.pct));
+    return `<div class="brow" data-i="${i}">
+      <span class="bkey">${esc(t.key)}</span>
+      <span class="btrack"><span class="bfill" style="width:${w}%;background:${color}"></span></span>
+      <span class="bpct">${t.pct.toFixed(1)}%</span>
+      <span class="bleft">còn ${fmt(t.supply)}</span></div>`;
+  }).join("");
+  host.querySelectorAll(".brow").forEach(el => {
+    const t = tokens[+el.dataset.i];
+    el.addEventListener("mousemove", e => showTip(e,
+      `<b>${esc(t.key)}</b> · ${esc(t.exch)}<br>
+       Đã đốt <b>${fmt(t.burned)}</b> (${t.pct.toFixed(2)}%)<br>
+       Còn lại ${fmt(t.supply)} / ${fmt(t.initial)}<br>
+       <span style="color:var(--muted)">nguồn: ${esc(t.source)}</span>`));
+    el.addEventListener("mouseleave", hideTip);
+  });
+}
+
+/* ---------- bảng số liệu ---------- */
+function drawTable(tokens) {
+  const head = `<thead><tr><th>Token</th><th>Cung ban đầu</th><th>Còn lại</th>
+    <th>Đã đốt</th><th>%</th><th>7 ngày</th><th>30 ngày</th><th>Nguồn</th></tr></thead>`;
+  const rows = tokens.map(t => `<tr>
+      <td class="name"><i class="dot" style="background:${t.own ? "var(--series-mine)" : "var(--series-other)"}"></i>${esc(t.key)}<small>${esc(t.exch)}</small></td>
+      <td>${fmt(t.initial)}</td><td>${fmt(t.supply)}</td><td>${fmt(t.burned)}</td>
+      <td>${t.pct.toFixed(2)}%</td><td>${fmt(t.d7)}</td><td>${fmt(t.d30)}</td>
+      <td>${esc(t.source)}</td></tr>`).join("");
+  document.getElementById("tbl").innerHTML = head + "<tbody>" + rows + "</tbody>";
+}
+
+/* ---------- sparkline: chỉ vẽ token có thay đổi ---------- */
+function drawSparks(tokens) {
+  const enough = tokens.filter(t => Object.keys(t.days || {}).length >= 5);
+  if (!enough.length) return;
+  const moved = [], flat = [];
+  enough.forEach(t => {
+    const vals = Object.keys(t.days).sort().map(d => t.days[d]);
+    (Math.min(...vals) === Math.max(...vals) ? flat : moved).push([t, vals]);
+  });
+  if (!moved.length && !flat.length) return;
+  document.getElementById("spark-sec").hidden = false;
+
+  document.getElementById("sparks").innerHTML = moved.map(([t, vals]) => {
+    const lo = Math.min(...vals), hi = Math.max(...vals), span = (hi - lo) || 1;
+    const W = 170, H = 34;
+    const pts = vals.map((v, i) => {
+      const x = vals.length === 1 ? W : (i / (vals.length - 1)) * W;
+      return x.toFixed(1) + "," + (H - ((v - lo) / span) * (H - 4) - 2).toFixed(1);
+    }).join(" ");
+    const chg = vals[0] - vals[vals.length - 1];
+    return `<div class="spark"><b>${esc(t.key)}</b>
+      <span class="v"> ${vals.length} ngày · ${chg > 0 ? "đốt " + fmt(chg) : "cung tăng " + fmt(-chg)}</span>
+      <svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" aria-hidden="true"
+        style="display:block;margin-top:6px"><polyline points="${pts}" fill="none"
+        stroke="var(--series-mine)" stroke-width="2" stroke-linejoin="round"
+        stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></div>`;
+  }).join("");
+
+  const note = document.createElement("p");
+  note.className = "flatnote";
+  if (flat.length) {
+    const days = Math.max(...flat.map(([t]) => Object.keys(t.days).length));
+    note.textContent = `Không đổi trong ${days} ngày: ` +
+      flat.map(([t]) => t.key).join(", ") + ".";
+  }
+  const sec = document.getElementById("spark-sec");
+  sec.querySelectorAll(".flatnote").forEach(n => n.remove());
+  if (flat.length) sec.appendChild(note);
+  if (!moved.length) document.getElementById("sparks").innerHTML = "";
+}
+
+/* ---------- pool ---------- */
+function drawPools(p) {
+  const host = document.getElementById("pools");
+  if (!p) { host.innerHTML = '<p class="empty">Chưa có dữ liệu pool.</p>'; return; }
+  const up = p.upcoming || [], hist = p.history || [];
+  const byTag = {};
+  hist.forEach(h => { byTag[h.tag || "?"] = (byTag[h.tag || "?"] || 0) + 1; });
+  const counts = Object.entries(byTag).sort((a, b) => b[1] - a[1]);
+
+  let html = "";
+  if (up.length) {
+    html += "<h3 style='font-size:14px;margin:14px 0 6px'>Đang mở hoặc sắp mở</h3><ul class='pools'>" +
+      up.map(x => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>
+        <div class="when"><span class="tag">${esc(x.tag)}</span> · mở ${day(x.start)} · đóng ${day(x.end)}</div></li>`).join("") +
+      "</ul>";
+  }
+  if (counts.length) {
+    html += "<h3 style='font-size:14px;margin:18px 0 6px'>Số pool đã báo, theo nguồn</h3><ul class='pools'>" +
+      counts.map(([tag, n]) => `<li>${esc(tag)} <span class="when">— ${n} pool</span></li>`).join("") + "</ul>";
+  }
+  if (hist.length) {
+    html += "<h3 style='font-size:14px;margin:18px 0 6px'>Gần đây</h3><ul class='pools'>" +
+      hist.slice(0, 15).map(x => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>
+        <div class="when"><span class="tag">${esc(x.tag)}</span>${x.start ? " · mở " + day(x.start) : ""}${x.rewards ? " · thưởng " + esc(x.rewards) : ""}</div></li>`).join("") +
+      "</ul>";
+  }
+  host.innerHTML = html || '<p class="empty">Chưa ghi nhận pool nào. Danh sách sẽ dài dần khi bot bắt được pool mới.</p>';
+}
+
+/* ---------- nạp dữ liệu ---------- */
+const grab = u => fetch(u, { cache: "no-store" }).then(r => r.ok ? r.json() : null).catch(() => null);
+
+Promise.all([grab("data/burn.json"), grab("data/pools.json")]).then(([burn, pools]) => {
+  if (!burn) {
+    document.getElementById("bars").innerHTML =
+      '<p class="empty">Chưa có <code>data/burn.json</code>. Chạy workflow một lần rồi tải lại trang.</p>';
+    document.getElementById("updated").textContent = "";
+  } else {
+    const ts = burn.updated_at ? new Date(burn.updated_at) : null;
+    document.getElementById("updated").textContent =
+      ts ? "Cập nhật " + day(ts.getTime() / 1000) + " (giờ VN)" : "";
+    drawBars(burn.tokens || []);
+    drawTable(burn.tokens || []);
+    drawSparks(burn.tokens || []);
+  }
+  drawPools(pools);
+});
+</script>
+</body>
+</html>

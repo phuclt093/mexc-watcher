@@ -65,6 +65,9 @@ HEALTH_PARSE_AFTER = int(os.getenv("HEALTH_PARSE_AFTER", "3"))
 HEALTH_FAIL_AFTER = int(os.getenv("HEALTH_FAIL_AFTER", "18"))
 HEALTH_SKIP_AFTER = int(os.getenv("HEALTH_SKIP_AFTER", "6"))
 HEALTH_SKIP_MINUTES = int(os.getenv("HEALTH_SKIP_MINUTES", "60"))
+# Thu muc xuat du lieu cho trang bieu do (de trong = tat)
+DOCS_DIR = pathlib.Path(os.getenv("DOCS_DATA_DIR", "docs/data"))
+POOL_HISTORY_MAX = int(os.getenv("POOL_HISTORY_MAX", "300"))
 
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
@@ -538,7 +541,7 @@ def _collect_mexc(found, state):
 
 def _blank_state():
     return {"seen": {}, "titles": {}, "initialized": False,
-            "agenda": {}, "health": {}}
+            "agenda": {}, "health": {}, "pool_history": []}
 
 
 def load_state():
@@ -714,6 +717,46 @@ def detail_lines(d):
     return out
 
 
+def remember_pool(state, a, detail, tag):
+    """Ghi lai moi pool da bao. Sau vai thang se tra loi duoc 'san nao thuc su
+    co viec cho token minh giu' - tan suat moi noi, chu khong phai cam giac."""
+    h = state.setdefault("pool_history", [])
+    if any(x.get("id") == a["id"] for x in h):
+        return
+    h.append({
+        "id": a["id"], "title": a["title"], "url": a["url"], "tag": tag,
+        "seen": int(time.time()), "ts": a.get("ts"),
+        "start": detail.get("start"), "end": detail.get("end"),
+        "rewards": detail.get("rewards"),
+    })
+    if len(h) > POOL_HISTORY_MAX:
+        del h[:len(h) - POOL_HISTORY_MAX]
+
+
+def export_docs(state):
+    """Ghi du lieu pool cho trang bieu do. Hong thi ke, khong lam gay luong chinh."""
+    if not str(DOCS_DIR).strip():
+        return
+    try:
+        DOCS_DIR.mkdir(parents=True, exist_ok=True)
+        now = time.time()
+        upcoming = []
+        for aid, it in (state.get("agenda") or {}).items():
+            if it.get("end") and it["end"] < now:
+                continue
+            upcoming.append({"id": aid, "title": it.get("title"), "tag": it.get("tag"),
+                             "url": it.get("url"), "start": it.get("start"),
+                             "end": it.get("end")})
+        upcoming.sort(key=lambda x: x.get("start") or x.get("end") or 0)
+        (DOCS_DIR / "pools.json").write_text(json.dumps({
+            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "upcoming": upcoming,
+            "history": list(reversed(state.get("pool_history") or [])),
+        }, ensure_ascii=False, indent=1), "utf-8")
+    except Exception as e:  # noqa: BLE001
+        log(f"! khong xuat duoc du lieu pool: {e}")
+
+
 def remember_schedule(state, a, detail, tag):
     if not (detail.get("start") or detail.get("end")):
         return
@@ -852,6 +895,8 @@ def main():
             state["seen"][a["id"]] = a["title"]
             state["titles"][key] = time.time()
             remember_schedule(state, a, detail, tag)
+            if kind == "pool":
+                remember_pool(state, a, detail, tag)
             log(f"Da gui: {a['title']}")
         else:
             ok_all = False
@@ -863,6 +908,7 @@ def main():
 
     run_agenda(state)
     save_state(state)
+    export_docs(state)
     return 0 if ok_all else 1
 
 
