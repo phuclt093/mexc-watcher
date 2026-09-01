@@ -52,6 +52,24 @@ OTHER_MIN_PCT = float(os.getenv("BURN_OTHER_MIN_PCT", "0.5"))
 # Thu muc xuat du lieu cho trang bieu do (de trong = tat)
 DOCS_DIR = pathlib.Path(os.getenv("DOCS_DATA_DIR", "docs/data"))
 
+
+def pages_url():
+    """Dia chi trang bieu do. Tu suy ra tu GITHUB_REPOSITORY khi chay tren Actions,
+    dat PAGES_URL de ghi de (vd dung ten mien rieng). De trong = khong dinh link."""
+    u = os.getenv("PAGES_URL", "").strip()
+    if u:
+        return u.rstrip("/") + "/"
+    repo = os.getenv("GITHUB_REPOSITORY", "").strip()
+    if repo.count("/") == 1 and all(repo.split("/")):
+        owner, name = repo.split("/")
+        return f"https://{owner.lower()}.github.io/{name}/"
+    return ""
+
+
+def pages_link(label="📈 Xem bieu do day du"):
+    u = pages_url()
+    return f'\n\n<a href="{html.escape(u, quote=True)}">{label}</a>' if u else ""
+
 ETHERSCAN_KEY = os.getenv("ETHERSCAN_API_KEY", "").strip()
 CG_KEY = os.getenv("COINGECKO_API_KEY", "").strip()
 
@@ -346,7 +364,7 @@ def digest(state, snapshot):
     if missing:
         lines.append(f"<i>Khong lay duoc so lieu: {', '.join(missing)}</i>")
     lines.append("<i>Da dot = cung ban dau - tong cung hien tai.</i>")
-    return telegram_send("\n".join(lines))
+    return telegram_send("\n".join(lines) + pages_link(), preview=False)
 
 
 def export_docs(state, snapshot):
@@ -479,6 +497,7 @@ def main():
                 for r in sorted(rows, key=lambda x: -(x['initial'] - x['supply']) / x['initial'])
             ) + "</pre>"
             + "\n\nTu gio se bao moi khi san dot them token."
+            + pages_link(), preview=False
         )
         state["last_check"] = now
         state["last_digest"] = today

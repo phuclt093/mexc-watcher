@@ -127,15 +127,28 @@ Con lai: 396.525M MX
 
 ```
 📊 Tong ket burn token san
-30/08/2026
+01/09/2026
+
+━ Token ban dang giu ━
 
 🔥 MX · MEXC
-   Con lai: 396.525M / 1.000B
-   Da dot: 603.475M (60.35%) ██████░░░░
-   Hom nay: 79,305 · 7 ngay: 1.850M · 30 ngay: 7.930M
+   Con lai: 409.025M / 1.000B
+   Da dot: 590.975M (59.10%) ██████░░░░
+   Hom nay: 0 · 7 ngay: 0 · 30 ngay: 12.271M
    nguon: on-chain
 ...
+
+━ Cac san khac ━
+OKB   93.0%  ███████░  con 21.000M
+GT    60.4%  █████░░░  con 118.864M
+BGB   54.5%  ████░░░░  con 910.921M
+BNB   33.4%  ███░░░░░  con 133.162M
+
+📈 Xem bieu do day du -> https://<username>.github.io/<repo>/
 ```
+
+Dòng link cuối tự xuất hiện khi chạy trên GitHub Actions — địa chỉ suy ra từ biến
+`GITHUB_REPOSITORY` có sẵn, không cần cấu hình gì. Dùng tên miền riêng thì đặt `PAGES_URL`.
 
 **8 token đang theo dõi.** Bốn token bạn giữ, cộng bốn sàn lớn để có cái so sánh — nhìn cạnh
 nhau mới thấy sàn nào đốt thật:
@@ -301,6 +314,11 @@ Trang gồm:
 Trang không cần build, không thư viện ngoài, chạy được cả nền sáng lẫn nền tối theo cài đặt máy.
 Chưa có dữ liệu thì nó hiện lời nhắc chạy workflow một lần, không vỡ.
 
+**Bản tổng kết trên Telegram có đính link tới trang này** ở cuối tin, nên từ Telegram bấm một
+phát là ra biểu đồ. Bot **không gửi ảnh** — gửi được, nhưng phải thêm Pillow vào workflow, mà dự
+án này cố ý giữ **không phụ thuộc thư viện ngoài nào** để ít chỗ hỏng. Tin tổng kết vẫn có thanh
+`██████░░░░` vẽ bằng ký tự nên đọc thẳng trong Telegram cũng nắm được tình hình.
+
 > Bảng màu đã kiểm tra bằng máy cho người mù màu (Delta E 24,7 nền sáng và 26,8 nền tối, ngưỡng
 > cần ≥ 8), và mọi cột đều có nhãn số bên cạnh nên không bao giờ phải phân biệt bằng màu.
 
@@ -387,6 +405,7 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 | `DISPLAY_TZ_HOURS` | `7` | múi giờ hiển thị trong tin nhắn (7 = giờ VN) |
 | `POOL_HISTORY_MAX` | `300` | giữ tối đa bao nhiêu pool trong lịch sử |
 | `DOCS_DATA_DIR` | `docs/data` | nơi ghi dữ liệu cho trang biểu đồ; để trống = tắt |
+| `PAGES_URL` | *(tự suy ra)* | địa chỉ trang biểu đồ đính vào bản tổng kết; mặc định lấy từ `GITHUB_REPOSITORY` |
 
 **Tin burn và cảnh báo sức khoẻ:**
 

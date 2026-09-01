@@ -574,7 +574,9 @@ def save_state(state):
     STATE_FILE.write_text(json.dumps(state, ensure_ascii=False, indent=2), "utf-8")
 
 
-def telegram_send(text):
+def telegram_send(text, preview=True):
+    """preview=False cho cac tin bao cao - the xem truoc cua Telegram khong them
+    duoc gi ma con lam tin dai ra."""
     if DRY_RUN:
         log("DRY_RUN, khong gui:\n" + text)
         return True
@@ -586,7 +588,7 @@ def telegram_send(text):
         "chat_id": CHAT_ID,
         "text": text,
         "parse_mode": "HTML",
-        "disable_web_page_preview": "false",
+        "disable_web_page_preview": "false" if preview else "true",
     }).encode()
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
 
