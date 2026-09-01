@@ -34,7 +34,7 @@
     "17827791532625": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-09-01T09:32:50Z",
+  "updated_at": "2026-09-01T09:50:50Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848
   },
@@ -64,7 +64,8 @@
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 1
+        "fail": 0,
+        "fail_notified": false
       },
       "HTX Earn": {
         "zero": 0,
