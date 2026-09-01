@@ -61,6 +61,10 @@ TZ_H = int(os.getenv("DISPLAY_TZ_HOURS", "7"))
 HEALTH_ALERT = os.getenv("HEALTH_ALERT", "1") != "0"
 HEALTH_DOWN_AFTER = int(os.getenv("HEALTH_DOWN_AFTER", "6"))
 HEALTH_PARSE_AFTER = int(os.getenv("HEALTH_PARSE_AFTER", "3"))
+# Nguon tai hong lien tuc: bao sau bao nhieu lan, va gian nhip thu lai tu lan thu may
+HEALTH_FAIL_AFTER = int(os.getenv("HEALTH_FAIL_AFTER", "18"))
+HEALTH_SKIP_AFTER = int(os.getenv("HEALTH_SKIP_AFTER", "6"))
+HEALTH_SKIP_MINUTES = int(os.getenv("HEALTH_SKIP_MINUTES", "60"))
 
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "").strip()
@@ -116,9 +120,12 @@ KUCOIN_FILTER = re.compile(
 HTX_BASE = "https://www.htx.com"
 HTX_LISTS = [
     ("HTX Primepool", "https://www.htx.com/en-us/support/list/360000031362/"),   # Latest Activities
-    ("HTX Primepool", "https://www.htx.com/en-us/support/list/54911014605677/"),  # HTX Earn
+    ("HTX Earn", "https://www.htx.com/en-us/support/list/54911014605677/"),      # HTX Earn
 ]
-HTX_LINK_RE = re.compile(r'href="(?P<path>/support/(?P<id>\d{8,})/?)"')
+# Bat duong dan bai o BAT KY dau, khong bat buoc nam trong href="" - giong ARTICLE_RE
+# cua MEXC. Ly do: trang co the tra ve payload JSON thay vi HTML co the <a>.
+HTX_LINK_RE = re.compile(
+    r'(?P<path>/support/(?P<id>\d{8,}))(?=["\'\\?/\s<)&]|$)')
 HTX_FILTER = re.compile(
     os.getenv("HTX_KEYWORDS", r"primepool|prime pool|primelist|prime list"), re.I)
 HTX_BUDGET = int(os.getenv("HTX_BUDGET", "120"))
@@ -182,6 +189,18 @@ _stats = {}
 
 def note(label, ok, raw=0, matched=0):
     _stats[label] = {"ok": ok, "raw": raw, "matched": matched}
+
+
+def skip_source(state, label):
+    """Nguon chet lien tuc thi ngung thu moi 10 phut - vua ton thoi gian workflow
+    vua khong duoc gi. Van thu lai dinh ky de tu hoi phuc khi san song lai."""
+    rec = ((state.get("health") or {}).get("sources") or {}).get(label) or {}
+    nxt = rec.get("next_try")
+    if nxt and time.time() < nxt:
+        left = int((nxt - time.time()) / 60)
+        log(f"Bo qua {label}: dang chet, thu lai sau ~{left} phut")
+        return True
+    return False
 
 # Cach tai nao da chay duoc trong lan chay nay -> dung luon cho cac URL sau
 _working = None
@@ -305,32 +324,37 @@ def find_title(page, link_start, slug):
     return prettify(slug)
 
 
-def collect():
+def collect(state):
     """Tra ve dict {article_id: {...}} tu tat ca nguon."""
     global _budget_until
     found = {}
     # Nguon dung API chinh thuc (nhanh, on dinh) lam truoc
     if WATCH_KUCOIN:
-        _collect_kucoin(found)
+        _collect_kucoin(found, state)
     if WATCH_COINEX:
-        _collect_coinex(found)
+        _collect_coinex(found, state)
     # Nguon phai cao HTML lam sau, moi cai co tran thoi gian rieng
     if WATCH_HTX:
-        _collect_htx(found)
+        _collect_htx(found, state)
     _budget_until = time.monotonic() + FETCH_BUDGET
-    _collect_mexc(found)
+    _collect_mexc(found, state)
     _budget_until = None
     return found
 
 
-def _collect_htx(found):
+def _collect_htx(found, state):
     """HTX: cao trang danh muc thong bao, loc tieu de co Primepool/Primelist."""
     global _budget_until
     _budget_until = time.monotonic() + HTX_BUDGET
     for label, url in HTX_LISTS:
+        if skip_source(state, label):
+            continue
         log(f"Dang kiem tra {label}: {url}")
         try:
-            page = fetch(url, valid=lambda b: "/support/" in b)
+            # Phai thay dung duong dan bai viet moi coi la tai duoc. Neu chi kiem tra
+            # chuoi "/support/" thi trang loi cua Cloudflare cung lot (no co link
+            # support.cloudflare.com) -> that bai bi ghi nham thanh thanh cong.
+            page = fetch(url, valid=lambda b: bool(HTX_LINK_RE.search(b)))
         except RuntimeError as e:
             log(f"  ! bo qua {label}: {e}")
             note(label, False)
@@ -366,8 +390,10 @@ def _collect_htx(found):
     _budget_until = None
 
 
-def _collect_coinex(found):
+def _collect_coinex(found, state):
     """CoinEx: API Zendesk cua trang thong bao, muc Events."""
+    if skip_source(state, "CoinEx"):
+        return
     log("Dang kiem tra CoinEx (Events)")
     try:
         body = fetch(COINEX_API, valid=lambda b: '"articles"' in b)
@@ -414,13 +440,15 @@ def _collect_coinex(found):
         + (f" ({old} bai qua cu)" if old else ""))
 
 
-def _collect_kucoin(found):
+def _collect_kucoin(found, state):
     """KuCoin: goi API chinh thuc roi loc theo tu khoa GemPool/Launchpool."""
     for ann_type in KUCOIN_TYPES:
+        label = f"KuCoin {ann_type}"
+        if skip_source(state, label):
+            continue
         url = (f"{KUCOIN_API}?currentPage=1&pageSize=30"
                f"&annType={ann_type}&lang=en_US")
         log(f"Dang kiem tra KuCoin ({ann_type})")
-        label = f"KuCoin {ann_type}"
         try:
             body = fetch(url, valid=lambda b: '"annId"' in b)
         except RuntimeError as e:
@@ -462,8 +490,10 @@ def _collect_kucoin(found):
             + (f" ({old} bai qua cu)" if old else ""))
 
 
-def _collect_mexc(found):
+def _collect_mexc(found, state):
     for label, path, keyword in SOURCES:
+        if skip_source(state, label):
+            continue
         url = f"{BASE}/{LANG}{path}" if LANG and LANG != "en-US" else f"{BASE}{path}"
         log(f"Dang kiem tra {label}: {url}")
         try:
@@ -605,10 +635,33 @@ def check_health(state):
         h["fail_streak"] = 0
         h["down_notified"] = False
 
+    now = time.time()
     for label, st in _stats.items():
-        if not st["ok"]:
-            continue
         rec = h["sources"].setdefault(label, {})
+
+        if not st["ok"]:
+            # Tai hong: dem, gian nhip thu lai, va bao MOT lan khi hong da lau.
+            rec["fail"] = rec.get("fail", 0) + 1
+            if rec["fail"] >= HEALTH_SKIP_AFTER:
+                rec["next_try"] = now + HEALTH_SKIP_MINUTES * 60
+            if (HEALTH_ALERT and rec["fail"] >= HEALTH_FAIL_AFTER
+                    and not rec.get("fail_notified")):
+                msgs.append(
+                    f"⚠️ <b>Nguon {html.escape(label)} khong tai duoc</b>\n\n"
+                    f"That bai {rec['fail']} lan lien tiep. Bot se gian nhip thu lai "
+                    f"({HEALTH_SKIP_MINUTES} phut/lan) de khong dot thoi gian workflow, "
+                    "va tu bao khi nguon song lai.\n"
+                    "Cac nguon con lai van chay binh thuong.")
+                rec["fail_notified"] = True
+            continue
+
+        if rec.get("fail"):
+            if rec.get("fail_notified"):
+                msgs.append(f"✅ <b>Nguon {html.escape(label)} tai duoc tro lai</b>")
+            rec["fail"] = 0
+            rec["fail_notified"] = False
+        rec.pop("next_try", None)
+
         if st["raw"] > 0:
             if rec.get("notified"):
                 msgs.append(f"✅ <b>Nguon {html.escape(label)} boc bai lai binh thuong</b>")
@@ -722,7 +775,7 @@ def run_agenda(state):
 
 def main():
     state = load_state()
-    found = collect()
+    found = collect(state)
     check_health(state)
 
     if _sources_ok == 0:

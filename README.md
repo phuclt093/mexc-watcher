@@ -26,9 +26,17 @@ sự kiện mà bạn bỏ token đang giữ vào để nhận thưởng.
 > một sản phẩm chạy thường trực, không phải sự kiện có hạn. Nên bộ lọc CoinEx bám vào chữ
 > `CET` để bắt các sự kiện liên quan token bạn giữ, chứ không kỳ vọng có pool.
 
-> **Về HTX Primepool:** sản phẩm này có thật (khoá $HTX để farm token mới) nhưng đợt gần đây
-> không thấy chạy — các mục Latest Activities và HTX Earn vài tháng qua chỉ toàn khuyến mãi
-> giao dịch. Bot cứ theo dõi sẵn, khi nào Primepool quay lại là báo.
+> **Về HTX (cập nhật 01/09/2026):** HTX đã đưa trang thông báo ra sau tường lửa **Tencent
+> Cloud EdgeOne**, chặn cả IP thường lẫn IP của mọi proxy đọc trang mà bot dùng. Nguồn HTX
+> hiện **không tải được**, và không tìm ra đường thay thế (họ không dùng Zendesk như CoinEx,
+> trang danh sách render bằng JavaScript).
+>
+> Bot vẫn giữ nguồn HTX: sau 6 lần hỏng liên tiếp nó tự giãn nhịp xuống 1 tiếng/lần để khỏi
+> đốt thời gian workflow, gửi **một** tin cảnh báo, rồi im. Khi nào HTX mở lại là bot tự báo
+> và chạy tiếp. Không muốn nhận cảnh báo thì đặt `HTX=0`.
+>
+> Bản thân Primepool (khoá $HTX farm token mới) là sản phẩm có thật nhưng đợt gần đây cũng
+> không thấy chạy.
 
 ---
 
@@ -217,6 +225,11 @@ Bot tự canh hai kiểu hỏng.
 **Không tải được nguồn nào** — Cloudflare chặn IP hoặc proxy chết hết. Sau 6 lần chạy liên
 tiếp thất bại (~1 tiếng) bot bắn một tin cảnh báo, và bắn tin báo hồi phục khi chạy lại được.
 
+**Một nguồn riêng lẻ chết** — các nguồn khác vẫn chạy nên kiểu này dễ trôi qua không ai để ý.
+Bot đếm riêng từng nguồn: hỏng 6 lần liên tiếp thì **giãn nhịp** xuống 1 tiếng/lần (khỏi đốt
+thời gian workflow cho một nguồn đã chết), hỏng 18 lần thì gửi **một** tin cảnh báo, và tự
+báo lại khi nguồn sống lại. Đây chính là cách bot phát hiện HTX bị EdgeOne chặn.
+
 **Tải được nhưng bóc ra 0 bài** — sàn đổi cấu trúc HTML, regex không còn khớp. Kiểu này
 nguy hiểm hơn: GitHub Actions vẫn xanh, log vẫn đẹp, nhưng bot mù tịt. Bot đếm số bài bóc
 được **trước khi lọc từ khoá**; tải thành công mà con số đó bằng 0 ba lần liên tiếp thì báo:
@@ -232,6 +245,15 @@ Mỗi cảnh báo chỉ gửi **một lần** cho tới khi tình trạng đổi
 
 > Cố ý đếm bài **trước** khi lọc từ khoá. Nếu đếm sau, HTX vài tháng không có Primepool sẽ bị
 > báo nhầm là hỏng.
+
+> **Bài học từ lần canary đầu tiên bắt được lỗi.** Nó báo nguồn HTX tải được nhưng bóc 0 bài.
+> Đào ra thì hoá ra HTX không tải được chút nào: proxy trả về trang lỗi 522 của Cloudflare,
+> mà trang lỗi đó chứa link `cloudflare.com/support/` — vừa đủ để lọt qua điều kiện kiểm tra
+> `"/support/" in body`. Một thất bại bị ghi nhầm thành thành công suốt nhiều ngày.
+>
+> Bài học: **điều kiện kiểm tra "tải thành công" phải đúng bằng cái mà bộ bóc tách cần tìm**,
+> không được lỏng hơn. Giờ nó dùng chính `HTX_LINK_RE` — không thấy đường dẫn bài viết thật
+> thì coi như tải hỏng.
 
 ---
 
@@ -324,6 +346,9 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 | `HEALTH_ALERT` | `1` | `0` = tắt cảnh báo khi bot hỏng |
 | `HEALTH_DOWN_AFTER` | `6` | báo sau bao nhiêu lần liên tiếp không tải được nguồn nào |
 | `HEALTH_PARSE_AFTER` | `3` | báo sau bao nhiêu lần tải được mà bóc 0 bài |
+| `HEALTH_FAIL_AFTER` | `18` | báo sau bao nhiêu lần một nguồn tải hỏng liên tiếp |
+| `HEALTH_SKIP_AFTER` | `6` | hỏng bao nhiêu lần thì giãn nhịp thử lại nguồn đó |
+| `HEALTH_SKIP_MINUTES` | `60` | nguồn đang chết thì bao lâu thử lại một lần |
 
 ---
 
