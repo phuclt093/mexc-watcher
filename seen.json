@@ -31,12 +31,14 @@
     "cx:40826324521364": "CoinEx Mining: Lock CET to Share 5 ETH",
     "cx:40825280204308": "CoinEx Has Distributed Rewards for the “PUMP, BONK, ZORA Special Event: Deposit & Trade Futures to Share 50,000 CET and More” Event",
     "4411278979481": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter",
-    "17827791532625": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter"
+    "17827791532625": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter",
+    "kc:326266": "KuMining September Trading Challenge: Compete for 9,000+ USDT in Rewards!"
   },
   "initialized": true,
-  "updated_at": "2026-09-01T09:50:50Z",
+  "updated_at": "2026-09-01T13:02:37Z",
   "titles": {
-    "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848
+    "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
+    "kumining september trading challenge compete for 9 000 usdt in rewards": 1788267756.762729
   },
   "agenda": {},
   "health": {
@@ -74,5 +76,18 @@
     },
     "fail_streak": 0,
     "down_notified": false
-  }
+  },
+  "pool_history": [
+    {
+      "id": "kc:326266",
+      "title": "KuMining September Trading Challenge: Compete for 9,000+ USDT in Rewards!",
+      "url": "https://www.kucoin.com/announcement/en-kumining-september-trading-challenge-compete-for-9000-usdt-in-rewards?lang=en_US",
+      "tag": "KuCoin Launchpool",
+      "seen": 1788267756,
+      "ts": 1788260400.0,
+      "start": null,
+      "end": null,
+      "rewards": null
+    }
+  ]
 }
