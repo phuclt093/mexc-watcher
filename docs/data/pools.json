@@ -1,7 +1,18 @@
 {
- "updated_at": "2026-09-04T06:11:53Z",
+ "updated_at": "2026-09-04T11:15:32Z",
  "upcoming": [],
  "history": [
+  {
+   "id": "kc:328680",
+   "title": "KuMining Partner Rewards Boost: Earn an Extra 1% USDT Commission and Claim Trial Coupons",
+   "url": "https://www.kucoin.com/announcement/en-kumining-partner-rewards-boost-earn-an-extra-1-usdt-commission-and-claim-trial-coupons?lang=en_US",
+   "tag": "KuCoin Launchpool",
+   "seen": 1788520531,
+   "ts": 1788519600.0,
+   "start": null,
+   "end": null,
+   "rewards": null
+  },
   {
    "id": "kc:326266",
    "title": "KuMining September Trading Challenge: Compete for 9,000+ USDT in Rewards!",

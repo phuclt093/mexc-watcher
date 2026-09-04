@@ -32,13 +32,15 @@
     "cx:40825280204308": "CoinEx Has Distributed Rewards for the “PUMP, BONK, ZORA Special Event: Deposit & Trade Futures to Share 50,000 CET and More” Event",
     "4411278979481": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter",
     "17827791532625": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter",
-    "kc:326266": "KuMining September Trading Challenge: Compete for 9,000+ USDT in Rewards!"
+    "kc:326266": "KuMining September Trading Challenge: Compete for 9,000+ USDT in Rewards!",
+    "kc:328680": "KuMining Partner Rewards Boost: Earn an Extra 1% USDT Commission and Claim Trial Coupons"
   },
   "initialized": true,
-  "updated_at": "2026-09-04T06:11:53Z",
+  "updated_at": "2026-09-04T11:15:32Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
-    "kumining september trading challenge compete for 9 000 usdt in rewards": 1788267756.762729
+    "kumining september trading challenge compete for 9 000 usdt in rewards": 1788267756.762729,
+    "kumining partner rewards boost earn an extra 1 usdt commission and claim trial coupons": 1788520531.9135592
   },
   "agenda": {},
   "health": {
@@ -70,7 +72,7 @@
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -89,6 +91,17 @@
       "tag": "KuCoin Launchpool",
       "seen": 1788267756,
       "ts": 1788260400.0,
+      "start": null,
+      "end": null,
+      "rewards": null
+    },
+    {
+      "id": "kc:328680",
+      "title": "KuMining Partner Rewards Boost: Earn an Extra 1% USDT Commission and Claim Trial Coupons",
+      "url": "https://www.kucoin.com/announcement/en-kumining-partner-rewards-boost-earn-an-extra-1-usdt-commission-and-claim-trial-coupons?lang=en_US",
+      "tag": "KuCoin Launchpool",
+      "seen": 1788520531,
+      "ts": 1788519600.0,
       "start": null,
       "end": null,
       "rewards": null
