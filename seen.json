@@ -36,7 +36,7 @@
     "kc:328680": "KuMining Partner Rewards Boost: Earn an Extra 1% USDT Commission and Claim Trial Coupons"
   },
   "initialized": true,
-  "updated_at": "2026-09-05T15:10:31Z",
+  "updated_at": "2026-09-05T17:19:15Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "kumining september trading challenge compete for 9 000 usdt in rewards": 1788267756.762729,
@@ -60,19 +60,19 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false
       },
       "MEXC MX Exclusives": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 5,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
