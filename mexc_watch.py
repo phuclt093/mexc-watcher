@@ -132,7 +132,7 @@ HTX_LINK_RE = re.compile(
     r'(?P<path>/support/(?P<id>\d{8,}))(?=["\'\\?/\s<)&]|$)')
 HTX_FILTER = re.compile(
     os.getenv("HTX_KEYWORDS", r"primepool|prime pool|primelist|prime list"), re.I)
-HTX_BUDGET = int(os.getenv("HTX_BUDGET", "120"))
+HTX_BUDGET = int(os.getenv("HTX_BUDGET", "60"))
 
 # CoinEx dung Zendesk cho trang thong bao -> co API JSON cong khai, khong can key.
 # CoinEx KHONG co san pham launchpool; muc Events chu yeu la thuong nap va thi giao dich,
@@ -198,7 +198,7 @@ PROXIES = [
 ]
 
 # Tran thoi gian cho toan bo phan MEXC, de job khong treo qua timeout cua workflow.
-FETCH_BUDGET = int(os.getenv("FETCH_BUDGET", "300"))
+FETCH_BUDGET = int(os.getenv("FETCH_BUDGET", "150"))
 _budget_until = None
 _sources_ok = 0   # so nguon tai duoc trong lan chay nay
 # Suc khoe tung nguon trong lan chay nay:
@@ -248,9 +248,9 @@ def fetch(url, tries=2, valid=None):
 
     methods = []
     if PROXY_MODE != "proxy":
-        methods.append(("direct", lambda u: u, 25))
+        methods.append(("direct", lambda u: u, 12))
     if PROXY_MODE != "direct":
-        methods.extend((name, fn, 40) for name, fn in PROXIES)
+        methods.extend((name, fn, 15) for name, fn in PROXIES)
 
     # uu tien cach da chung minh la chay duoc
     if _working:
