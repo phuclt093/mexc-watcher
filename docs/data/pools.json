@@ -1,0 +1,48 @@
+{
+ "updated_at": "2026-09-07T16:25:10Z",
+ "upcoming": [
+  {
+   "id": "bg:12560603894377",
+   "title": "Candybomb Carnival (Episode 3): Trade to share 80,000 USDT",
+   "tag": "Bitget Support",
+   "url": "https://www.bitget.com/support/articles/12560603894377",
+   "start": 1788786000,
+   "end": 1789401600
+  }
+ ],
+ "history": [
+  {
+   "id": "bg:12560603823740",
+   "title": "What Is Bitget Launchpool and How to Participate?",
+   "url": "https://www.bitget.com/support/articles/12560603823740",
+   "tag": "Bitget Launchpool",
+   "seen": 1788798309,
+   "ts": null,
+   "start": null,
+   "end": null,
+   "rewards": null
+  },
+  {
+   "id": "bg:12560603823744",
+   "title": "What is Bitget PoolX and How to Participate?",
+   "url": "https://www.bitget.com/support/articles/12560603823744",
+   "tag": "Bitget PoolX",
+   "seen": 1788798308,
+   "ts": null,
+   "start": null,
+   "end": null,
+   "rewards": null
+  },
+  {
+   "id": "bg:12560603894377",
+   "title": "Candybomb Carnival (Episode 3): Trade to share 80,000 USDT",
+   "url": "https://www.bitget.com/support/articles/12560603894377",
+   "tag": "Bitget Support",
+   "seen": 1788798306,
+   "ts": 1788786050.0,
+   "start": 1788786000,
+   "end": 1789401600,
+   "rewards": "80,000 USDT"
+  }
+ ]
+}

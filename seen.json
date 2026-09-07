@@ -31,14 +31,29 @@
     "cx:40826324521364": "CoinEx Mining: Lock CET to Share 5 ETH",
     "cx:40825280204308": "CoinEx Has Distributed Rewards for the “PUMP, BONK, ZORA Special Event: Deposit & Trade Futures to Share 50,000 CET and More” Event",
     "4411278979481": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter",
-    "17827791532625": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter"
+    "17827791532625": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter",
+    "bg:12560603894377": "Candybomb Carnival (Episode 3): Trade to share 80,000 USDT",
+    "bg:12560603823744": "What is Bitget PoolX and How to Participate?",
+    "bg:12560603823740": "What Is Bitget Launchpool and How to Participate?"
   },
   "initialized": true,
-  "updated_at": "2026-09-01T09:50:50Z",
+  "updated_at": "2026-09-07T16:25:10Z",
   "titles": {
-    "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848
+    "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
+    "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
+    "what is bitget poolx and how to participate": 1788798308.2951448,
+    "what is bitget launchpool and how to participate": 1788798309.859694
   },
-  "agenda": {},
+  "agenda": {
+    "bg:12560603894377": {
+      "title": "Candybomb Carnival (Episode 3): Trade to share 80,000 USDT",
+      "url": "https://www.bitget.com/support/articles/12560603894377",
+      "tag": "Bitget Support",
+      "start": 1788786000,
+      "end": 1789401600,
+      "sent": []
+    }
+  },
   "health": {
     "sources": {
       "KuCoin activities": {
@@ -64,15 +79,62 @@
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
+        "zero": 0,
+        "notified": false
+      },
+      "Bitget Support": {
+        "zero": 0,
+        "notified": false
+      },
+      "Bitget Launchpool": {
+        "zero": 0,
+        "notified": false
+      },
+      "Bitget PoolX": {
         "zero": 0,
         "notified": false
       }
     },
     "fail_streak": 0,
     "down_notified": false
-  }
+  },
+  "pool_history": [
+    {
+      "id": "bg:12560603894377",
+      "title": "Candybomb Carnival (Episode 3): Trade to share 80,000 USDT",
+      "url": "https://www.bitget.com/support/articles/12560603894377",
+      "tag": "Bitget Support",
+      "seen": 1788798306,
+      "ts": 1788786050.0,
+      "start": 1788786000,
+      "end": 1789401600,
+      "rewards": "80,000 USDT"
+    },
+    {
+      "id": "bg:12560603823744",
+      "title": "What is Bitget PoolX and How to Participate?",
+      "url": "https://www.bitget.com/support/articles/12560603823744",
+      "tag": "Bitget PoolX",
+      "seen": 1788798308,
+      "ts": null,
+      "start": null,
+      "end": null,
+      "rewards": null
+    },
+    {
+      "id": "bg:12560603823740",
+      "title": "What Is Bitget Launchpool and How to Participate?",
+      "url": "https://www.bitget.com/support/articles/12560603823740",
+      "tag": "Bitget Launchpool",
+      "seen": 1788798309,
+      "ts": null,
+      "start": null,
+      "end": null,
+      "rewards": null
+    }
+  ]
 }
