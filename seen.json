@@ -37,7 +37,7 @@
     "bg:12560603823740": "What Is Bitget Launchpool and How to Participate?"
   },
   "initialized": true,
-  "updated_at": "2026-09-07T16:31:31Z",
+  "updated_at": "2026-09-07T16:39:17Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -75,8 +75,7 @@
       },
       "MEXC MX Exclusives": {
         "zero": 0,
-        "notified": false,
-        "fail": 1
+        "notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
