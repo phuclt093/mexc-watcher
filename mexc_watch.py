@@ -45,6 +45,7 @@ PROXY_MODE = os.getenv("PROXY_MODE", "auto").lower()
 WATCH_KUCOIN = os.getenv("KUCOIN", "1") != "0"
 WATCH_HTX = os.getenv("HTX", "1") != "0"
 WATCH_COINEX = os.getenv("COINEX", "1") != "0"
+WATCH_BITGET = os.getenv("BITGET", "1") != "0"
 MAX_AGE_HOURS = int(os.getenv("MAX_AGE_HOURS", "72"))
 TITLE_DEDUPE_DAYS = int(os.getenv("TITLE_DEDUPE_DAYS", "30"))
 
@@ -142,6 +143,18 @@ COINEX_API = ("https://coinex-announcement.zendesk.com/api/v2/help_center/en-us/
 COINEX_FILTER = re.compile(
     os.getenv("COINEX_KEYWORDS", r"\bCET\b|launchpool|staking mining|mining pool"), re.I)
 
+# Bitget: cao trang tro giup va thong bao (Support, Launchpool, PoolX, CandyBomb)
+BITGET_BASE = "https://www.bitget.com"
+BITGET_LISTS = [
+    ("Bitget Support", "https://www.bitget.com/support"),
+    ("Bitget Launchpool", "https://www.bitget.com/support/sections/12508313446495"),
+    ("Bitget PoolX", "https://www.bitget.com/support/sections/12508313446545"),
+]
+BITGET_LINK_RE = re.compile(
+    r'(?P<path>/support/articles/(?P<id>\d{8,}))(?=["\'\\?/\s<)&]|$)')
+BITGET_FILTER = re.compile(
+    os.getenv("BITGET_KEYWORDS", r"\bBGB\b|launchpool|poolx|candybomb|staking mining|mining pool"), re.I)
+
 # Bat duong dan bai viet o BAT KY dau trong trang, khong bat buoc phai nam trong href="".
 # Ly do: qua proxy, MEXC doi khi tra ve payload JSON cua Next.js thay vi HTML co the <a>,
 # luc do duong dan nam trong "url":"/announcements/article/..." -> regex bam href se trat.
@@ -167,7 +180,12 @@ DATE_RES = [
 
 
 def log(msg):
-    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}", flush=True)
+    txt = f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] {msg}"
+    try:
+        print(txt, flush=True)
+    except UnicodeEncodeError:
+        sys.stdout.buffer.write((txt + "\n").encode("utf-8", errors="replace"))
+        sys.stdout.flush()
 
 
 # Cloudflare cua MEXC chan IP datacenter (GitHub Actions, VPS) bang loi 403.
@@ -339,6 +357,8 @@ def collect(state):
     # Nguon phai cao HTML lam sau, moi cai co tran thoi gian rieng
     if WATCH_HTX:
         _collect_htx(found, state)
+    if WATCH_BITGET:
+        _collect_bitget(found, state)
     _budget_until = time.monotonic() + FETCH_BUDGET
     _collect_mexc(found, state)
     _budget_until = None
@@ -441,6 +461,87 @@ def _collect_coinex(found, state):
     note("CoinEx", True, len(arts), n)
     log(f"  -> {n} bai khop tren {len(arts)} bai doc duoc"
         + (f" ({old} bai qua cu)" if old else ""))
+
+
+def _collect_bitget(found, state):
+    """Bitget: cao trang danh muc thong bao, loc tieu de co BGB/Launchpool/PoolX/CandyBomb."""
+    for label, url in BITGET_LISTS:
+        if skip_source(state, label):
+            continue
+        log(f"Dang kiem tra {label}: {url}")
+        try:
+            page = fetch(url, valid=lambda b: bool(BITGET_LINK_RE.search(b) or '"contentId"' in b))
+        except RuntimeError as e:
+            log(f"  ! bo qua {label}: {e}")
+            note(label, False)
+            continue
+        page = page.replace("\\/", "/")
+
+        n = old = raw = 0
+        found_json_ids = set()
+        for jm in re.finditer(
+            r'\{"contentId":"(?P<id>\d+)".*?"sectionName":"(?P<sec>[^"]*)".*?"showTime":"(?P<st>\d+)".*?"title":"(?P<title>[^"]+)"\}',
+            page
+        ):
+            raw += 1
+            raw_id = jm.group("id")
+            found_json_ids.add(raw_id)
+            title_raw = jm.group("title")
+            title = html.unescape(
+                title_raw.encode().decode("unicode_escape", "replace") if "\\u" in title_raw else title_raw
+            ).strip()
+            kind = classify(title, BITGET_FILTER)
+            if not kind:
+                continue
+            ts = int(jm.group("st")) / 1000 if jm.group("st") else None
+            if too_old(ts):
+                old += 1
+                continue
+            n += 1
+            aid = "bg:" + raw_id
+            if aid in found:
+                if label not in found[aid]["sources"]:
+                    found[aid]["sources"].append(label)
+                continue
+            found[aid] = {
+                "id": aid,
+                "title": title,
+                "url": f"{BITGET_BASE}/support/articles/{raw_id}",
+                "sources": [label],
+                "ts": ts,
+                "kind": kind,
+            }
+
+        for m in BITGET_LINK_RE.finditer(page):
+            raw_id = m.group("id")
+            if raw_id in found_json_ids:
+                continue
+            raw += 1
+            title = find_title(page, m.start(), "")
+            kind = classify(title, BITGET_FILTER) if title else None
+            if not kind:
+                continue
+            ts = date_near(page, m.start())
+            if too_old(ts):
+                old += 1
+                continue
+            n += 1
+            aid = "bg:" + raw_id
+            if aid in found:
+                if label not in found[aid]["sources"]:
+                    found[aid]["sources"].append(label)
+                continue
+            found[aid] = {
+                "id": aid,
+                "title": title,
+                "url": BITGET_BASE + m.group("path"),
+                "sources": [label],
+                "ts": ts,
+                "kind": kind,
+            }
+        note(label, True, raw, n)
+        log(f"  -> {n} bai khop tren {raw} bai doc duoc"
+            + (f" ({old} bai qua cu)" if old else ""))
 
 
 def _collect_kucoin(found, state):

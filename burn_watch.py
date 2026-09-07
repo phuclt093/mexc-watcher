@@ -104,7 +104,7 @@ TOKENS = [
     dict(key="OKB", exch="OKX", own=False, initial=300_000_000,
          cg=["okb"],
          chain=None, contract=None, decimals=None),
-    dict(key="BGB", exch="Bitget", own=False, initial=2_000_000_000,
+    dict(key="BGB", exch="Bitget", own=True, initial=2_000_000_000,
          cg=["bitget-token"],
          chain=None, contract=None, decimals=None),
     dict(key="GT", exch="Gate", own=False, initial=300_000_000,

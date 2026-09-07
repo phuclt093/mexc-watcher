@@ -9,6 +9,7 @@ không cần bật máy.
 | KuCoin | KuMining, GemPool | KCS | API chính thức |
 | HTX | Primepool, Primelist | HTX / HT | cào HTML (trực tiếp) |
 | CoinEx | sự kiện liên quan CET | CET | API Zendesk |
+| Bitget | Launchpool, PoolX, CandyBomb | BGB | cào HTML (trực tiếp) |
 
 Bot còn **mở bài ra đọc** để lấy giờ mở/đóng pool rồi **nhắc trước khi pool mở** và
 **nhắc trước khi pool đóng** để kịp rút token về, và **tự báo khi chính nó hỏng** thay vì
@@ -159,9 +160,9 @@ nhau mới thấy sàn nào đốt thật:
 | KCS | KuCoin | ✅ | 200.000.000 | on-chain (Etherscan V2) |
 | HTX | HTX | ✅ | 999,99 nghìn tỷ | CoinGecko |
 | CET | CoinEx | ✅ | 10.000.000.000 | CoinGecko |
+| BGB | Bitget | ✅ | 2.000.000.000 | CoinGecko |
 | BNB | Binance | — | 200.000.000 | CoinGecko |
 | OKB | OKX | — | 300.000.000 | CoinGecko |
-| BGB | Bitget | — | 2.000.000.000 | CoinGecko |
 | GT | Gate | — | 300.000.000 | CoinGecko |
 
 **Token bạn giữ** thì báo mọi lần đốt. **Token chỉ theo dõi** chỉ báo khi đốt lớn
@@ -387,8 +388,10 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 | `KUCOIN` | `1` | `0` = tắt theo dõi KuCoin |
 | `HTX` | `1` | `0` = tắt theo dõi HTX |
 | `COINEX` | `1` | `0` = tắt theo dõi CoinEx |
+| `BITGET` | `1` | `0` = tắt theo dõi Bitget |
 | `HTX_KEYWORDS` | `primepool\|primelist\|…` | regex lọc tiêu đề HTX |
 | `COINEX_KEYWORDS` | `\bCET\b\|launchpool\|…` | regex lọc tiêu đề CoinEx |
+| `BITGET_KEYWORDS` | `\bBGB\b\|launchpool\|…` | regex lọc tiêu đề Bitget |
 | `HTX_BUDGET` | `120` | số giây tối đa dành cho phần HTX |
 | `KUCOIN_KEYWORDS` | `gempool\|kumining\|…` | regex lọc tiêu đề KuCoin |
 | `FETCH_BUDGET` | `300` | số giây tối đa dành cho phần MEXC |
