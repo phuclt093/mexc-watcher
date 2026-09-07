@@ -97,6 +97,9 @@ TOKENS = [
     dict(key="CET", exch="CoinEx", own=True, initial=10_000_000_000,
          cg=["coinex-token"],
          chain=None, contract=None, decimals=None),
+    dict(key="TKO", exch="Tokocrypto", own=True, initial=500_000_000,
+         cg=["tokocrypto"],
+         chain=None, contract=None, decimals=None),
     # own=False: theo doi de so sanh, chi bao khi dot lon (>= BURN_OTHER_MIN_PCT)
     dict(key="BNB", exch="Binance", own=False, initial=200_000_000,
          cg=["binancecoin"],

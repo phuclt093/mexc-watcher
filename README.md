@@ -161,6 +161,7 @@ nhau mới thấy sàn nào đốt thật:
 | HTX | HTX | ✅ | 999,99 nghìn tỷ | CoinGecko |
 | CET | CoinEx | ✅ | 10.000.000.000 | CoinGecko |
 | BGB | Bitget | ✅ | 2.000.000.000 | CoinGecko |
+| TKO | Tokocrypto | ✅ | 500.000.000 | CoinGecko |
 | BNB | Binance | — | 200.000.000 | CoinGecko |
 | OKB | OKX | — | 300.000.000 | CoinGecko |
 | GT | Gate | — | 300.000.000 | CoinGecko |
