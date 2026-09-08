@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-09-08T09:56:02Z",
+ "updated_at": "2026-09-08T14:02:42Z",
  "upcoming": [
   {
    "id": "bg:12560603894377",
@@ -8,9 +8,28 @@
    "url": "https://www.bitget.com/support/articles/12560603894377",
    "start": 1788786000,
    "end": 1789401600
+  },
+  {
+   "id": "bg:12560603894560",
+   "title": "CandyBomb x CNPY: Trade to share 75,000 USDC",
+   "tag": "Bitget Support",
+   "url": "https://www.bitget.com/support/articles/12560603894560",
+   "start": 1788883200,
+   "end": 1789488000
   }
  ],
  "history": [
+  {
+   "id": "bg:12560603894560",
+   "title": "CandyBomb x CNPY: Trade to share 75,000 USDC",
+   "url": "https://www.bitget.com/support/articles/12560603894560",
+   "tag": "Bitget Support",
+   "seen": 1788876161,
+   "ts": 1788872427.0,
+   "start": 1788883200,
+   "end": 1789488000,
+   "rewards": "75,000 USDC"
+  },
   {
    "id": "bg:12560603823740",
    "title": "What Is Bitget Launchpool and How to Participate?",

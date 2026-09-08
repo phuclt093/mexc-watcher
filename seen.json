@@ -34,15 +34,17 @@
     "17827791532625": "Voting Result and Listing Arrangement for QIE Blockchain (QIE) Kickstarter",
     "bg:12560603894377": "Candybomb Carnival (Episode 3): Trade to share 80,000 USDT",
     "bg:12560603823744": "What is Bitget PoolX and How to Participate?",
-    "bg:12560603823740": "What Is Bitget Launchpool and How to Participate?"
+    "bg:12560603823740": "What Is Bitget Launchpool and How to Participate?",
+    "bg:12560603894560": "CandyBomb x CNPY: Trade to share 75,000 USDC"
   },
   "initialized": true,
-  "updated_at": "2026-09-08T09:56:02Z",
+  "updated_at": "2026-09-08T14:02:42Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
     "what is bitget poolx and how to participate": 1788798308.2951448,
-    "what is bitget launchpool and how to participate": 1788798309.859694
+    "what is bitget launchpool and how to participate": 1788798309.859694,
+    "candybomb x cnpy trade to share 75 000 usdc": 1788876161.7252827
   },
   "agenda": {
     "bg:12560603894377": {
@@ -51,6 +53,14 @@
       "tag": "Bitget Support",
       "start": 1788786000,
       "end": 1789401600,
+      "sent": []
+    },
+    "bg:12560603894560": {
+      "title": "CandyBomb x CNPY: Trade to share 75,000 USDC",
+      "url": "https://www.bitget.com/support/articles/12560603894560",
+      "tag": "Bitget Support",
+      "start": 1788883200,
+      "end": 1789488000,
       "sent": []
     }
   },
@@ -71,19 +81,19 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 3,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC MX Exclusives": {
         "zero": 0,
         "notified": false,
-        "fail": 3,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 3,
+        "fail": 4,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -139,6 +149,17 @@
       "start": null,
       "end": null,
       "rewards": null
+    },
+    {
+      "id": "bg:12560603894560",
+      "title": "CandyBomb x CNPY: Trade to share 75,000 USDC",
+      "url": "https://www.bitget.com/support/articles/12560603894560",
+      "tag": "Bitget Support",
+      "seen": 1788876161,
+      "ts": 1788872427.0,
+      "start": 1788883200,
+      "end": 1789488000,
+      "rewards": "75,000 USDC"
     }
   ]
 }
