@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-09-09T10:28:37Z",
+ "updated_at": "2026-09-09T14:46:03Z",
  "upcoming": [
   {
    "id": "bg:12560603894377",
@@ -16,9 +16,66 @@
    "url": "https://www.bitget.com/support/articles/12560603894560",
    "start": 1788883200,
    "end": 1789488000
+  },
+  {
+   "id": "bg:12560603894727",
+   "title": "Bitget PoolX is listing Zora (ZORA): Lock ZORA to get 950,000 ZORA airdrop",
+   "tag": "Bitget Support",
+   "url": "https://www.bitget.com/support/articles/12560603894727",
+   "start": 1788955200,
+   "end": 1789466400
+  },
+  {
+   "id": "bg:12560603894724",
+   "title": "Candybomb Carnival (Episode 4): Trade to share 80,000 USDT",
+   "tag": "Bitget Support",
+   "url": "https://www.bitget.com/support/articles/12560603894724",
+   "start": 1788958800,
+   "end": 1789574400
+  },
+  {
+   "id": "bg:12560603894668",
+   "title": "CandyBomb x rSPCX: Trade stocks to share 270 rSPCX",
+   "tag": "Bitget Support",
+   "url": "https://www.bitget.com/support/articles/12560603894668",
+   "start": 1788962400,
+   "end": 1789567200
   }
  ],
  "history": [
+  {
+   "id": "bg:12560603894668",
+   "title": "CandyBomb x rSPCX: Trade stocks to share 270 rSPCX",
+   "url": "https://www.bitget.com/support/articles/12560603894668",
+   "tag": "Bitget Support",
+   "seen": 1788965162,
+   "ts": 1788955243.0,
+   "start": 1788962400,
+   "end": 1789567200,
+   "rewards": null
+  },
+  {
+   "id": "bg:12560603894724",
+   "title": "Candybomb Carnival (Episode 4): Trade to share 80,000 USDT",
+   "url": "https://www.bitget.com/support/articles/12560603894724",
+   "tag": "Bitget Support",
+   "seen": 1788965160,
+   "ts": 1788958850.0,
+   "start": 1788958800,
+   "end": 1789574400,
+   "rewards": "80,000 USDT"
+  },
+  {
+   "id": "bg:12560603894727",
+   "title": "Bitget PoolX is listing Zora (ZORA): Lock ZORA to get 950,000 ZORA airdrop",
+   "url": "https://www.bitget.com/support/articles/12560603894727",
+   "tag": "Bitget Support",
+   "seen": 1788965158,
+   "ts": 1788955211.0,
+   "start": 1788955200,
+   "end": 1789466400,
+   "rewards": null
+  },
   {
    "id": "bg:12560603894560",
    "title": "CandyBomb x CNPY: Trade to share 75,000 USDC",

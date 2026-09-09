@@ -35,16 +35,22 @@
     "bg:12560603894377": "Candybomb Carnival (Episode 3): Trade to share 80,000 USDT",
     "bg:12560603823744": "What is Bitget PoolX and How to Participate?",
     "bg:12560603823740": "What Is Bitget Launchpool and How to Participate?",
-    "bg:12560603894560": "CandyBomb x CNPY: Trade to share 75,000 USDC"
+    "bg:12560603894560": "CandyBomb x CNPY: Trade to share 75,000 USDC",
+    "bg:12560603894727": "Bitget PoolX is listing Zora (ZORA): Lock ZORA to get 950,000 ZORA airdrop",
+    "bg:12560603894724": "Candybomb Carnival (Episode 4): Trade to share 80,000 USDT",
+    "bg:12560603894668": "CandyBomb x rSPCX: Trade stocks to share 270 rSPCX"
   },
   "initialized": true,
-  "updated_at": "2026-09-09T10:28:37Z",
+  "updated_at": "2026-09-09T14:46:03Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
     "what is bitget poolx and how to participate": 1788798308.2951448,
     "what is bitget launchpool and how to participate": 1788798309.859694,
-    "candybomb x cnpy trade to share 75 000 usdc": 1788876161.7252827
+    "candybomb x cnpy trade to share 75 000 usdc": 1788876161.7252827,
+    "bitget poolx is listing zora zora lock zora to get 950 000 zora airdrop": 1788965158.621929,
+    "candybomb carnival episode 4 trade to share 80 000 usdt": 1788965160.618533,
+    "candybomb x rspcx trade stocks to share 270 rspcx": 1788965162.6411633
   },
   "agenda": {
     "bg:12560603894377": {
@@ -61,6 +67,30 @@
       "tag": "Bitget Support",
       "start": 1788883200,
       "end": 1789488000,
+      "sent": []
+    },
+    "bg:12560603894727": {
+      "title": "Bitget PoolX is listing Zora (ZORA): Lock ZORA to get 950,000 ZORA airdrop",
+      "url": "https://www.bitget.com/support/articles/12560603894727",
+      "tag": "Bitget Support",
+      "start": 1788955200,
+      "end": 1789466400,
+      "sent": []
+    },
+    "bg:12560603894724": {
+      "title": "Candybomb Carnival (Episode 4): Trade to share 80,000 USDT",
+      "url": "https://www.bitget.com/support/articles/12560603894724",
+      "tag": "Bitget Support",
+      "start": 1788958800,
+      "end": 1789574400,
+      "sent": []
+    },
+    "bg:12560603894668": {
+      "title": "CandyBomb x rSPCX: Trade stocks to share 270 rSPCX",
+      "url": "https://www.bitget.com/support/articles/12560603894668",
+      "tag": "Bitget Support",
+      "start": 1788962400,
+      "end": 1789567200,
       "sent": []
     }
   },
@@ -81,19 +111,19 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC MX Exclusives": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -160,6 +190,39 @@
       "start": 1788883200,
       "end": 1789488000,
       "rewards": "75,000 USDC"
+    },
+    {
+      "id": "bg:12560603894727",
+      "title": "Bitget PoolX is listing Zora (ZORA): Lock ZORA to get 950,000 ZORA airdrop",
+      "url": "https://www.bitget.com/support/articles/12560603894727",
+      "tag": "Bitget Support",
+      "seen": 1788965158,
+      "ts": 1788955211.0,
+      "start": 1788955200,
+      "end": 1789466400,
+      "rewards": null
+    },
+    {
+      "id": "bg:12560603894724",
+      "title": "Candybomb Carnival (Episode 4): Trade to share 80,000 USDT",
+      "url": "https://www.bitget.com/support/articles/12560603894724",
+      "tag": "Bitget Support",
+      "seen": 1788965160,
+      "ts": 1788958850.0,
+      "start": 1788958800,
+      "end": 1789574400,
+      "rewards": "80,000 USDT"
+    },
+    {
+      "id": "bg:12560603894668",
+      "title": "CandyBomb x rSPCX: Trade stocks to share 270 rSPCX",
+      "url": "https://www.bitget.com/support/articles/12560603894668",
+      "tag": "Bitget Support",
+      "seen": 1788965162,
+      "ts": 1788955243.0,
+      "start": 1788962400,
+      "end": 1789567200,
+      "rewards": null
     }
   ]
 }
