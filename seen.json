@@ -41,7 +41,7 @@
     "bg:12560603894668": "CandyBomb x rSPCX: Trade stocks to share 270 rSPCX"
   },
   "initialized": true,
-  "updated_at": "2026-09-09T18:03:58Z",
+  "updated_at": "2026-09-09T20:53:45Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -117,13 +117,13 @@
       "MEXC MX Exclusives": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
