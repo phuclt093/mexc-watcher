@@ -38,10 +38,11 @@
     "bg:12560603894560": "CandyBomb x CNPY: Trade to share 75,000 USDC",
     "bg:12560603894727": "Bitget PoolX is listing Zora (ZORA): Lock ZORA to get 950,000 ZORA airdrop",
     "bg:12560603894724": "Candybomb Carnival (Episode 4): Trade to share 80,000 USDT",
-    "bg:12560603894668": "CandyBomb x rSPCX: Trade stocks to share 270 rSPCX"
+    "bg:12560603894668": "CandyBomb x rSPCX: Trade stocks to share 270 rSPCX",
+    "htx:95043269084842": "TradFi Trade to Earn #3: Win Rewards 24/7 from a 6,000 USDT Daily Prize Pool + Ongoing Buybacks to Support $HTX Value! SNDKUSDTSwap 09/10 03:00:00 (UTC)"
   },
   "initialized": true,
-  "updated_at": "2026-09-10T00:45:02Z",
+  "updated_at": "2026-09-10T05:23:33Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -50,7 +51,8 @@
     "candybomb x cnpy trade to share 75 000 usdc": 1788876161.7252827,
     "bitget poolx is listing zora zora lock zora to get 950 000 zora airdrop": 1788965158.621929,
     "candybomb carnival episode 4 trade to share 80 000 usdt": 1788965160.618533,
-    "candybomb x rspcx trade stocks to share 270 rspcx": 1788965162.6411633
+    "candybomb x rspcx trade stocks to share 270 rspcx": 1788965162.6411633,
+    "tradfi trade to earn #3 win rewards 24 7 from a 6 000 usdt daily prize pool ongoing buybacks to support htx value sndkusdtswap 09 10 03 00 00 utc": 1789017812.1151707
   },
   "agenda": {
     "bg:12560603894377": {
@@ -111,19 +113,19 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC MX Exclusives": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
