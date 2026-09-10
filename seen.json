@@ -39,10 +39,12 @@
     "bg:12560603894727": "Bitget PoolX is listing Zora (ZORA): Lock ZORA to get 950,000 ZORA airdrop",
     "bg:12560603894724": "Candybomb Carnival (Episode 4): Trade to share 80,000 USDT",
     "bg:12560603894668": "CandyBomb x rSPCX: Trade stocks to share 270 rSPCX",
-    "htx:95043269084842": "TradFi Trade to Earn #3: Win Rewards 24/7 from a 6,000 USDT Daily Prize Pool + Ongoing Buybacks to Support $HTX Value! SNDKUSDTSwap 09/10 03:00:00 (UTC)"
+    "htx:95043269084842": "TradFi Trade to Earn #3: Win Rewards 24/7 from a 6,000 USDT Daily Prize Pool + Ongoing Buybacks to Support $HTX Value! SNDKUSDTSwap 09/10 03:00:00 (UTC)",
+    "bg:12560603894673": "CandyBomb x rMU: Trade futures to share 20 rMU!",
+    "bg:12560603894671": "CandyBomb x ZEC: Trade futures to share 16 ZEC!"
   },
   "initialized": true,
-  "updated_at": "2026-09-10T05:23:33Z",
+  "updated_at": "2026-09-10T09:57:04Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -52,7 +54,9 @@
     "bitget poolx is listing zora zora lock zora to get 950 000 zora airdrop": 1788965158.621929,
     "candybomb carnival episode 4 trade to share 80 000 usdt": 1788965160.618533,
     "candybomb x rspcx trade stocks to share 270 rspcx": 1788965162.6411633,
-    "tradfi trade to earn #3 win rewards 24 7 from a 6 000 usdt daily prize pool ongoing buybacks to support htx value sndkusdtswap 09 10 03 00 00 utc": 1789017812.1151707
+    "tradfi trade to earn #3 win rewards 24 7 from a 6 000 usdt daily prize pool ongoing buybacks to support htx value sndkusdtswap 09 10 03 00 00 utc": 1789017812.1151707,
+    "candybomb x rmu trade futures to share 20 rmu": 1789034221.5055208,
+    "candybomb x zec trade futures to share 16 zec": 1789034223.3577518
   },
   "agenda": {
     "bg:12560603894377": {
@@ -94,6 +98,22 @@
       "start": 1788962400,
       "end": 1789567200,
       "sent": []
+    },
+    "bg:12560603894673": {
+      "title": "CandyBomb x rMU: Trade futures to share 20 rMU!",
+      "url": "https://www.bitget.com/support/articles/12560603894673",
+      "tag": "Bitget Support",
+      "start": 1789012800,
+      "end": 1789027200,
+      "sent": []
+    },
+    "bg:12560603894671": {
+      "title": "CandyBomb x ZEC: Trade futures to share 16 ZEC!",
+      "url": "https://www.bitget.com/support/articles/12560603894671",
+      "tag": "Bitget Support",
+      "start": 1789012800,
+      "end": 1789027200,
+      "sent": []
     }
   },
   "health": {
@@ -113,13 +133,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC MX Exclusives": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
@@ -224,6 +244,28 @@
       "ts": 1788955243.0,
       "start": 1788962400,
       "end": 1789567200,
+      "rewards": null
+    },
+    {
+      "id": "bg:12560603894673",
+      "title": "CandyBomb x rMU: Trade futures to share 20 rMU!",
+      "url": "https://www.bitget.com/support/articles/12560603894673",
+      "tag": "Bitget Support",
+      "seen": 1789034221,
+      "ts": 1789027231.0,
+      "start": 1789012800,
+      "end": 1789027200,
+      "rewards": null
+    },
+    {
+      "id": "bg:12560603894671",
+      "title": "CandyBomb x ZEC: Trade futures to share 16 ZEC!",
+      "url": "https://www.bitget.com/support/articles/12560603894671",
+      "tag": "Bitget Support",
+      "seen": 1789034223,
+      "ts": 1789027231.0,
+      "start": 1789012800,
+      "end": 1789027200,
       "rewards": null
     }
   ]

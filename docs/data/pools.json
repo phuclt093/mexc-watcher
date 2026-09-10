@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-09-10T05:23:33Z",
+ "updated_at": "2026-09-10T09:57:04Z",
  "upcoming": [
   {
    "id": "bg:12560603894377",
@@ -43,6 +43,28 @@
   }
  ],
  "history": [
+  {
+   "id": "bg:12560603894671",
+   "title": "CandyBomb x ZEC: Trade futures to share 16 ZEC!",
+   "url": "https://www.bitget.com/support/articles/12560603894671",
+   "tag": "Bitget Support",
+   "seen": 1789034223,
+   "ts": 1789027231.0,
+   "start": 1789012800,
+   "end": 1789027200,
+   "rewards": null
+  },
+  {
+   "id": "bg:12560603894673",
+   "title": "CandyBomb x rMU: Trade futures to share 20 rMU!",
+   "url": "https://www.bitget.com/support/articles/12560603894673",
+   "tag": "Bitget Support",
+   "seen": 1789034221,
+   "ts": 1789027231.0,
+   "start": 1789012800,
+   "end": 1789027200,
+   "rewards": null
+  },
   {
    "id": "bg:12560603894668",
    "title": "CandyBomb x rSPCX: Trade stocks to share 270 rSPCX",
