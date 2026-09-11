@@ -42,10 +42,11 @@
     "htx:95043269084842": "TradFi Trade to Earn #3: Win Rewards 24/7 from a 6,000 USDT Daily Prize Pool + Ongoing Buybacks to Support $HTX Value! SNDKUSDTSwap 09/10 03:00:00 (UTC)",
     "bg:12560603894673": "CandyBomb x rMU: Trade futures to share 20 rMU!",
     "bg:12560603894671": "CandyBomb x ZEC: Trade futures to share 16 ZEC!",
-    "bg:12560603894757": "CandyBomb x CP: Trade to share 2,500,000 CP"
+    "bg:12560603894757": "CandyBomb x CP: Trade to share 2,500,000 CP",
+    "bg:12560603894905": "CandyBomb x DEBIT (Episode 2): Trade to share 45,000 USDT"
   },
   "initialized": true,
-  "updated_at": "2026-09-11T09:12:31Z",
+  "updated_at": "2026-09-11T13:34:34Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -58,7 +59,8 @@
     "tradfi trade to earn #3 win rewards 24 7 from a 6 000 usdt daily prize pool ongoing buybacks to support htx value sndkusdtswap 09 10 03 00 00 utc": 1789017812.1151707,
     "candybomb x rmu trade futures to share 20 rmu": 1789034221.5055208,
     "candybomb x zec trade futures to share 16 zec": 1789034223.3577518,
-    "candybomb x cp trade to share 2 500 000 cp": 1789048768.836181
+    "candybomb x cp trade to share 2 500 000 cp": 1789048768.836181,
+    "candybomb x debit episode 2 trade to share 45 000 usdt": 1789133673.4573028
   },
   "agenda": {
     "bg:12560603894377": {
@@ -124,6 +126,14 @@
       "start": 1789056000,
       "end": 1789660800,
       "sent": []
+    },
+    "bg:12560603894905": {
+      "title": "CandyBomb x DEBIT (Episode 2): Trade to share 45,000 USDT",
+      "url": "https://www.bitget.com/support/articles/12560603894905",
+      "tag": "Bitget Support",
+      "start": 1789142400,
+      "end": 1789747200,
+      "sent": []
     }
   },
   "health": {
@@ -143,19 +153,19 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false
       },
       "MEXC MX Exclusives": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -288,6 +298,17 @@
       "start": 1789056000,
       "end": 1789660800,
       "rewards": "2,500,000 CP"
+    },
+    {
+      "id": "bg:12560603894905",
+      "title": "CandyBomb x DEBIT (Episode 2): Trade to share 45,000 USDT",
+      "url": "https://www.bitget.com/support/articles/12560603894905",
+      "tag": "Bitget Support",
+      "seen": 1789133673,
+      "ts": 1789128027.0,
+      "start": 1789142400,
+      "end": 1789747200,
+      "rewards": "45,000 USDT"
     }
   ]
 }

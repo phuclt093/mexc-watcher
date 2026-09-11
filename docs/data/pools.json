@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-09-11T09:12:31Z",
+ "updated_at": "2026-09-11T13:34:34Z",
  "upcoming": [
   {
    "id": "bg:12560603894377",
@@ -48,9 +48,28 @@
    "url": "https://www.bitget.com/support/articles/12560603894757",
    "start": 1789056000,
    "end": 1789660800
+  },
+  {
+   "id": "bg:12560603894905",
+   "title": "CandyBomb x DEBIT (Episode 2): Trade to share 45,000 USDT",
+   "tag": "Bitget Support",
+   "url": "https://www.bitget.com/support/articles/12560603894905",
+   "start": 1789142400,
+   "end": 1789747200
   }
  ],
  "history": [
+  {
+   "id": "bg:12560603894905",
+   "title": "CandyBomb x DEBIT (Episode 2): Trade to share 45,000 USDT",
+   "url": "https://www.bitget.com/support/articles/12560603894905",
+   "tag": "Bitget Support",
+   "seen": 1789133673,
+   "ts": 1789128027.0,
+   "start": 1789142400,
+   "end": 1789747200,
+   "rewards": "45,000 USDT"
+  },
   {
    "id": "bg:12560603894757",
    "title": "CandyBomb x CP: Trade to share 2,500,000 CP",
