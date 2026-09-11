@@ -46,7 +46,7 @@
     "bg:12560603894905": "CandyBomb x DEBIT (Episode 2): Trade to share 45,000 USDT"
   },
   "initialized": true,
-  "updated_at": "2026-09-11T21:57:11Z",
+  "updated_at": "2026-09-11T23:45:29Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -153,21 +153,22 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 5,
-        "fail_notified": false
+        "fail": 6,
+        "fail_notified": false,
+        "next_try": 1789173929.089418
       },
       "MEXC MX Exclusives": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 6,
+        "fail": 7,
         "fail_notified": false,
-        "next_try": 1789167431.0270162
+        "next_try": 1789173929.089418
       },
       "HTX Earn": {
         "zero": 0,
