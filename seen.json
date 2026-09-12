@@ -46,7 +46,7 @@
     "bg:12560603894905": "CandyBomb x DEBIT (Episode 2): Trade to share 45,000 USDT"
   },
   "initialized": true,
-  "updated_at": "2026-09-12T19:14:49Z",
+  "updated_at": "2026-09-12T21:28:48Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -165,7 +165,7 @@
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false
       },
       "HTX Earn": {
