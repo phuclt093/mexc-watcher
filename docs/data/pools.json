@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-09-14T07:02:17Z",
+ "updated_at": "2026-09-14T13:48:26Z",
  "upcoming": [
   {
    "id": "bg:12560603894377",
@@ -56,9 +56,47 @@
    "url": "https://www.bitget.com/support/articles/12560603894905",
    "start": 1789142400,
    "end": 1789747200
+  },
+  {
+   "id": "bg:12560603895084",
+   "title": "Candybomb Carnival (Episode 5): Trade to share 70,000 USDT",
+   "tag": "Bitget Support",
+   "url": "https://www.bitget.com/support/articles/12560603895084",
+   "start": 1789380000,
+   "end": 1790006400
+  },
+  {
+   "id": "bg:12560603895106",
+   "title": "CandyBomb x MCAT: Trade to share 60,000 USDT",
+   "tag": "Bitget Support",
+   "url": "https://www.bitget.com/support/articles/12560603895106",
+   "start": 1789401600,
+   "end": 1790006400
   }
  ],
  "history": [
+  {
+   "id": "bg:12560603895084",
+   "title": "Candybomb Carnival (Episode 5): Trade to share 70,000 USDT",
+   "url": "https://www.bitget.com/support/articles/12560603895084",
+   "tag": "Bitget Support",
+   "seen": 1789393704,
+   "ts": 1789380050.0,
+   "start": 1789380000,
+   "end": 1790006400,
+   "rewards": "70,000 USDT"
+  },
+  {
+   "id": "bg:12560603895106",
+   "title": "CandyBomb x MCAT: Trade to share 60,000 USDT",
+   "url": "https://www.bitget.com/support/articles/12560603895106",
+   "tag": "Bitget Support",
+   "seen": 1789393702,
+   "ts": 1789380027.0,
+   "start": 1789401600,
+   "end": 1790006400,
+   "rewards": "60,000 USDT"
+  },
   {
    "id": "bg:12560603894905",
    "title": "CandyBomb x DEBIT (Episode 2): Trade to share 45,000 USDT",
