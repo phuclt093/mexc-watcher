@@ -61,7 +61,7 @@
     "17827791538531": "Voting Result and Listing Arrangement for Orkestri AI (OKAI) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-09-15T18:56:58Z",
+  "updated_at": "2026-09-15T21:53:22Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -132,7 +132,7 @@
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -152,7 +152,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 4
+        "fail": 5
       }
     },
     "fail_streak": 0,
