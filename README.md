@@ -367,7 +367,8 @@ cần key, không bị Cloudflare chặn nên luôn chạy đường `direct`. C
 SOURCES = [
     ("Launchpool",  "/announcements/tag/launchpool-28", None),
     ("Airdrop+",    "/announcements/tag/airdrop-32",    None),
-    ("Kickstarter", "/announcements/new-listings", re.compile(r"kickstarter|launchpool|airdrop", re.I)),
+    ("Kickstarter",  "/announcements/tag/kickstarter-33", None),
+    ("New Listings", "/announcements/new-listings", re.compile(r"kickstarter", re.I)),
     # ("Pre-Market", "/announcements/tag/pre-market-29", None),
     # ("Earn",       "/announcements/tag/earn-26",       None),
 ]
@@ -420,7 +421,7 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 | `HEALTH_ALERT` | `1` | `0` = tắt cảnh báo khi bot hỏng |
 | `HEALTH_DOWN_AFTER` | `6` | báo sau bao nhiêu lần liên tiếp không tải được nguồn nào |
 | `HEALTH_PARSE_AFTER` | `3` | báo sau bao nhiêu lần tải được mà bóc 0 bài |
-| `HEALTH_FAIL_AFTER` | `18` | báo sau bao nhiêu lần một nguồn tải hỏng liên tiếp |
+| `HEALTH_FAIL_AFTER` | `6` | báo sau bao nhiêu lần một nguồn tải hỏng liên tiếp |
 | `HEALTH_SKIP_AFTER` | `6` | hỏng bao nhiêu lần thì giãn nhịp thử lại nguồn đó |
 | `HEALTH_SKIP_MINUTES` | `60` | nguồn đang chết thì bao lâu thử lại một lần |
 

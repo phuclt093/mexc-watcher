@@ -46,7 +46,16 @@
     "bg:12560603894905": "CandyBomb x DEBIT (Episode 2): Trade to share 45,000 USDT",
     "bg:12560603895106": "CandyBomb x MCAT: Trade to share 60,000 USDT",
     "bg:12560603895084": "Candybomb Carnival (Episode 5): Trade to share 70,000 USDT",
-    "17827791538530": "First in Market: MEXC Kickstarter—Vote Orkestri AI (OKAI) to Win Free 50,000 USDT Airdrops"
+    "17827791538530": "First in Market: MEXC Kickstarter—Vote Orkestri AI (OKAI) to Win Free 50,000 USDT Airdrops",
+    "17827791538400": "First in Market: MEXC to List MarsCat (MCAT) in Innovation Zone with 625,000 MCAT & 10,000 USDT Airdrop+ Rewards",
+    "17827791538303": "Voting Result and Listing Arrangement for PFPai (PFP) Kickstarter",
+    "17827791538302": "First in Market: MEXC Kickstarter—Vote PFPai (PFP) to Win Free 83,333 PFP Airdrops",
+    "17827791538086": "Voting Result and Listing Arrangement for MoonnFun (MODA) Kickstarter",
+    "17827791538006": "First in Market: MEXC Kickstarter—Vote MoonnFun (MODA) to Win Free 50,000 USDT Airdrops",
+    "17827791537914": "First in Market: MEXC to List Bitball (PBALL) in Innovation Zone with 50,000 PBALL & 10,000 USDT Airdrop+ Rewards",
+    "17827791537768": "Voting Result and Listing Arrangement for Shard Legends (SLCW) Kickstarter",
+    "17827791537767": "First in Market: MEXC Kickstarter—Vote Shard Legends: Clan Wars (SLCW) to Win Free 50,000 USDT Airdrops",
+    "17827791537740": "Voting Result and Listing Arrangement for QoreChain (QOR) Kickstarter"
   },
   "initialized": true,
   "updated_at": "2026-09-15T05:23:31Z",
@@ -165,13 +174,6 @@
         "notified": false,
         "fail": 0,
         "fail_notified": false
-      },
-      "MEXC MX Exclusives": {
-        "zero": 0,
-        "notified": false,
-        "fail": 7,
-        "fail_notified": false,
-        "next_try": 1789453328.25259
       },
       "MEXC Kickstarter": {
         "zero": 0,

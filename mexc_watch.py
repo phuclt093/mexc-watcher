@@ -63,7 +63,7 @@ HEALTH_ALERT = os.getenv("HEALTH_ALERT", "1") != "0"
 HEALTH_DOWN_AFTER = int(os.getenv("HEALTH_DOWN_AFTER", "6"))
 HEALTH_PARSE_AFTER = int(os.getenv("HEALTH_PARSE_AFTER", "3"))
 # Nguon tai hong lien tuc: bao sau bao nhieu lan, va gian nhip thu lai tu lan thu may
-HEALTH_FAIL_AFTER = int(os.getenv("HEALTH_FAIL_AFTER", "18"))
+HEALTH_FAIL_AFTER = int(os.getenv("HEALTH_FAIL_AFTER", "6"))
 HEALTH_SKIP_AFTER = int(os.getenv("HEALTH_SKIP_AFTER", "6"))
 HEALTH_SKIP_MINUTES = int(os.getenv("HEALTH_SKIP_MINUTES", "60"))
 # Thu muc xuat du lieu cho trang bieu do (de trong = tat)
@@ -87,12 +87,17 @@ BURN_NEWS_RE = re.compile(
 # (nhan hien thi, duong dan, bo loc tu khoa hoac None = lay tat ca)
 SOURCES = [
     ("MEXC Launchpool",  "/announcements/tag/launchpool-28", None),
-    # Trang MX Exclusives gom ca Kickstarter lan thong cao buyback & burn MX.
-    ("MEXC MX Exclusives", "/announcements/mx-exclusives",
-     re.compile(r"kickstarter|launchpool", re.I)),
-    # Luoi thu hai: Kickstarter thinh thoang chi xuat hien o trang New Listings.
-    ("MEXC Kickstarter", "/announcements/new-listings", re.compile(r"kickstarter", re.I)),
+    # Trang tag rieng cho Kickstarter: moi thang chi vai bai va bai nam lai ca thang,
+    # nen du GitHub Actions bo lich vai tieng van khong so. Day la luoi chinh.
+    # Khong loc tu khoa: ca trang da la Kickstarter roi.
+    ("MEXC Kickstarter", "/announcements/tag/kickstarter-33", None),
+    # Luoi phu. Canh bao: New Listings dang hang chuc bai moi gio (chu yeu la
+    # niem yet futures), Kickstarter troi khoi trang 1 trong chua toi mot tieng
+    # -> mot minh no KHONG du de bat Kickstarter.
+    ("MEXC New Listings", "/announcements/new-listings", re.compile(r"kickstarter", re.I)),
 ]
+# Da bo "/announcements/mx-exclusives" (thang 9/2026): MEXC ngung dang o chuyen muc
+# nay tu 4/2/2026, va viec tai trang cung hong lien tuc -> chi ton thoi gian fetch.
 
 
 def classify(text, keyword):
@@ -173,6 +178,9 @@ MONTHS = {m: i + 1 for i, m in enumerate(
 
 # Cac dinh dang ngay gap tren trang danh sach cua tung san
 DATE_RES = [
+    # The <time dateTime="2026-09-13T11:57:38.000Z"> cua MEXC. Phai dat TRUOC "ymd"
+    # vi "ymd" doi ranh gioi tu sau ngay, ma o day ky tu ke tiep la "T" -> truot.
+    ("iso", re.compile(r"\b(20\d{2})-(\d{2})-(\d{2})T\d{2}:\d{2}")),          # 2026-09-13T11:57
     ("ymd", re.compile(r"\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b")),          # 2026-08-25
     ("mdy", re.compile(r"\b([A-Z][a-z]{2})[a-z]*\.?\s+(\d{1,2}),?\s+(20\d{2})\b")),  # Aug 25, 2026
     ("md", re.compile(r"\b(\d{2})/(\d{2})\b")),                                # 08/12 (HTX)
@@ -295,7 +303,7 @@ def date_near(page, pos, window=400):
         m = rx.search(chunk)
         if not m:
             continue
-        if kind == "ymd":
+        if kind in ("iso", "ymd"):
             ts = _epoch(m.group(1), m.group(2), m.group(3))
         elif kind == "mdy":
             mo = MONTHS.get(m.group(1).lower())
