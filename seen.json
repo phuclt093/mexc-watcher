@@ -45,10 +45,11 @@
     "bg:12560603894757": "CandyBomb x CP: Trade to share 2,500,000 CP",
     "bg:12560603894905": "CandyBomb x DEBIT (Episode 2): Trade to share 45,000 USDT",
     "bg:12560603895106": "CandyBomb x MCAT: Trade to share 60,000 USDT",
-    "bg:12560603895084": "Candybomb Carnival (Episode 5): Trade to share 70,000 USDT"
+    "bg:12560603895084": "Candybomb Carnival (Episode 5): Trade to share 70,000 USDT",
+    "17827791538530": "First in Market: MEXC Kickstarter—Vote Orkestri AI (OKAI) to Win Free 50,000 USDT Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-09-15T00:42:34Z",
+  "updated_at": "2026-09-15T05:23:31Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -64,7 +65,8 @@
     "candybomb x cp trade to share 2 500 000 cp": 1789048768.836181,
     "candybomb x debit episode 2 trade to share 45 000 usdt": 1789133673.4573028,
     "candybomb x mcat trade to share 60 000 usdt": 1789393702.919288,
-    "candybomb carnival episode 5 trade to share 70 000 usdt": 1789393704.8259575
+    "candybomb carnival episode 5 trade to share 70 000 usdt": 1789393704.8259575,
+    "first in market mexc kickstarter vote orkestri ai okai to win free 50 000 usdt airdrops": 1789449809.970993
   },
   "agenda": {
     "bg:12560603894377": {
@@ -91,7 +93,9 @@
       "tag": "Bitget Support",
       "start": 1788955200,
       "end": 1789466400,
-      "sent": []
+      "sent": [
+        "close"
+      ]
     },
     "bg:12560603894724": {
       "title": "Candybomb Carnival (Episode 4): Trade to share 80,000 USDT",
@@ -159,23 +163,21 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 6,
-        "fail_notified": false,
-        "next_try": 1789436554.833929
+        "fail": 0,
+        "fail_notified": false
       },
       "MEXC MX Exclusives": {
         "zero": 0,
         "notified": false,
-        "fail": 6,
+        "fail": 7,
         "fail_notified": false,
-        "next_try": 1789436554.833929
+        "next_try": 1789453328.25259
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 7,
-        "fail_notified": false,
-        "next_try": 1789436554.833929
+        "fail": 0,
+        "fail_notified": false
       },
       "HTX Earn": {
         "zero": 0,
@@ -340,6 +342,17 @@
       "start": 1789380000,
       "end": 1790006400,
       "rewards": "70,000 USDT"
+    },
+    {
+      "id": "17827791538530",
+      "title": "First in Market: MEXC Kickstarter—Vote Orkestri AI (OKAI) to Win Free 50,000 USDT Airdrops",
+      "url": "https://www.mexc.com/announcements/article/first-in-market-17827791538530",
+      "tag": "MEXC Kickstarter",
+      "seen": 1789449809,
+      "ts": null,
+      "start": null,
+      "end": null,
+      "rewards": null
     }
   ]
 }
