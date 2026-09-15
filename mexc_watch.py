@@ -153,12 +153,29 @@ BITGET_BASE = "https://www.bitget.com"
 BITGET_LISTS = [
     ("Bitget Support", "https://www.bitget.com/support"),
     ("Bitget Launchpool", "https://www.bitget.com/support/sections/12508313446495"),
-    ("Bitget PoolX", "https://www.bitget.com/support/sections/12508313446545"),
 ]
 BITGET_LINK_RE = re.compile(
     r'(?P<path>/support/articles/(?P<id>\d{8,}))(?=["\'\\?/\s<)&]|$)')
 BITGET_FILTER = re.compile(
-    os.getenv("BITGET_KEYWORDS", r"\bBGB\b|launchpool|poolx|candybomb|staking mining|mining pool"), re.I)
+    os.getenv("BITGET_KEYWORDS", r"\bBGB\b|launchpool|staking mining|mining pool"), re.I)
+
+# Loai han vai su kien Bitget ra khoi thong bao. Chi go URL trang la KHONG du,
+# vi hai ly do:
+#   1. Tin PoolX/CandyBomb van duoc dang o trang Support chung - vd bai
+#      "Bitget PoolX is listing Zora (ZORA)..." tung bat duoc tu nhan
+#      "Bitget Support" chu khong phai tu trang PoolX.
+#   2. Mot bai ten "CandyBomb x BGB ..." van khop \bBGB\b trong BITGET_FILTER.
+# De trong bien moi truong nay (BITGET_EXCLUDE="") de tat bo loc loai tru.
+_BG_EX = os.getenv("BITGET_EXCLUDE", r"candybomb|poolx").strip()
+BITGET_EXCLUDE = re.compile(_BG_EX, re.I) if _BG_EX else None
+
+
+def bitget_kind(title):
+    """Bai Bitget nay co dang bao khong - da tru cac su kien bi loai."""
+    kind = classify(title, BITGET_FILTER) if title else None
+    if kind and BITGET_EXCLUDE and BITGET_EXCLUDE.search(title):
+        return None
+    return kind
 
 # Bat duong dan bai viet o BAT KY dau trong trang, khong bat buoc phai nam trong href="".
 # Ly do: qua proxy, MEXC doi khi tra ve payload JSON cua Next.js thay vi HTML co the <a>,
@@ -498,7 +515,7 @@ def _collect_bitget(found, state):
             title = html.unescape(
                 title_raw.encode().decode("unicode_escape", "replace") if "\\u" in title_raw else title_raw
             ).strip()
-            kind = classify(title, BITGET_FILTER)
+            kind = bitget_kind(title)
             if not kind:
                 continue
             ts = int(jm.group("st")) / 1000 if jm.group("st") else None
@@ -526,7 +543,7 @@ def _collect_bitget(found, state):
                 continue
             raw += 1
             title = find_title(page, m.start(), "")
-            kind = classify(title, BITGET_FILTER) if title else None
+            kind = bitget_kind(title)
             if not kind:
                 continue
             ts = date_near(page, m.start())

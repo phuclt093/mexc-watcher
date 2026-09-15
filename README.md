@@ -9,7 +9,7 @@ không cần bật máy.
 | KuCoin | KuMining, GemPool | KCS | API chính thức |
 | HTX | Primepool, Primelist | HTX / HT | cào HTML (trực tiếp) |
 | CoinEx | sự kiện liên quan CET | CET | API Zendesk |
-| Bitget | Launchpool, PoolX, CandyBomb | BGB | cào HTML (trực tiếp) |
+| Bitget | Launchpool, tin BGB | BGB | cào HTML (trực tiếp) |
 
 Bot còn **mở bài ra đọc** để lấy giờ mở/đóng pool rồi **nhắc trước khi pool mở** và
 **nhắc trước khi pool đóng** để kịp rút token về, và **tự báo khi chính nó hỏng** thay vì
@@ -394,6 +394,7 @@ Tham số thứ 3 là bộ lọc từ khoá (regex). `None` = lấy tất cả b
 | `HTX_KEYWORDS` | `primepool\|primelist\|…` | regex lọc tiêu đề HTX |
 | `COINEX_KEYWORDS` | `\bCET\b\|launchpool\|…` | regex lọc tiêu đề CoinEx |
 | `BITGET_KEYWORDS` | `\bBGB\b\|launchpool\|…` | regex lọc tiêu đề Bitget |
+| `BITGET_EXCLUDE` | `candybomb\|poolx` | regex **loại trừ** tiêu đề Bitget, chạy sau bộ lọc trên; để trống = tắt |
 | `HTX_BUDGET` | `120` | số giây tối đa dành cho phần HTX |
 | `KUCOIN_KEYWORDS` | `gempool\|kumining\|…` | regex lọc tiêu đề KuCoin |
 | `FETCH_BUDGET` | `300` | số giây tối đa dành cho phần MEXC |
