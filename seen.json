@@ -62,7 +62,7 @@
     "17827791538594": "First in Market: MEXC to List Tina (TINA) in Innovation Zone with 5,000,000 TINA & 10,000 USDT Airdrop+ Rewards"
   },
   "initialized": true,
-  "updated_at": "2026-09-20T14:56:17Z",
+  "updated_at": "2026-09-20T17:50:26Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -126,7 +126,7 @@
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -146,11 +146,10 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 11,
-        "fail_notified": true,
+        "fail": 0,
+        "fail_notified": false,
         "zero": 0,
-        "notified": false,
-        "next_try": 1789919777.727644
+        "notified": false
       }
     },
     "fail_streak": 0,
