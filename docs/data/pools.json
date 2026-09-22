@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-09-22T06:19:59Z",
+ "updated_at": "2026-09-22T11:48:16Z",
  "upcoming": [
   {
    "id": "kc:332311",
@@ -19,6 +19,17 @@
   }
  ],
  "history": [
+  {
+   "id": "kc:331466",
+   "title": "KuMining 1st Anniversary: Mine, Earn & Celebrate With 100,000+ USDT in Rewards",
+   "url": "https://www.kucoin.com/announcement/en-kumining-1st-anniversary-mine-earn-celebrate-with-100000-usdt-in-rewards?lang=en_US",
+   "tag": "KuCoin Launchpool",
+   "seen": 1790077695,
+   "ts": 1790074800.0,
+   "start": null,
+   "end": null,
+   "rewards": null
+  },
   {
    "id": "17827791538594",
    "title": "First in Market: MEXC to List Tina (TINA) in Innovation Zone with 5,000,000 TINA & 10,000 USDT Airdrop+ Rewards",
