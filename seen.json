@@ -63,7 +63,7 @@
     "kc:331466": "KuMining 1st Anniversary: Mine, Earn & Celebrate With 100,000+ USDT in Rewards"
   },
   "initialized": true,
-  "updated_at": "2026-09-24T00:00:47Z",
+  "updated_at": "2026-09-24T03:48:49Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -124,14 +124,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 6,
-        "fail_notified": true,
-        "next_try": 1790211646.8601568
+        "fail": 0,
+        "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
