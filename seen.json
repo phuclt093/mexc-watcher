@@ -60,10 +60,11 @@
     "17827791538576": "MEXC Kickstarter: Vote for USD1 to Win Free 20,000 USD1 Airdrops",
     "17827791538531": "Voting Result and Listing Arrangement for Orkestri AI (OKAI) Kickstarter",
     "17827791538594": "First in Market: MEXC to List Tina (TINA) in Innovation Zone with 5,000,000 TINA & 10,000 USDT Airdrop+ Rewards",
-    "kc:331466": "KuMining 1st Anniversary: Mine, Earn & Celebrate With 100,000+ USDT in Rewards"
+    "kc:331466": "KuMining 1st Anniversary: Mine, Earn & Celebrate With 100,000+ USDT in Rewards",
+    "17827791538765": "First in Market: MEXC Kickstarter—Vote Dustswap (DUST) to Win Free 30,000 USDT Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-09-24T23:57:12Z",
+  "updated_at": "2026-09-25T02:41:17Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -85,7 +86,8 @@
     "mexc kickstarter vote for usd1 to win free 20 000 usd1 airdrops": 1789467417.4539795,
     "voting result and listing arrangement for orkestri ai okai kickstarter": 1789467420.3984692,
     "first in market mexc to list tina tina in innovation zone with 5 000 000 tina 10 000 usdt airdrop rewards": 1789579780.1406307,
-    "kumining 1st anniversary mine earn celebrate with 100 000 usdt in rewards": 1790077695.8815525
+    "kumining 1st anniversary mine earn celebrate with 100 000 usdt in rewards": 1790077695.8815525,
+    "first in market mexc kickstarter vote dustswap dust to win free 30 000 usdt airdrops": 1790304076.7456746
   },
   "agenda": {
     "kc:332311": {
@@ -105,6 +107,14 @@
       "sent": [
         "close"
       ]
+    },
+    "17827791538765": {
+      "title": "First in Market: MEXC Kickstarter—Vote Dustswap (DUST) to Win Free 30,000 USDT Airdrops",
+      "url": "https://www.mexc.com/announcements/article/first-in-market-17827791538765",
+      "tag": "MEXC Kickstarter",
+      "start": 1790224200,
+      "end": 1790496000,
+      "sent": []
     }
   },
   "health": {
@@ -124,7 +134,7 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
@@ -150,7 +160,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false,
         "zero": 0,
         "notified": false
@@ -368,6 +378,17 @@
       "start": null,
       "end": null,
       "rewards": null
+    },
+    {
+      "id": "17827791538765",
+      "title": "First in Market: MEXC Kickstarter—Vote Dustswap (DUST) to Win Free 30,000 USDT Airdrops",
+      "url": "https://www.mexc.com/announcements/article/first-in-market-17827791538765",
+      "tag": "MEXC Kickstarter",
+      "seen": 1790304076,
+      "ts": 1790078400,
+      "start": 1790224200,
+      "end": 1790496000,
+      "rewards": "100,000 MX"
     }
   ]
 }

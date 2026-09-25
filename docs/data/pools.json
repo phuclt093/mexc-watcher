@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-09-24T23:57:12Z",
+ "updated_at": "2026-09-25T02:41:17Z",
  "upcoming": [
   {
    "id": "kc:332311",
@@ -8,9 +8,28 @@
    "url": "https://www.kucoin.com/announcement/en-introducing-gno-land-gnot-on-kucoin-gempool?lang=en_US",
    "start": 1789489980,
    "end": 1790431200
+  },
+  {
+   "id": "17827791538765",
+   "title": "First in Market: MEXC Kickstarter—Vote Dustswap (DUST) to Win Free 30,000 USDT Airdrops",
+   "tag": "MEXC Kickstarter",
+   "url": "https://www.mexc.com/announcements/article/first-in-market-17827791538765",
+   "start": 1790224200,
+   "end": 1790496000
   }
  ],
  "history": [
+  {
+   "id": "17827791538765",
+   "title": "First in Market: MEXC Kickstarter—Vote Dustswap (DUST) to Win Free 30,000 USDT Airdrops",
+   "url": "https://www.mexc.com/announcements/article/first-in-market-17827791538765",
+   "tag": "MEXC Kickstarter",
+   "seen": 1790304076,
+   "ts": 1790078400,
+   "start": 1790224200,
+   "end": 1790496000,
+   "rewards": "100,000 MX"
+  },
   {
    "id": "kc:331466",
    "title": "KuMining 1st Anniversary: Mine, Earn & Celebrate With 100,000+ USDT in Rewards",
