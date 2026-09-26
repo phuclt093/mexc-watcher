@@ -64,7 +64,7 @@
     "17827791538765": "First in Market: MEXC Kickstarter—Vote Dustswap (DUST) to Win Free 30,000 USDT Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-09-26T13:54:34Z",
+  "updated_at": "2026-09-26T17:32:51Z",
   "titles": {
     "voting result and listing arrangement for qie blockchain qie kickstarter": 1788069443.3028848,
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
@@ -126,13 +126,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -152,7 +152,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 3,
+        "fail": 4,
         "fail_notified": false,
         "zero": 0,
         "notified": false
