@@ -64,7 +64,7 @@
     "17827791538765": "First in Market: MEXC Kickstarter—Vote Dustswap (DUST) to Win Free 30,000 USDT Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-09-30T22:32:30Z",
+  "updated_at": "2026-10-01T01:27:22Z",
   "titles": {
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
     "what is bitget poolx and how to participate": 1788798308.2951448,
@@ -112,7 +112,7 @@
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -132,7 +132,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 3,
+        "fail": 4,
         "fail_notified": false,
         "zero": 0,
         "notified": false
