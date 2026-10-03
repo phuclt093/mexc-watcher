@@ -65,7 +65,7 @@
     "kc:334636": "KuMining October Trading Challenge: Compete for 9,000+ USDT in Rewards!"
   },
   "initialized": true,
-  "updated_at": "2026-10-03T02:13:53Z",
+  "updated_at": "2026-10-03T08:12:15Z",
   "titles": {
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
     "what is bitget poolx and how to participate": 1788798308.2951448,
@@ -108,7 +108,7 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 3,
+        "fail": 4,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
@@ -134,10 +134,11 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 5,
-        "fail_notified": false,
+        "fail": 6,
+        "fail_notified": true,
         "zero": 0,
-        "notified": false
+        "notified": false,
+        "next_try": 1791018734.6837974
       }
     },
     "fail_streak": 0,
