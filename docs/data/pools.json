@@ -1,7 +1,27 @@
 {
- "updated_at": "2026-10-06T01:28:38Z",
- "upcoming": [],
+ "updated_at": "2026-10-06T07:51:49Z",
+ "upcoming": [
+  {
+   "id": "17827791538988",
+   "title": "First in Market: MEXC Kickstarter—Vote Crocpad (CROC) to Win Free 50,000 USDT Airdrops",
+   "tag": "MEXC Kickstarter / MEXC New Listings",
+   "url": "https://www.mexc.com/announcements/article/first-in-market-17827791538988",
+   "start": 1791098760,
+   "end": 1791446400
+  }
+ ],
  "history": [
+  {
+   "id": "17827791538988",
+   "title": "First in Market: MEXC Kickstarter—Vote Crocpad (CROC) to Win Free 50,000 USDT Airdrops",
+   "url": "https://www.mexc.com/announcements/article/first-in-market-17827791538988",
+   "tag": "MEXC Kickstarter / MEXC New Listings",
+   "seen": 1791273108,
+   "ts": 1791201600,
+   "start": 1791098760,
+   "end": 1791446400,
+   "rewards": "100,000 MX"
+  },
   {
    "id": "17827791538976",
    "title": "First in Market: MEXC to List Cortex Network (CTX) in Innovation Zone with 100,000 CTX & 10,000 USDT Airdrop+ Rewards",
