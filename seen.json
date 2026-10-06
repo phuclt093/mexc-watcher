@@ -67,7 +67,7 @@
     "17827791538988": "First in Market: MEXC Kickstarter—Vote Crocpad (CROC) to Win Free 50,000 USDT Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-10-06T19:49:34Z",
+  "updated_at": "2026-10-06T23:22:20Z",
   "titles": {
     "candybomb carnival episode 3 trade to share 80 000 usdt": 1788798306.7268374,
     "what is bitget poolx and how to participate": 1788798308.2951448,
@@ -121,7 +121,7 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 3,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
@@ -147,7 +147,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 2,
+        "fail": 0,
         "fail_notified": false,
         "zero": 0,
         "notified": false
