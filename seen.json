@@ -68,9 +68,8 @@
     "17827791538989": "Voting Result and Listing Arrangement for Crocpad (CROC) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-10-08T07:29:43Z",
+  "updated_at": "2026-10-08T14:48:02Z",
   "titles": {
-    "candybomb x cnpy trade to share 75 000 usdc": 1788876161.7252827,
     "bitget poolx is listing zora zora lock zora to get 950 000 zora airdrop": 1788965158.621929,
     "candybomb carnival episode 4 trade to share 80 000 usdt": 1788965160.618533,
     "candybomb x rspcx trade stocks to share 270 rspcx": 1788965162.6411633,
@@ -158,7 +157,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false,
         "zero": 0,
         "notified": false
