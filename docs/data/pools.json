@@ -1,7 +1,18 @@
 {
- "updated_at": "2026-10-09T13:33:58Z",
+ "updated_at": "2026-10-09T19:00:07Z",
  "upcoming": [],
  "history": [
+  {
+   "id": "bg:12560603896921",
+   "title": "Bitget announcement on suspending BGB - Ethereum network withdrawal service",
+   "url": "https://www.bitget.com/support/articles/12560603896921",
+   "tag": "Bitget Support",
+   "seen": 1791572406,
+   "ts": 1791559690.086,
+   "start": 1791530880,
+   "end": 1791559680,
+   "rewards": null
+  },
   {
    "id": "17827791538989",
    "title": "Voting Result and Listing Arrangement for Crocpad (CROC) Kickstarter",

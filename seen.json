@@ -65,14 +65,12 @@
     "kc:334636": "KuMining October Trading Challenge: Compete for 9,000+ USDT in Rewards!",
     "17827791538976": "First in Market: MEXC to List Cortex Network (CTX) in Innovation Zone with 100,000 CTX & 10,000 USDT Airdrop+ Rewards",
     "17827791538988": "First in Market: MEXC Kickstarter—Vote Crocpad (CROC) to Win Free 50,000 USDT Airdrops",
-    "17827791538989": "Voting Result and Listing Arrangement for Crocpad (CROC) Kickstarter"
+    "17827791538989": "Voting Result and Listing Arrangement for Crocpad (CROC) Kickstarter",
+    "bg:12560603896921": "Bitget announcement on suspending BGB - Ethereum network withdrawal service"
   },
   "initialized": true,
-  "updated_at": "2026-10-09T13:33:58Z",
+  "updated_at": "2026-10-09T19:00:07Z",
   "titles": {
-    "bitget poolx is listing zora zora lock zora to get 950 000 zora airdrop": 1788965158.621929,
-    "candybomb carnival episode 4 trade to share 80 000 usdt": 1788965160.618533,
-    "candybomb x rspcx trade stocks to share 270 rspcx": 1788965162.6411633,
     "tradfi trade to earn #3 win rewards 24 7 from a 6 000 usdt daily prize pool ongoing buybacks to support htx value sndkusdtswap 09 10 03 00 00 utc": 1789017812.1151707,
     "candybomb x rmu trade futures to share 20 rmu": 1789034221.5055208,
     "candybomb x zec trade futures to share 16 zec": 1789034223.3577518,
@@ -90,7 +88,8 @@
     "kumining october trading challenge compete for 9 000 usdt in rewards": 1790865748.135312,
     "first in market mexc to list cortex network ctx in innovation zone with 100 000 ctx 10 000 usdt airdrop rewards": 1791250117.857373,
     "first in market mexc kickstarter vote crocpad croc to win free 50 000 usdt airdrops": 1791273108.722178,
-    "voting result and listing arrangement for crocpad croc kickstarter": 1791390953.9669669
+    "voting result and listing arrangement for crocpad croc kickstarter": 1791390953.9669669,
+    "bitget announcement on suspending bgb ethereum network withdrawal service": 1791572406.6620996
   },
   "agenda": {
     "17827791538988": {
@@ -112,6 +111,14 @@
       "sent": [
         "close"
       ]
+    },
+    "bg:12560603896921": {
+      "title": "Bitget announcement on suspending BGB - Ethereum network withdrawal service",
+      "url": "https://www.bitget.com/support/articles/12560603896921",
+      "tag": "Bitget Support",
+      "start": 1791530880,
+      "end": 1791559680,
+      "sent": []
     }
   },
   "health": {
@@ -131,13 +138,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -157,7 +164,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false,
         "zero": 0,
         "notified": false
@@ -430,6 +437,17 @@
       "start": 1791360000,
       "end": 1791446400,
       "rewards": "13,251,775 MX"
+    },
+    {
+      "id": "bg:12560603896921",
+      "title": "Bitget announcement on suspending BGB - Ethereum network withdrawal service",
+      "url": "https://www.bitget.com/support/articles/12560603896921",
+      "tag": "Bitget Support",
+      "seen": 1791572406,
+      "ts": 1791559690.086,
+      "start": 1791530880,
+      "end": 1791559680,
+      "rewards": null
     }
   ]
 }
