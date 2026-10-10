@@ -1,7 +1,18 @@
 {
- "updated_at": "2026-10-10T02:18:24Z",
+ "updated_at": "2026-10-10T08:36:05Z",
  "upcoming": [],
  "history": [
+  {
+   "id": "bg:12560603896937",
+   "title": "Bitget announcement on resuming BGB - Ethereum withdrawals",
+   "url": "https://www.bitget.com/support/articles/12560603896937",
+   "tag": "Bitget Support",
+   "seen": 1791621364,
+   "ts": 1791617855.084,
+   "start": null,
+   "end": null,
+   "rewards": null
+  },
   {
    "id": "bg:12560603896921",
    "title": "Bitget announcement on suspending BGB - Ethereum network withdrawal service",

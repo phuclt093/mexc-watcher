@@ -66,12 +66,12 @@
     "17827791538976": "First in Market: MEXC to List Cortex Network (CTX) in Innovation Zone with 100,000 CTX & 10,000 USDT Airdrop+ Rewards",
     "17827791538988": "First in Market: MEXC Kickstarter—Vote Crocpad (CROC) to Win Free 50,000 USDT Airdrops",
     "17827791538989": "Voting Result and Listing Arrangement for Crocpad (CROC) Kickstarter",
-    "bg:12560603896921": "Bitget announcement on suspending BGB - Ethereum network withdrawal service"
+    "bg:12560603896921": "Bitget announcement on suspending BGB - Ethereum network withdrawal service",
+    "bg:12560603896937": "Bitget announcement on resuming BGB - Ethereum withdrawals"
   },
   "initialized": true,
-  "updated_at": "2026-10-10T02:18:24Z",
+  "updated_at": "2026-10-10T08:36:05Z",
   "titles": {
-    "tradfi trade to earn #3 win rewards 24 7 from a 6 000 usdt daily prize pool ongoing buybacks to support htx value sndkusdtswap 09 10 03 00 00 utc": 1789017812.1151707,
     "candybomb x rmu trade futures to share 20 rmu": 1789034221.5055208,
     "candybomb x zec trade futures to share 16 zec": 1789034223.3577518,
     "candybomb x cp trade to share 2 500 000 cp": 1789048768.836181,
@@ -89,7 +89,8 @@
     "first in market mexc to list cortex network ctx in innovation zone with 100 000 ctx 10 000 usdt airdrop rewards": 1791250117.857373,
     "first in market mexc kickstarter vote crocpad croc to win free 50 000 usdt airdrops": 1791273108.722178,
     "voting result and listing arrangement for crocpad croc kickstarter": 1791390953.9669669,
-    "bitget announcement on suspending bgb ethereum network withdrawal service": 1791572406.6620996
+    "bitget announcement on suspending bgb ethereum network withdrawal service": 1791572406.6620996,
+    "bitget announcement on resuming bgb ethereum withdrawals": 1791621364.2060883
   },
   "agenda": {
     "17827791538988": {
@@ -138,13 +139,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 3,
+        "fail": 4,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -164,7 +165,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 3,
+        "fail": 0,
         "fail_notified": false,
         "zero": 0,
         "notified": false
@@ -447,6 +448,17 @@
       "ts": 1791559690.086,
       "start": 1791530880,
       "end": 1791559680,
+      "rewards": null
+    },
+    {
+      "id": "bg:12560603896937",
+      "title": "Bitget announcement on resuming BGB - Ethereum withdrawals",
+      "url": "https://www.bitget.com/support/articles/12560603896937",
+      "tag": "Bitget Support",
+      "seen": 1791621364,
+      "ts": 1791617855.084,
+      "start": null,
+      "end": null,
       "rewards": null
     }
   ]
