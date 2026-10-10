@@ -69,7 +69,7 @@
     "bg:12560603896921": "Bitget announcement on suspending BGB - Ethereum network withdrawal service"
   },
   "initialized": true,
-  "updated_at": "2026-10-09T23:03:44Z",
+  "updated_at": "2026-10-10T02:18:24Z",
   "titles": {
     "tradfi trade to earn #3 win rewards 24 7 from a 6 000 usdt daily prize pool ongoing buybacks to support htx value sndkusdtswap 09 10 03 00 00 utc": 1789017812.1151707,
     "candybomb x rmu trade futures to share 20 rmu": 1789034221.5055208,
@@ -138,7 +138,7 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
@@ -164,7 +164,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false,
         "zero": 0,
         "notified": false
