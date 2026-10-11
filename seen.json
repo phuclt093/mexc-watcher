@@ -70,9 +70,8 @@
     "bg:12560603896937": "Bitget announcement on resuming BGB - Ethereum withdrawals"
   },
   "initialized": true,
-  "updated_at": "2026-10-11T06:43:32Z",
+  "updated_at": "2026-10-11T13:36:17Z",
   "titles": {
-    "candybomb x debit episode 2 trade to share 45 000 usdt": 1789133673.4573028,
     "candybomb x mcat trade to share 60 000 usdt": 1789393702.919288,
     "candybomb carnival episode 5 trade to share 70 000 usdt": 1789393704.8259575,
     "first in market mexc kickstarter vote orkestri ai okai to win free 50 000 usdt airdrops": 1789449809.970993,
@@ -90,26 +89,6 @@
     "bitget announcement on resuming bgb ethereum withdrawals": 1791621364.2060883
   },
   "agenda": {
-    "17827791538988": {
-      "title": "First in Market: MEXC Kickstarter—Vote Crocpad (CROC) to Win Free 50,000 USDT Airdrops",
-      "url": "https://www.mexc.com/announcements/article/first-in-market-17827791538988",
-      "tag": "MEXC Kickstarter / MEXC New Listings",
-      "start": 1791098760,
-      "end": 1791446400,
-      "sent": [
-        "close"
-      ]
-    },
-    "17827791538989": {
-      "title": "Voting Result and Listing Arrangement for Crocpad (CROC) Kickstarter",
-      "url": "https://www.mexc.com/announcements/article/voting-result-and-listing-arrangement-for-crocpad-croc-kickstarter-17827791538989",
-      "tag": "MEXC New Listings",
-      "start": 1791360000,
-      "end": 1791446400,
-      "sent": [
-        "close"
-      ]
-    },
     "bg:12560603896921": {
       "title": "Bitget announcement on suspending BGB - Ethereum network withdrawal service",
       "url": "https://www.bitget.com/support/articles/12560603896921",
@@ -136,13 +115,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -162,7 +141,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false,
         "zero": 0,
         "notified": false
