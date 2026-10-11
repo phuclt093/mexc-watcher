@@ -70,7 +70,7 @@
     "bg:12560603896937": "Bitget announcement on resuming BGB - Ethereum withdrawals"
   },
   "initialized": true,
-  "updated_at": "2026-10-11T18:26:18Z",
+  "updated_at": "2026-10-11T22:13:04Z",
   "titles": {
     "candybomb x mcat trade to share 60 000 usdt": 1789393702.919288,
     "candybomb carnival episode 5 trade to share 70 000 usdt": 1789393704.8259575,
@@ -115,7 +115,7 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
@@ -141,7 +141,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false,
         "zero": 0,
         "notified": false
