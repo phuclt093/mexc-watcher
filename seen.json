@@ -71,7 +71,7 @@
     "17827791539077": "First in Market: MEXC Kickstarter—Vote MetaOne (MTO) to Win Free 50,000 USDT Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-10-12T07:39:15Z",
+  "updated_at": "2026-10-12T17:00:59Z",
   "titles": {
     "candybomb x mcat trade to share 60 000 usdt": 1789393702.919288,
     "candybomb carnival episode 5 trade to share 70 000 usdt": 1789393704.8259575,
@@ -90,16 +90,7 @@
     "bitget announcement on resuming bgb ethereum withdrawals": 1791621364.2060883,
     "first in market mexc kickstarter vote metaone mto to win free 50 000 usdt airdrops": 1791790754.5234292
   },
-  "agenda": {
-    "bg:12560603896921": {
-      "title": "Bitget announcement on suspending BGB - Ethereum network withdrawal service",
-      "url": "https://www.bitget.com/support/articles/12560603896921",
-      "tag": "Bitget Support",
-      "start": 1791530880,
-      "end": 1791559680,
-      "sent": []
-    }
-  },
+  "agenda": {},
   "health": {
     "sources": {
       "KuCoin activities": {
@@ -117,13 +108,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -143,7 +134,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false,
         "zero": 0,
         "notified": false
