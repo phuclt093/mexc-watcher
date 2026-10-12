@@ -67,10 +67,11 @@
     "17827791538988": "First in Market: MEXC Kickstarter—Vote Crocpad (CROC) to Win Free 50,000 USDT Airdrops",
     "17827791538989": "Voting Result and Listing Arrangement for Crocpad (CROC) Kickstarter",
     "bg:12560603896921": "Bitget announcement on suspending BGB - Ethereum network withdrawal service",
-    "bg:12560603896937": "Bitget announcement on resuming BGB - Ethereum withdrawals"
+    "bg:12560603896937": "Bitget announcement on resuming BGB - Ethereum withdrawals",
+    "17827791539077": "First in Market: MEXC Kickstarter—Vote MetaOne (MTO) to Win Free 50,000 USDT Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-10-12T01:21:29Z",
+  "updated_at": "2026-10-12T07:39:15Z",
   "titles": {
     "candybomb x mcat trade to share 60 000 usdt": 1789393702.919288,
     "candybomb carnival episode 5 trade to share 70 000 usdt": 1789393704.8259575,
@@ -86,7 +87,8 @@
     "first in market mexc kickstarter vote crocpad croc to win free 50 000 usdt airdrops": 1791273108.722178,
     "voting result and listing arrangement for crocpad croc kickstarter": 1791390953.9669669,
     "bitget announcement on suspending bgb ethereum network withdrawal service": 1791572406.6620996,
-    "bitget announcement on resuming bgb ethereum withdrawals": 1791621364.2060883
+    "bitget announcement on resuming bgb ethereum withdrawals": 1791621364.2060883,
+    "first in market mexc kickstarter vote metaone mto to win free 50 000 usdt airdrops": 1791790754.5234292
   },
   "agenda": {
     "bg:12560603896921": {
@@ -115,7 +117,7 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
@@ -433,6 +435,17 @@
       "tag": "Bitget Support",
       "seen": 1791621364,
       "ts": 1791617855.084,
+      "start": null,
+      "end": null,
+      "rewards": null
+    },
+    {
+      "id": "17827791539077",
+      "title": "First in Market: MEXC Kickstarter—Vote MetaOne (MTO) to Win Free 50,000 USDT Airdrops",
+      "url": "https://www.mexc.com/announcements/article/first-in-market-17827791539077",
+      "tag": "MEXC Kickstarter",
+      "seen": 1791790754,
+      "ts": 1791547200,
       "start": null,
       "end": null,
       "rewards": null
