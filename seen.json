@@ -71,7 +71,7 @@
     "17827791539077": "First in Market: MEXC Kickstarter—Vote MetaOne (MTO) to Win Free 50,000 USDT Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-10-13T03:51:01Z",
+  "updated_at": "2026-10-13T11:13:37Z",
   "titles": {
     "candybomb x mcat trade to share 60 000 usdt": 1789393702.919288,
     "candybomb carnival episode 5 trade to share 70 000 usdt": 1789393704.8259575,
@@ -108,13 +108,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -134,7 +134,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 3,
+        "fail": 4,
         "fail_notified": false,
         "zero": 0,
         "notified": false
