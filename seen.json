@@ -71,10 +71,8 @@
     "17827791539077": "First in Market: MEXC Kickstarter—Vote MetaOne (MTO) to Win Free 50,000 USDT Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-10-14T12:21:03Z",
+  "updated_at": "2026-10-14T17:21:01Z",
   "titles": {
-    "candybomb x mcat trade to share 60 000 usdt": 1789393702.919288,
-    "candybomb carnival episode 5 trade to share 70 000 usdt": 1789393704.8259575,
     "first in market mexc kickstarter vote orkestri ai okai to win free 50 000 usdt airdrops": 1789449809.970993,
     "introducing gno land gnot on kucoin gempool": 1789467414.5803308,
     "mexc kickstarter vote for usd1 to win free 20 000 usd1 airdrops": 1789467417.4539795,
@@ -114,7 +112,7 @@
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -134,7 +132,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false,
         "zero": 0,
         "notified": false
