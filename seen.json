@@ -71,9 +71,8 @@
     "17827791539077": "First in Market: MEXC Kickstarter—Vote MetaOne (MTO) to Win Free 50,000 USDT Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-10-15T01:42:02Z",
+  "updated_at": "2026-10-15T06:32:12Z",
   "titles": {
-    "first in market mexc kickstarter vote orkestri ai okai to win free 50 000 usdt airdrops": 1789449809.970993,
     "introducing gno land gnot on kucoin gempool": 1789467414.5803308,
     "mexc kickstarter vote for usd1 to win free 20 000 usd1 airdrops": 1789467417.4539795,
     "voting result and listing arrangement for orkestri ai okai kickstarter": 1789467420.3984692,
@@ -106,7 +105,7 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
@@ -132,7 +131,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false,
         "zero": 0,
         "notified": false
