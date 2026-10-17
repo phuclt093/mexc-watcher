@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-17T09:58:15Z",
+ "updated_at": "2026-10-17T13:26:51Z",
  "upcoming": [
   {
    "id": "17827791539169",
@@ -8,9 +8,28 @@
    "url": "https://www.mexc.com/announcements/article/first-in-market-17827791539169",
    "start": 1792071000,
    "end": 1792310400
+  },
+  {
+   "id": "17827791539176",
+   "title": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter",
+   "tag": "MEXC Kickstarter",
+   "url": "https://www.mexc.com/announcements/article/voting-result-and-listing-arrangement-for-hoodlers-hdlr-kickstarter-17827791539176",
+   "start": 1792138200,
+   "end": 1792310400
   }
  ],
  "history": [
+  {
+   "id": "17827791539176",
+   "title": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter",
+   "url": "https://www.mexc.com/announcements/article/voting-result-and-listing-arrangement-for-hoodlers-hdlr-kickstarter-17827791539176",
+   "tag": "MEXC Kickstarter",
+   "seen": 1792243610,
+   "ts": 1792152000,
+   "start": 1792138200,
+   "end": 1792310400,
+   "rewards": "12,786,915 MX"
+  },
   {
    "id": "17827791539169",
    "title": "First in Market: MEXC Kickstarter—Vote Hoodlers (HDLR) to Win Free 50,000 USDT Airdrops",

@@ -69,10 +69,11 @@
     "bg:12560603896921": "Bitget announcement on suspending BGB - Ethereum network withdrawal service",
     "bg:12560603896937": "Bitget announcement on resuming BGB - Ethereum withdrawals",
     "17827791539077": "First in Market: MEXC Kickstarter—Vote MetaOne (MTO) to Win Free 50,000 USDT Airdrops",
-    "17827791539169": "First in Market: MEXC Kickstarter—Vote Hoodlers (HDLR) to Win Free 50,000 USDT Airdrops"
+    "17827791539169": "First in Market: MEXC Kickstarter—Vote Hoodlers (HDLR) to Win Free 50,000 USDT Airdrops",
+    "17827791539176": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-10-17T09:58:15Z",
+  "updated_at": "2026-10-17T13:26:51Z",
   "titles": {
     "kumining 1st anniversary mine earn celebrate with 100 000 usdt in rewards": 1790077695.8815525,
     "first in market mexc kickstarter vote dustswap dust to win free 30 000 usdt airdrops": 1790304076.7456746,
@@ -83,7 +84,8 @@
     "bitget announcement on suspending bgb ethereum network withdrawal service": 1791572406.6620996,
     "bitget announcement on resuming bgb ethereum withdrawals": 1791621364.2060883,
     "first in market mexc kickstarter vote metaone mto to win free 50 000 usdt airdrops": 1791790754.5234292,
-    "first in market mexc kickstarter vote hoodlers hdlr to win free 50 000 usdt airdrops": 1792143919.6043015
+    "first in market mexc kickstarter vote hoodlers hdlr to win free 50 000 usdt airdrops": 1792143919.6043015,
+    "voting result and listing arrangement for hoodlers hdlr kickstarter": 1792243610.0383976
   },
   "agenda": {
     "17827791539169": {
@@ -91,6 +93,14 @@
       "url": "https://www.mexc.com/announcements/article/first-in-market-17827791539169",
       "tag": "MEXC Kickstarter / MEXC New Listings",
       "start": 1792071000,
+      "end": 1792310400,
+      "sent": []
+    },
+    "17827791539176": {
+      "title": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter",
+      "url": "https://www.mexc.com/announcements/article/voting-result-and-listing-arrangement-for-hoodlers-hdlr-kickstarter-17827791539176",
+      "tag": "MEXC Kickstarter",
+      "start": 1792138200,
       "end": 1792310400,
       "sent": []
     }
@@ -112,13 +122,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -138,7 +148,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false,
         "zero": 0,
         "notified": false
@@ -455,6 +465,17 @@
       "start": 1792071000,
       "end": 1792310400,
       "rewards": "100,000 MX"
+    },
+    {
+      "id": "17827791539176",
+      "title": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter",
+      "url": "https://www.mexc.com/announcements/article/voting-result-and-listing-arrangement-for-hoodlers-hdlr-kickstarter-17827791539176",
+      "tag": "MEXC Kickstarter",
+      "seen": 1792243610,
+      "ts": 1792152000,
+      "start": 1792138200,
+      "end": 1792310400,
+      "rewards": "12,786,915 MX"
     }
   ]
 }
