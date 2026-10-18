@@ -73,7 +73,7 @@
     "17827791539176": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-10-18T00:56:57Z",
+  "updated_at": "2026-10-18T05:18:38Z",
   "titles": {
     "kumining 1st anniversary mine earn celebrate with 100 000 usdt in rewards": 1790077695.8815525,
     "first in market mexc kickstarter vote dustswap dust to win free 30 000 usdt airdrops": 1790304076.7456746,
@@ -94,7 +94,9 @@
       "tag": "MEXC Kickstarter / MEXC New Listings",
       "start": 1792071000,
       "end": 1792310400,
-      "sent": []
+      "sent": [
+        "close"
+      ]
     },
     "17827791539176": {
       "title": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter",
@@ -102,7 +104,9 @@
       "tag": "MEXC Kickstarter",
       "start": 1792138200,
       "end": 1792310400,
-      "sent": []
+      "sent": [
+        "close"
+      ]
     }
   },
   "health": {
@@ -122,14 +126,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 6,
-        "fail_notified": true,
-        "next_try": 1792288617.3035326
+        "fail": 0,
+        "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -149,11 +152,10 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 7,
-        "fail_notified": true,
+        "fail": 0,
+        "fail_notified": false,
         "zero": 0,
-        "notified": false,
-        "next_try": 1792288617.3035326
+        "notified": false
       }
     },
     "fail_streak": 0,
