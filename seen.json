@@ -73,7 +73,7 @@
     "17827791539176": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-10-18T19:07:47Z",
+  "updated_at": "2026-10-18T21:28:36Z",
   "titles": {
     "kumining 1st anniversary mine earn celebrate with 100 000 usdt in rewards": 1790077695.8815525,
     "first in market mexc kickstarter vote dustswap dust to win free 30 000 usdt airdrops": 1790304076.7456746,
@@ -132,7 +132,7 @@
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
