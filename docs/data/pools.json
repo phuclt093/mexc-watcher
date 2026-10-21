@@ -1,7 +1,27 @@
 {
- "updated_at": "2026-10-21T06:34:49Z",
- "upcoming": [],
+ "updated_at": "2026-10-21T12:20:52Z",
+ "upcoming": [
+  {
+   "id": "bg:12560603898201",
+   "title": "Axis Robotics (AXIS) to be listed on Bitget Launchpool — Grab a share of 1,333,333 AXIS",
+   "tag": "Bitget Support",
+   "url": "https://www.bitget.com/support/articles/12560603898201",
+   "start": 1792569600,
+   "end": 1792587600
+  }
+ ],
  "history": [
+  {
+   "id": "bg:12560603898201",
+   "title": "Axis Robotics (AXIS) to be listed on Bitget Launchpool — Grab a share of 1,333,333 AXIS",
+   "url": "https://www.bitget.com/support/articles/12560603898201",
+   "tag": "Bitget Support",
+   "seen": 1792585250,
+   "ts": 1792569648.0,
+   "start": 1792569600,
+   "end": 1792587600,
+   "rewards": "1,333,333 AXIS"
+  },
   {
    "id": "17827791539176",
    "title": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter",

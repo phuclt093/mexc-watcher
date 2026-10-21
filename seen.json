@@ -70,10 +70,11 @@
     "bg:12560603896937": "Bitget announcement on resuming BGB - Ethereum withdrawals",
     "17827791539077": "First in Market: MEXC Kickstarter—Vote MetaOne (MTO) to Win Free 50,000 USDT Airdrops",
     "17827791539169": "First in Market: MEXC Kickstarter—Vote Hoodlers (HDLR) to Win Free 50,000 USDT Airdrops",
-    "17827791539176": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter"
+    "17827791539176": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter",
+    "bg:12560603898201": "Axis Robotics (AXIS) to be listed on Bitget Launchpool — Grab a share of 1,333,333 AXIS"
   },
   "initialized": true,
-  "updated_at": "2026-10-21T06:34:49Z",
+  "updated_at": "2026-10-21T12:20:52Z",
   "titles": {
     "kumining 1st anniversary mine earn celebrate with 100 000 usdt in rewards": 1790077695.8815525,
     "first in market mexc kickstarter vote dustswap dust to win free 30 000 usdt airdrops": 1790304076.7456746,
@@ -85,25 +86,16 @@
     "bitget announcement on resuming bgb ethereum withdrawals": 1791621364.2060883,
     "first in market mexc kickstarter vote metaone mto to win free 50 000 usdt airdrops": 1791790754.5234292,
     "first in market mexc kickstarter vote hoodlers hdlr to win free 50 000 usdt airdrops": 1792143919.6043015,
-    "voting result and listing arrangement for hoodlers hdlr kickstarter": 1792243610.0383976
+    "voting result and listing arrangement for hoodlers hdlr kickstarter": 1792243610.0383976,
+    "axis robotics axis to be listed on bitget launchpool grab a share of 1 333 333 axis": 1792585250.5518785
   },
   "agenda": {
-    "17827791539169": {
-      "title": "First in Market: MEXC Kickstarter—Vote Hoodlers (HDLR) to Win Free 50,000 USDT Airdrops",
-      "url": "https://www.mexc.com/announcements/article/first-in-market-17827791539169",
-      "tag": "MEXC Kickstarter / MEXC New Listings",
-      "start": 1792071000,
-      "end": 1792310400,
-      "sent": [
-        "close"
-      ]
-    },
-    "17827791539176": {
-      "title": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter",
-      "url": "https://www.mexc.com/announcements/article/voting-result-and-listing-arrangement-for-hoodlers-hdlr-kickstarter-17827791539176",
-      "tag": "MEXC Kickstarter",
-      "start": 1792138200,
-      "end": 1792310400,
+    "bg:12560603898201": {
+      "title": "Axis Robotics (AXIS) to be listed on Bitget Launchpool — Grab a share of 1,333,333 AXIS",
+      "url": "https://www.bitget.com/support/articles/12560603898201",
+      "tag": "Bitget Support",
+      "start": 1792569600,
+      "end": 1792587600,
       "sent": [
         "close"
       ]
@@ -126,7 +118,7 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
@@ -152,11 +144,11 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 9,
+        "fail": 10,
         "fail_notified": true,
         "zero": 0,
         "notified": false,
-        "next_try": 1792568089.4775922
+        "next_try": 1792588844.1872547
       }
     },
     "fail_streak": 0,
@@ -481,6 +473,17 @@
       "start": 1792138200,
       "end": 1792310400,
       "rewards": "12,786,915 MX"
+    },
+    {
+      "id": "bg:12560603898201",
+      "title": "Axis Robotics (AXIS) to be listed on Bitget Launchpool — Grab a share of 1,333,333 AXIS",
+      "url": "https://www.bitget.com/support/articles/12560603898201",
+      "tag": "Bitget Support",
+      "seen": 1792585250,
+      "ts": 1792569648.0,
+      "start": 1792569600,
+      "end": 1792587600,
+      "rewards": "1,333,333 AXIS"
     }
   ]
 }
