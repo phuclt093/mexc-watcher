@@ -74,7 +74,7 @@
     "bg:12560603898201": "Axis Robotics (AXIS) to be listed on Bitget Launchpool — Grab a share of 1,333,333 AXIS"
   },
   "initialized": true,
-  "updated_at": "2026-10-21T12:20:52Z",
+  "updated_at": "2026-10-21T17:22:57Z",
   "titles": {
     "kumining 1st anniversary mine earn celebrate with 100 000 usdt in rewards": 1790077695.8815525,
     "first in market mexc kickstarter vote dustswap dust to win free 30 000 usdt airdrops": 1790304076.7456746,
@@ -124,7 +124,7 @@
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -144,11 +144,10 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 10,
-        "fail_notified": true,
+        "fail": 0,
+        "fail_notified": false,
         "zero": 0,
-        "notified": false,
-        "next_try": 1792588844.1872547
+        "notified": false
       }
     },
     "fail_streak": 0,
