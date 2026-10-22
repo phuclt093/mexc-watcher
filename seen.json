@@ -71,12 +71,12 @@
     "17827791539077": "First in Market: MEXC Kickstarter—Vote MetaOne (MTO) to Win Free 50,000 USDT Airdrops",
     "17827791539169": "First in Market: MEXC Kickstarter—Vote Hoodlers (HDLR) to Win Free 50,000 USDT Airdrops",
     "17827791539176": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter",
-    "bg:12560603898201": "Axis Robotics (AXIS) to be listed on Bitget Launchpool — Grab a share of 1,333,333 AXIS"
+    "bg:12560603898201": "Axis Robotics (AXIS) to be listed on Bitget Launchpool — Grab a share of 1,333,333 AXIS",
+    "kc:341252": "KuMining Halloween · Keep the Mine Lit — 50,000+ USDT in Rewards"
   },
   "initialized": true,
-  "updated_at": "2026-10-22T06:54:08Z",
+  "updated_at": "2026-10-22T12:41:51Z",
   "titles": {
-    "kumining 1st anniversary mine earn celebrate with 100 000 usdt in rewards": 1790077695.8815525,
     "first in market mexc kickstarter vote dustswap dust to win free 30 000 usdt airdrops": 1790304076.7456746,
     "kumining october trading challenge compete for 9 000 usdt in rewards": 1790865748.135312,
     "first in market mexc to list cortex network ctx in innovation zone with 100 000 ctx 10 000 usdt airdrop rewards": 1791250117.857373,
@@ -87,7 +87,8 @@
     "first in market mexc kickstarter vote metaone mto to win free 50 000 usdt airdrops": 1791790754.5234292,
     "first in market mexc kickstarter vote hoodlers hdlr to win free 50 000 usdt airdrops": 1792143919.6043015,
     "voting result and listing arrangement for hoodlers hdlr kickstarter": 1792243610.0383976,
-    "axis robotics axis to be listed on bitget launchpool grab a share of 1 333 333 axis": 1792585250.5518785
+    "axis robotics axis to be listed on bitget launchpool grab a share of 1 333 333 axis": 1792585250.5518785,
+    "kumining halloween keep the mine lit 50 000 usdt in rewards": 1792672910.650073
   },
   "agenda": {
     "bg:12560603898201": {
@@ -118,13 +119,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -144,7 +145,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 4,
+        "fail": 5,
         "fail_notified": false,
         "zero": 0,
         "notified": false
@@ -483,6 +484,17 @@
       "start": 1792569600,
       "end": 1792587600,
       "rewards": "1,333,333 AXIS"
+    },
+    {
+      "id": "kc:341252",
+      "title": "KuMining Halloween · Keep the Mine Lit — 50,000+ USDT in Rewards",
+      "url": "https://www.kucoin.com/announcement/en-announcement-title-kumining-halloween-keep-the-mine-lit-50000-usdt-in-rewards?lang=en_US",
+      "tag": "KuCoin Launchpool",
+      "seen": 1792672910,
+      "ts": 1792666800.0,
+      "start": null,
+      "end": null,
+      "rewards": null
     }
   ]
 }
