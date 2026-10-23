@@ -75,7 +75,7 @@
     "kc:341252": "KuMining Halloween · Keep the Mine Lit — 50,000+ USDT in Rewards"
   },
   "initialized": true,
-  "updated_at": "2026-10-23T12:20:39Z",
+  "updated_at": "2026-10-23T17:18:15Z",
   "titles": {
     "first in market mexc kickstarter vote dustswap dust to win free 30 000 usdt airdrops": 1790304076.7456746,
     "kumining october trading challenge compete for 9 000 usdt in rewards": 1790865748.135312,
@@ -119,13 +119,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -145,7 +145,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false,
         "zero": 0,
         "notified": false
