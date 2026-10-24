@@ -75,7 +75,7 @@
     "kc:341252": "KuMining Halloween · Keep the Mine Lit — 50,000+ USDT in Rewards"
   },
   "initialized": true,
-  "updated_at": "2026-10-24T11:29:47Z",
+  "updated_at": "2026-10-24T14:45:37Z",
   "titles": {
     "first in market mexc kickstarter vote dustswap dust to win free 30 000 usdt airdrops": 1790304076.7456746,
     "kumining october trading challenge compete for 9 000 usdt in rewards": 1790865748.135312,
@@ -90,18 +90,7 @@
     "axis robotics axis to be listed on bitget launchpool grab a share of 1 333 333 axis": 1792585250.5518785,
     "kumining halloween keep the mine lit 50 000 usdt in rewards": 1792672910.650073
   },
-  "agenda": {
-    "bg:12560603898201": {
-      "title": "Axis Robotics (AXIS) to be listed on Bitget Launchpool — Grab a share of 1,333,333 AXIS",
-      "url": "https://www.bitget.com/support/articles/12560603898201",
-      "tag": "Bitget Support",
-      "start": 1792569600,
-      "end": 1792587600,
-      "sent": [
-        "close"
-      ]
-    }
-  },
+  "agenda": {},
   "health": {
     "sources": {
       "KuCoin activities": {
@@ -125,7 +114,7 @@
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -145,7 +134,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 3,
+        "fail": 0,
         "fail_notified": false,
         "zero": 0,
         "notified": false
