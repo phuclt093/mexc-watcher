@@ -76,7 +76,7 @@
     "17827791539291": "First in Market: MEXC Kickstarter—Vote Kamirai (KAMIRAI) to Win Free 4,386,000,000 KAMIRAI Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-10-25T19:34:23Z",
+  "updated_at": "2026-10-25T22:03:22Z",
   "titles": {
     "kumining october trading challenge compete for 9 000 usdt in rewards": 1790865748.135312,
     "first in market mexc to list cortex network ctx in innovation zone with 100 000 ctx 10 000 usdt airdrop rewards": 1791250117.857373,
@@ -109,13 +109,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -135,7 +135,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false,
         "zero": 0,
         "notified": false
