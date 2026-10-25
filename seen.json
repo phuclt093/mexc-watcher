@@ -72,10 +72,11 @@
     "17827791539169": "First in Market: MEXC Kickstarter—Vote Hoodlers (HDLR) to Win Free 50,000 USDT Airdrops",
     "17827791539176": "Voting Result and Listing Arrangement for Hoodlers (HDLR) Kickstarter",
     "bg:12560603898201": "Axis Robotics (AXIS) to be listed on Bitget Launchpool — Grab a share of 1,333,333 AXIS",
-    "kc:341252": "KuMining Halloween · Keep the Mine Lit — 50,000+ USDT in Rewards"
+    "kc:341252": "KuMining Halloween · Keep the Mine Lit — 50,000+ USDT in Rewards",
+    "17827791539291": "First in Market: MEXC Kickstarter—Vote Kamirai (KAMIRAI) to Win Free 4,386,000,000 KAMIRAI Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-10-25T03:01:49Z",
+  "updated_at": "2026-10-25T08:13:48Z",
   "titles": {
     "kumining october trading challenge compete for 9 000 usdt in rewards": 1790865748.135312,
     "first in market mexc to list cortex network ctx in innovation zone with 100 000 ctx 10 000 usdt airdrop rewards": 1791250117.857373,
@@ -87,7 +88,8 @@
     "first in market mexc kickstarter vote hoodlers hdlr to win free 50 000 usdt airdrops": 1792143919.6043015,
     "voting result and listing arrangement for hoodlers hdlr kickstarter": 1792243610.0383976,
     "axis robotics axis to be listed on bitget launchpool grab a share of 1 333 333 axis": 1792585250.5518785,
-    "kumining halloween keep the mine lit 50 000 usdt in rewards": 1792672910.650073
+    "kumining halloween keep the mine lit 50 000 usdt in rewards": 1792672910.650073,
+    "first in market mexc kickstarter vote kamirai kamirai to win free 4 386 000 000 kamirai airdrops": 1792916027.4398873
   },
   "agenda": {},
   "health": {
@@ -107,13 +109,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 4,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -133,7 +135,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false,
         "zero": 0,
         "notified": false
@@ -480,6 +482,17 @@
       "tag": "KuCoin Launchpool",
       "seen": 1792672910,
       "ts": 1792666800.0,
+      "start": null,
+      "end": null,
+      "rewards": null
+    },
+    {
+      "id": "17827791539291",
+      "title": "First in Market: MEXC Kickstarter—Vote Kamirai (KAMIRAI) to Win Free 4,386,000,000 KAMIRAI Airdrops",
+      "url": "https://www.mexc.com/announcements/article/first-in-market-17827791539291",
+      "tag": "MEXC Kickstarter / MEXC New Listings",
+      "seen": 1792916027,
+      "ts": 1792756800,
       "start": null,
       "end": null,
       "rewards": null
