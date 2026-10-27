@@ -77,7 +77,7 @@
     "17827791539344": "Voting Result and Listing Arrangement for Kamirai (KAMIRAI) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-10-26T21:28:09Z",
+  "updated_at": "2026-10-27T00:40:20Z",
   "titles": {
     "kumining october trading challenge compete for 9 000 usdt in rewards": 1790865748.135312,
     "first in market mexc to list cortex network ctx in innovation zone with 100 000 ctx 10 000 usdt airdrop rewards": 1791250117.857373,
@@ -137,7 +137,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false,
         "zero": 0,
         "notified": false
