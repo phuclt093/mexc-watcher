@@ -78,7 +78,7 @@
     "17827791539341": "First in Market: MEXC to List Prism Network (PRSM) in Innovation Zone with 71,430 PRSM & 10,000 USDT Airdrop+ Rewards"
   },
   "initialized": true,
-  "updated_at": "2026-10-29T19:35:06Z",
+  "updated_at": "2026-10-29T23:35:33Z",
   "titles": {
     "kumining october trading challenge compete for 9 000 usdt in rewards": 1790865748.135312,
     "first in market mexc to list cortex network ctx in innovation zone with 100 000 ctx 10 000 usdt airdrop rewards": 1791250117.857373,
@@ -113,7 +113,7 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
@@ -139,7 +139,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false,
         "zero": 0,
         "notified": false
