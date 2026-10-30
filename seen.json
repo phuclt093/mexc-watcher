@@ -75,10 +75,11 @@
     "kc:341252": "KuMining Halloween · Keep the Mine Lit — 50,000+ USDT in Rewards",
     "17827791539291": "First in Market: MEXC Kickstarter—Vote Kamirai (KAMIRAI) to Win Free 4,386,000,000 KAMIRAI Airdrops",
     "17827791539344": "Voting Result and Listing Arrangement for Kamirai (KAMIRAI) Kickstarter",
-    "17827791539341": "First in Market: MEXC to List Prism Network (PRSM) in Innovation Zone with 71,430 PRSM & 10,000 USDT Airdrop+ Rewards"
+    "17827791539341": "First in Market: MEXC to List Prism Network (PRSM) in Innovation Zone with 71,430 PRSM & 10,000 USDT Airdrop+ Rewards",
+    "17827791539409": "First in Market: MEXC Kickstarter—Vote Noma (NOMA) to Win Free 50,000 USDT Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-10-30T09:22:07Z",
+  "updated_at": "2026-10-30T16:02:23Z",
   "titles": {
     "kumining october trading challenge compete for 9 000 usdt in rewards": 1790865748.135312,
     "first in market mexc to list cortex network ctx in innovation zone with 100 000 ctx 10 000 usdt airdrop rewards": 1791250117.857373,
@@ -93,9 +94,19 @@
     "kumining halloween keep the mine lit 50 000 usdt in rewards": 1792672910.650073,
     "first in market mexc kickstarter vote kamirai kamirai to win free 4 386 000 000 kamirai airdrops": 1792916027.4398873,
     "voting result and listing arrangement for kamirai kamirai kickstarter": 1793011323.2044706,
-    "first in market mexc to list prism network prsm in innovation zone with 71 430 prsm 10 000 usdt airdrop rewards": 1793133770.3015287
+    "first in market mexc to list prism network prsm in innovation zone with 71 430 prsm 10 000 usdt airdrop rewards": 1793133770.3015287,
+    "first in market mexc kickstarter vote noma noma to win free 50 000 usdt airdrops": 1793376142.78805
   },
-  "agenda": {},
+  "agenda": {
+    "17827791539409": {
+      "title": "First in Market: MEXC Kickstarter—Vote Noma (NOMA) to Win Free 50,000 USDT Airdrops",
+      "url": "https://www.mexc.com/announcements/article/first-in-market-17827791539409",
+      "tag": "MEXC Kickstarter",
+      "start": 1793287200,
+      "end": 1793523600,
+      "sent": []
+    }
+  },
   "health": {
     "sources": {
       "KuCoin activities": {
@@ -113,13 +124,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -139,7 +150,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 3,
+        "fail": 0,
         "fail_notified": false,
         "zero": 0,
         "notified": false
@@ -522,6 +533,17 @@
       "start": null,
       "end": null,
       "rewards": null
+    },
+    {
+      "id": "17827791539409",
+      "title": "First in Market: MEXC Kickstarter—Vote Noma (NOMA) to Win Free 50,000 USDT Airdrops",
+      "url": "https://www.mexc.com/announcements/article/first-in-market-17827791539409",
+      "tag": "MEXC Kickstarter",
+      "seen": 1793376142,
+      "ts": 1793275200,
+      "start": 1793287200,
+      "end": 1793523600,
+      "rewards": "100,000 MX"
     }
   ]
 }

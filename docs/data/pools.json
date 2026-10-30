@@ -1,7 +1,27 @@
 {
- "updated_at": "2026-10-30T09:22:07Z",
- "upcoming": [],
+ "updated_at": "2026-10-30T16:02:23Z",
+ "upcoming": [
+  {
+   "id": "17827791539409",
+   "title": "First in Market: MEXC Kickstarter—Vote Noma (NOMA) to Win Free 50,000 USDT Airdrops",
+   "tag": "MEXC Kickstarter",
+   "url": "https://www.mexc.com/announcements/article/first-in-market-17827791539409",
+   "start": 1793287200,
+   "end": 1793523600
+  }
+ ],
  "history": [
+  {
+   "id": "17827791539409",
+   "title": "First in Market: MEXC Kickstarter—Vote Noma (NOMA) to Win Free 50,000 USDT Airdrops",
+   "url": "https://www.mexc.com/announcements/article/first-in-market-17827791539409",
+   "tag": "MEXC Kickstarter",
+   "seen": 1793376142,
+   "ts": 1793275200,
+   "start": 1793287200,
+   "end": 1793523600,
+   "rewards": "100,000 MX"
+  },
   {
    "id": "17827791539341",
    "title": "First in Market: MEXC to List Prism Network (PRSM) in Innovation Zone with 71,430 PRSM & 10,000 USDT Airdrop+ Rewards",
