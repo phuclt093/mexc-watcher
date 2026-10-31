@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-10-31T05:30:46Z",
+ "updated_at": "2026-10-31T11:06:16Z",
  "upcoming": [
   {
    "id": "17827791539409",
@@ -11,6 +11,17 @@
   }
  ],
  "history": [
+  {
+   "id": "17827791539474",
+   "title": "Voting Result and Listing Arrangement for Noma (NOMA) Kickstarter",
+   "url": "https://www.mexc.com/announcements/article/voting-result-and-listing-arrangement-for-noma-noma-kickstarter-17827791539474",
+   "tag": "MEXC Kickstarter",
+   "seen": 1793444775,
+   "ts": 1793448000,
+   "start": null,
+   "end": null,
+   "rewards": null
+  },
   {
    "id": "17827791539409",
    "title": "First in Market: MEXC Kickstarter—Vote Noma (NOMA) to Win Free 50,000 USDT Airdrops",
