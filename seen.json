@@ -81,7 +81,7 @@
     "17827791539504": "First in Market: MEXC to List KOR Protocol (KOR) in Innovation Zone with 3,333,333 KOR & 10,000 USDT Airdrop+ Rewards"
   },
   "initialized": true,
-  "updated_at": "2026-11-05T09:57:33Z",
+  "updated_at": "2026-11-05T17:48:32Z",
   "titles": {
     "voting result and listing arrangement for crocpad croc kickstarter": 1791390953.9669669,
     "bitget announcement on suspending bgb ethereum network withdrawal service": 1791572406.6620996,
@@ -116,13 +116,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -142,11 +142,11 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 11,
+        "fail": 12,
         "fail_notified": true,
         "zero": 0,
         "notified": false,
-        "next_try": 1793876252.433104
+        "next_try": 1793904512.598183
       }
     },
     "fail_streak": 0,
