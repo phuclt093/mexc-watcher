@@ -82,7 +82,7 @@
     "17827791539558": "First in Market: MEXC Kickstarter—Vote ValueX Chain (VLX) to Win Free 227,273 VLX Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-11-07T15:13:55Z",
+  "updated_at": "2026-11-07T19:29:32Z",
   "titles": {
     "bitget announcement on suspending bgb ethereum network withdrawal service": 1791572406.6620996,
     "bitget announcement on resuming bgb ethereum withdrawals": 1791621364.2060883,
@@ -126,14 +126,14 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 7,
+        "fail": 8,
         "fail_notified": true,
-        "next_try": 1794068035.0414903
+        "next_try": 1794083372.6142137
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -153,7 +153,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 3,
+        "fail": 4,
         "fail_notified": false,
         "zero": 0,
         "notified": false
