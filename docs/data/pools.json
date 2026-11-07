@@ -1,5 +1,5 @@
 {
- "updated_at": "2026-11-07T19:29:32Z",
+ "updated_at": "2026-11-07T22:55:43Z",
  "upcoming": [
   {
    "id": "17827791539558",
@@ -8,9 +8,28 @@
    "url": "https://www.mexc.com/announcements/article/first-in-market-17827791539558",
    "start": 1793894340,
    "end": 1794124800
+  },
+  {
+   "id": "17827791539625",
+   "title": "Voting Result and Listing Arrangement for ValueX Chain (VLX) Kickstarter",
+   "tag": "MEXC New Listings",
+   "url": "https://www.mexc.com/announcements/article/voting-result-and-listing-arrangement-for-valuex-chain-vlx-kickstarter-17827791539625",
+   "start": 1794038400,
+   "end": 1794124800
   }
  ],
  "history": [
+  {
+   "id": "17827791539625",
+   "title": "Voting Result and Listing Arrangement for ValueX Chain (VLX) Kickstarter",
+   "url": "https://www.mexc.com/announcements/article/voting-result-and-listing-arrangement-for-valuex-chain-vlx-kickstarter-17827791539625",
+   "tag": "MEXC New Listings",
+   "seen": 1794092142,
+   "ts": 1793966400,
+   "start": 1794038400,
+   "end": 1794124800,
+   "rewards": "12,905,542 MX"
+  },
   {
    "id": "17827791539558",
    "title": "First in Market: MEXC Kickstarter—Vote ValueX Chain (VLX) to Win Free 227,273 VLX Airdrops",
