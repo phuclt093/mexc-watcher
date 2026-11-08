@@ -83,7 +83,7 @@
     "17827791539625": "Voting Result and Listing Arrangement for ValueX Chain (VLX) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-11-08T01:59:39Z",
+  "updated_at": "2026-11-08T08:34:34Z",
   "titles": {
     "bitget announcement on suspending bgb ethereum network withdrawal service": 1791572406.6620996,
     "bitget announcement on resuming bgb ethereum withdrawals": 1791621364.2060883,
@@ -136,13 +136,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 5,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -162,7 +162,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false,
         "zero": 0,
         "notified": false
