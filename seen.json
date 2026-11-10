@@ -83,7 +83,7 @@
     "17827791539625": "Voting Result and Listing Arrangement for ValueX Chain (VLX) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-11-10T03:06:32Z",
+  "updated_at": "2026-11-10T11:02:45Z",
   "titles": {
     "first in market mexc kickstarter vote metaone mto to win free 50 000 usdt airdrops": 1791790754.5234292,
     "first in market mexc kickstarter vote hoodlers hdlr to win free 50 000 usdt airdrops": 1792143919.6043015,
@@ -134,13 +134,14 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 5,
-        "fail_notified": false
+        "fail": 6,
+        "fail_notified": true,
+        "next_try": 1794312164.806539
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -160,7 +161,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false,
         "zero": 0,
         "notified": false
