@@ -83,9 +83,8 @@
     "17827791539625": "Voting Result and Listing Arrangement for ValueX Chain (VLX) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-11-11T03:07:40Z",
+  "updated_at": "2026-11-11T10:47:10Z",
   "titles": {
-    "first in market mexc kickstarter vote metaone mto to win free 50 000 usdt airdrops": 1791790754.5234292,
     "first in market mexc kickstarter vote hoodlers hdlr to win free 50 000 usdt airdrops": 1792143919.6043015,
     "voting result and listing arrangement for hoodlers hdlr kickstarter": 1792243610.0383976,
     "axis robotics axis to be listed on bitget launchpool grab a share of 1 333 333 axis": 1792585250.5518785,
@@ -99,24 +98,7 @@
     "first in market mexc kickstarter vote valuex chain vlx to win free 227 273 vlx airdrops": 1794003841.3777933,
     "voting result and listing arrangement for valuex chain vlx kickstarter": 1794092142.4084413
   },
-  "agenda": {
-    "17827791539558": {
-      "title": "First in Market: MEXC Kickstarter—Vote ValueX Chain (VLX) to Win Free 227,273 VLX Airdrops",
-      "url": "https://www.mexc.com/announcements/article/first-in-market-17827791539558",
-      "tag": "MEXC Kickstarter / MEXC New Listings",
-      "start": 1793894340,
-      "end": 1794124800,
-      "sent": []
-    },
-    "17827791539625": {
-      "title": "Voting Result and Listing Arrangement for ValueX Chain (VLX) Kickstarter",
-      "url": "https://www.mexc.com/announcements/article/voting-result-and-listing-arrangement-for-valuex-chain-vlx-kickstarter-17827791539625",
-      "tag": "MEXC New Listings",
-      "start": 1794038400,
-      "end": 1794124800,
-      "sent": []
-    }
-  },
+  "agenda": {},
   "health": {
     "sources": {
       "KuCoin activities": {
@@ -134,13 +116,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -160,7 +142,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false,
         "zero": 0,
         "notified": false
