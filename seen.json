@@ -83,7 +83,7 @@
     "17827791539625": "Voting Result and Listing Arrangement for ValueX Chain (VLX) Kickstarter"
   },
   "initialized": true,
-  "updated_at": "2026-11-13T02:41:06Z",
+  "updated_at": "2026-11-13T09:59:06Z",
   "titles": {
     "first in market mexc kickstarter vote hoodlers hdlr to win free 50 000 usdt airdrops": 1792143919.6043015,
     "voting result and listing arrangement for hoodlers hdlr kickstarter": 1792243610.0383976,
@@ -116,13 +116,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 5,
+        "fail": 0,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 0,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -142,11 +142,10 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 7,
-        "fail_notified": true,
+        "fail": 0,
+        "fail_notified": false,
         "zero": 0,
-        "notified": false,
-        "next_try": 1794541266.614184
+        "notified": false
       }
     },
     "fail_streak": 0,
