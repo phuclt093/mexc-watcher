@@ -80,12 +80,12 @@
     "17827791539474": "Voting Result and Listing Arrangement for Noma (NOMA) Kickstarter",
     "17827791539504": "First in Market: MEXC to List KOR Protocol (KOR) in Innovation Zone with 3,333,333 KOR & 10,000 USDT Airdrop+ Rewards",
     "17827791539558": "First in Market: MEXC Kickstarter—Vote ValueX Chain (VLX) to Win Free 227,273 VLX Airdrops",
-    "17827791539625": "Voting Result and Listing Arrangement for ValueX Chain (VLX) Kickstarter"
+    "17827791539625": "Voting Result and Listing Arrangement for ValueX Chain (VLX) Kickstarter",
+    "kc:352892": "KuMining Black Friday: Mine More, Get More!"
   },
   "initialized": true,
-  "updated_at": "2026-11-16T10:26:31Z",
+  "updated_at": "2026-11-16T20:38:25Z",
   "titles": {
-    "voting result and listing arrangement for hoodlers hdlr kickstarter": 1792243610.0383976,
     "axis robotics axis to be listed on bitget launchpool grab a share of 1 333 333 axis": 1792585250.5518785,
     "kumining halloween keep the mine lit 50 000 usdt in rewards": 1792672910.650073,
     "first in market mexc kickstarter vote kamirai kamirai to win free 4 386 000 000 kamirai airdrops": 1792916027.4398873,
@@ -95,7 +95,8 @@
     "voting result and listing arrangement for noma noma kickstarter": 1793444775.8480666,
     "first in market mexc to list kor protocol kor in innovation zone with 3 333 333 kor 10 000 usdt airdrop rewards": 1793696105.840885,
     "first in market mexc kickstarter vote valuex chain vlx to win free 227 273 vlx airdrops": 1794003841.3777933,
-    "voting result and listing arrangement for valuex chain vlx kickstarter": 1794092142.4084413
+    "voting result and listing arrangement for valuex chain vlx kickstarter": 1794092142.4084413,
+    "kumining black friday mine more get more": 1794861504.7877207
   },
   "agenda": {},
   "health": {
@@ -115,13 +116,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 2,
+        "fail": 3,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -141,7 +142,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false,
         "zero": 0,
         "notified": false
@@ -579,6 +580,17 @@
       "start": 1794038400,
       "end": 1794124800,
       "rewards": "12,905,542 MX"
+    },
+    {
+      "id": "kc:352892",
+      "title": "KuMining Black Friday: Mine More, Get More!",
+      "url": "https://www.kucoin.com/announcement/en-kumining-black-friday-mine-more-get-more?lang=en_US",
+      "tag": "KuCoin Launchpool",
+      "seen": 1794861504,
+      "ts": 1794826800.0,
+      "start": null,
+      "end": null,
+      "rewards": null
     }
   ]
 }

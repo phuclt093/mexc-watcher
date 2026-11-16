@@ -1,7 +1,18 @@
 {
- "updated_at": "2026-11-16T10:26:31Z",
+ "updated_at": "2026-11-16T20:38:25Z",
  "upcoming": [],
  "history": [
+  {
+   "id": "kc:352892",
+   "title": "KuMining Black Friday: Mine More, Get More!",
+   "url": "https://www.kucoin.com/announcement/en-kumining-black-friday-mine-more-get-more?lang=en_US",
+   "tag": "KuCoin Launchpool",
+   "seen": 1794861504,
+   "ts": 1794826800.0,
+   "start": null,
+   "end": null,
+   "rewards": null
+  },
   {
    "id": "17827791539625",
    "title": "Voting Result and Listing Arrangement for ValueX Chain (VLX) Kickstarter",
