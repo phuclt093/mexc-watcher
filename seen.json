@@ -84,7 +84,7 @@
     "kc:352892": "KuMining Black Friday: Mine More, Get More!"
   },
   "initialized": true,
-  "updated_at": "2026-11-18T18:58:25Z",
+  "updated_at": "2026-11-19T00:56:27Z",
   "titles": {
     "axis robotics axis to be listed on bitget launchpool grab a share of 1 333 333 axis": 1792585250.5518785,
     "kumining halloween keep the mine lit 50 000 usdt in rewards": 1792672910.650073,
@@ -116,13 +116,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 3,
+        "fail": 4,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 4,
+        "fail": 5,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -142,10 +142,11 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 5,
-        "fail_notified": false,
+        "fail": 6,
+        "fail_notified": true,
         "zero": 0,
-        "notified": false
+        "notified": false,
+        "next_try": 1795053385.7798078
       }
     },
     "fail_streak": 0,
