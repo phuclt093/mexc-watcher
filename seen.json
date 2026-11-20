@@ -84,9 +84,8 @@
     "kc:352892": "KuMining Black Friday: Mine More, Get More!"
   },
   "initialized": true,
-  "updated_at": "2026-11-20T04:21:44Z",
+  "updated_at": "2026-11-20T13:14:13Z",
   "titles": {
-    "axis robotics axis to be listed on bitget launchpool grab a share of 1 333 333 axis": 1792585250.5518785,
     "kumining halloween keep the mine lit 50 000 usdt in rewards": 1792672910.650073,
     "first in market mexc kickstarter vote kamirai kamirai to win free 4 386 000 000 kamirai airdrops": 1792916027.4398873,
     "voting result and listing arrangement for kamirai kamirai kickstarter": 1793011323.2044706,
@@ -116,13 +115,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -142,7 +141,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false,
         "zero": 0,
         "notified": false
