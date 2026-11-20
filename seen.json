@@ -84,7 +84,7 @@
     "kc:352892": "KuMining Black Friday: Mine More, Get More!"
   },
   "initialized": true,
-  "updated_at": "2026-11-20T13:14:13Z",
+  "updated_at": "2026-11-20T21:11:21Z",
   "titles": {
     "kumining halloween keep the mine lit 50 000 usdt in rewards": 1792672910.650073,
     "first in market mexc kickstarter vote kamirai kamirai to win free 4 386 000 000 kamirai airdrops": 1792916027.4398873,
@@ -115,13 +115,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -141,7 +141,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 1,
+        "fail": 2,
         "fail_notified": false,
         "zero": 0,
         "notified": false
