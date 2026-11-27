@@ -85,7 +85,7 @@
     "17827791539872": "MEXC Kickstarter: Vote for BTC to Win Free 0.4 BTC Airdrops"
   },
   "initialized": true,
-  "updated_at": "2026-11-27T04:32:19Z",
+  "updated_at": "2026-11-27T14:17:35Z",
   "titles": {
     "first in market mexc kickstarter vote noma noma to win free 50 000 usdt airdrops": 1793376142.78805,
     "voting result and listing arrangement for noma noma kickstarter": 1793444775.8480666,
@@ -113,13 +113,13 @@
       "MEXC Launchpool": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "MEXC Kickstarter": {
         "zero": 0,
         "notified": false,
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false
       },
       "HTX Earn": {
@@ -139,7 +139,7 @@
         "notified": false
       },
       "MEXC New Listings": {
-        "fail": 0,
+        "fail": 1,
         "fail_notified": false,
         "zero": 0,
         "notified": false
